@@ -3,9 +3,6 @@ Steps: [Convert the steps into workflow diagram (include tools for each step) an
 .
 .
 .
-.
-.
-.
-.
-.
-.
+
+
+
