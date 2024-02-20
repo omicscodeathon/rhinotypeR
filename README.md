@@ -68,8 +68,6 @@ The package consists of 6 data analysis functions (processfastq(); counts(); exp
 
 ## Citation
 
-Ben Aribi H., Dixon I., Abassi N., and  Awe O. I.(2023). Exvar: An R Package for Gene Expression And Genetic Variation Data Analysis And Visualization.  https://github.com/omicscodeathon/Exvar
-
 ## Contributors
 
    - Martha Luka
