@@ -50,9 +50,9 @@ The list of functions and their roles are represented in Table 1.
 | Function        | Role                                   | Input                    | Output                     |
 |-----------------|----------------------------------------|--------------------------|-----------------------------|
 | `requirement()` | Install required packages              | -                        | -                           |
-| `compute genetic distances()`| Preprocess fastq files                 | Fastq files              | BAM files                   |
-| `phylogenetic clustering()`      | Gene count analysis                    | BAM files                | CSV file                    |
-| `compare sequences()`  | Identify DEGs                          | BAM files                | CSV file                    |
+| `compute genetic distances()`|                  |  files              | files                   |
+| `phylogenetic clustering()`      |                     |  files                |  file                    |
+| `compare sequences()`  |                      |  files                |  file                    |
 
 
 #### Programming language: R 4.2.1
