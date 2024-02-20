@@ -45,20 +45,15 @@ The package can be installed as follows:
 The package will encompass functions to compute genetic distances, perform phylogenetic clustering, and compare sequences against RV prototype strains. 
 These functionalities will be designed to be user-friendly and adaptable to various research needs.
 
-The package consists of 6 data analysis functions (processfastq(); counts(); expression(); callsnp(); callcnv(); and callindel()), 3 data visualization functions (vizexp(), vizsnp(), and vizcnv()), and a requirement() function is also provided to install all the dependencies. The list of functions and their roles are represented in Table 1.
+The package consists of 6 data analysis functions compute genetic distances(); counts(); expression(); callsnp(); callcnv(); and callindel()), 3 data visualization functions (vizexp(), vizsnp(), and vizcnv()), and a requirement() function is also provided to install all the dependencies. The list of functions and their roles are represented in Table 1.
 
 | Function        | Role                                   | Input                    | Output                     |
 |-----------------|----------------------------------------|--------------------------|-----------------------------|
 | `requirement()` | Install required packages              | -                        | -                           |
-| `processfastq()`| Preprocess fastq files                 | Fastq files              | BAM files                   |
+| `compute genetic distances()`| Preprocess fastq files                 | Fastq files              | BAM files                   |
 | `counts()`      | Gene count analysis                    | BAM files                | CSV file                    |
 | `expression()`  | Identify DEGs                          | BAM files                | CSV file                    |
 | `callsnp()`     | SNP calling                            | BAM files                | VCF files                   |
-| `callcnv()`     | CNV calling                            | BAM files                | CSV file                    |
-| `callindel()`   | Indel calling                          | BAM files                | VCF files                   |
-| `vizexp()`      | Analyze and visualize gene expression  | CSV file                 | Interactive interface       |
-| `vizsnp()`      | Analyze and visualize SNP data          | VCF files                | Interactive interface       |
-| `vizcnv()`      | Analyze and visualize CNV data          | CSV file                 | Interactive interface       |
 
 #### Programming language: R 4.2.1
 
@@ -74,6 +69,6 @@ The package consists of 6 data analysis functions (processfastq(); counts(); exp
 
    - Winfred Gatua
 
-   - Wafaa
+   - Wafaa Rashed
 
    - Ruth Nanjala
