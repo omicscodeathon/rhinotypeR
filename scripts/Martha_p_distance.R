@@ -26,7 +26,7 @@ calc_p_distance <- function(path_to_ref, path_to_query) {
   query_chars <- strsplit(query, split = "")[[1]]
   
   # Count the differences (SNPs)
-  snps <- sum(seq1_chars != seq2_chars)
+  snps <- sum(ref_chars != query_chars)
   
   # Calculate p-distance
   p_dist <- snps/length(ref_chars)
