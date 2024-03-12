@@ -5,109 +5,109 @@
 
 # Function 1 
 # Read fasta
-read_fasta_sequence <- function(fasta_file) {
-  lines <- readLines(fasta_file)
+readFasta <- function(fastaFile) {
+  lines <- readLines(fastaFile)
   sequence <- paste(lines[-1], collapse = "")
   return(toupper(sequence)) # Convert sequence to uppercase
 }
 
 # Example usage
-read_fasta_sequence("./data/tmp_query.fasta")
-read_fasta_sequence("./data/tmp_ref_b99.fasta")
+readFasta("./data/tmp_query.fasta")
+readFasta("./data/tmp_ref_b99.fasta")
 
 # Function 2
 # Compare sequence lengths
-compare_lengths <- function(path_to_ref, path_to_query){
-  ref <- read_fasta_sequence(path_to_ref)
-  query <- read_fasta_sequence(path_to_query)
+compareLengths <- function(pathToRef, pathToQuery){
+  ref <- readFasta(pathToRef)
+  query <- readFasta(pathToQuery)
   
   # Convert the sequences to character vectors
-  ref_length <- length(unlist(strsplit(ref, "")))
-  query_length <- length(unlist(strsplit(query, "")))
+  refLength <- length(unlist(strsplit(ref, "")))
+  queryLength <- length(unlist(strsplit(query, "")))
   
   # Return both lengths for further use
-  return(list(ref_length = ref_length, query_length = query_length))
+  return(list(refLength = refLength, queryLength = queryLength))
 }
 # Example usage
-compare_lengths(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query="./data/tmp_query.fasta")
+compareLengths(pathToRef = "./data/tmp_ref_b99.fasta", pathToQuery="./data/tmp_query.fasta")
 
 # Function 3
 # Function to handle gaps or non-ATCG characters in sequences
-handle_gaps <- function(ref_seq, query_seq, option = "delete") {
+handleGaps <- function(refSeq, querySeq, option = "delete") {
   # Convert sequences to character vectors
-  ref_chars <- strsplit(toupper(ref_seq), "")[[1]]
-  query_chars <- strsplit(toupper(query_seq), "")[[1]]
+  refChars <- strsplit(toupper(refSeq), "")[[1]]
+  queryChars <- strsplit(toupper(querySeq), "")[[1]]
   
   # Identify positions with non-ATCG characters
-  valid_positions <- which((ref_chars %in% c("A", "T", "C", "G")) & (query_chars %in% c("A", "T", "C", "G")))
+  valid_positions <- which((refChars %in% c("A", "T", "C", "G")) & (queryChars %in% c("A", "T", "C", "G")))
   
   if (option == "delete") {
     # Keep only positions with ATCG characters in both sequences
-    ref_chars <- ref_chars[valid_positions]
-    query_chars <- query_chars[valid_positions]
+    refChars <- refChars[valid_positions]
+    queryChars <- queryChars[valid_positions]
   } # If option is "ignore", we do nothing to the sequences
   
   # Reassemble sequences
-  ref_seq_cleaned <- paste(ref_chars, collapse = "")
-  query_seq_cleaned <- paste(query_chars, collapse = "")
+  refSeq_cleaned <- paste(refChars, collapse = "")
+  querySeq_cleaned <- paste(queryChars, collapse = "")
   
-  return(list(ref_seq = ref_seq_cleaned, query_seq = query_seq_cleaned))
+  return(list(refSeq = refSeq_cleaned, querySeq = querySeq_cleaned))
 }
 
 
 
 # Function 4
 # Count SNPs
-count_SNPs <- function(path_to_ref, path_to_query){
+countSNPs <- function(pathToRef, pathToQuery){
   
   # Read fasta file
-  ref <- read_fasta_sequence(path_to_ref)
-  query <- read_fasta_sequence(path_to_query)
+  ref <- readFasta(pathToRef)
+  query <- readFasta(pathToQuery)
   
   # Convert the sequences to character vectors
-  ref_chars <- strsplit(ref, split = "")[[1]]
-  query_chars <- strsplit(query, split = "")[[1]]
+  refChars <- strsplit(ref, split = "")[[1]]
+  queryChars <- strsplit(query, split = "")[[1]]
   
   # Count the differences (SNPs)
-  snps <- sum(ref_chars != query_chars)
+  snps <- sum(refChars != queryChars)
   
   # output
   return(snps)
 }
 # Example usage
-count_SNPs(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query="./data/tmp_query.fasta")
+countSNPs(pathToRef = "./data/tmp_ref_b99.fasta", pathToQuery="./data/tmp_query.fasta")
 
 
 
 
 # Function 5
 # p-distance
-calc_p_distance <- function(path_to_ref, path_to_query) {
+calcPDistance <- function(pathToRef, pathToQuery) {
   
   # Count the differences (SNPs)
-  snps <- count_SNPs(path_to_ref, path_to_query)
+  snps <- countSNPs(pathToRef, pathToQuery)
   
   # lengths
-  lengths <- compare_lengths(path_to_ref, path_to_query)
-  ref_length <- lengths$ref_length
+  lengths <- compareLengths(pathToRef, pathToQuery)
+  refLength <- lengths$refLength
   
   # Calculate p-distance
-  p_dist <- snps/ref_length
+  p_dist <- snps/refLength
   
   # output
   return(p_dist)
 }
 
 # Example usage
-calc_p_distance(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query = "./data/tmp_query.fasta")
+calcPDistance(pathToRef = "./data/tmp_ref_b99.fasta", pathToQuery = "./data/tmp_query.fasta")
 
 
 # Jukes Cantor
 
 # Function to calculate Jukes-Cantor genetic distance
-calc_jukes_cantor_distance <- function(path_to_ref, path_to_query) {
+calcJukesCantorDistance <- function(pathToRef, pathToQuery) {
   # Calculate p-distance
-  p_dist <- calc_p_distance(path_to_ref, path_to_query)
+  p_dist <- calcPDistance(pathToRef, pathToQuery)
   
   # Calculate Jukes-Cantor genetic distance
   jc_dist <- -3/4 * log(1 - 4/3 * p_dist)
@@ -117,28 +117,28 @@ calc_jukes_cantor_distance <- function(path_to_ref, path_to_query) {
 }
 
 # Example usage
-calc_jukes_cantor_distance(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query = "./data/tmp_query.fasta")
+calcJukesCantorDistance(pathToRef = "./data/tmp_ref_b99.fasta", pathToQuery = "./data/tmp_query.fasta")
 
 
 # Kimura 2 parameter (transitions vs transversions)
 
 ## Function to calculate proportions of transitions and transversions
-calculate_transitions_transversions <- function(ref_chars, query_chars) {
-  transitions <- sum((ref_chars == 'A' & query_chars == 'G') |
-                       (ref_chars == 'G' & query_chars == 'A') |
-                       (ref_chars == 'C' & query_chars == 'T') |
-                       (ref_chars == 'T' & query_chars == 'C'))
+calcTransitionTransversions <- function(refChars, queryChars) {
+  transitions <- sum((refChars == 'A' & queryChars == 'G') |
+                       (refChars == 'G' & queryChars == 'A') |
+                       (refChars == 'C' & queryChars == 'T') |
+                       (refChars == 'T' & queryChars == 'C'))
   
-  transversions <- sum((ref_chars == 'A' & query_chars == 'C') |
-                         (ref_chars == 'A' & query_chars == 'T') |
-                         (ref_chars == 'G' & query_chars == 'C') |
-                         (ref_chars == 'G' & query_chars == 'T') |
-                         (ref_chars == 'C' & query_chars == 'A') |
-                         (ref_chars == 'C' & query_chars == 'G') |
-                         (ref_chars == 'T' & query_chars == 'A') |
-                         (ref_chars == 'T' & query_chars == 'G'))
+  transversions <- sum((refChars == 'A' & queryChars == 'C') |
+                         (refChars == 'A' & queryChars == 'T') |
+                         (refChars == 'G' & queryChars == 'C') |
+                         (refChars == 'G' & queryChars == 'T') |
+                         (refChars == 'C' & queryChars == 'A') |
+                         (refChars == 'C' & queryChars == 'G') |
+                         (refChars == 'T' & queryChars == 'A') |
+                         (refChars == 'T' & queryChars == 'G'))
   
-  total_sites <- length(ref_chars)
+  total_sites <- length(refChars)
   P <- transitions / total_sites
   Q <- transversions / total_sites
   
@@ -146,18 +146,18 @@ calculate_transitions_transversions <- function(ref_chars, query_chars) {
 }
 
 ## Function to calculate Kimura 2-parameter genetic distance
-calc_kimura_2p_distance <- function(path_to_ref, path_to_query) {
+calcKimura2pDistance <- function(pathToRef, pathToQuery) {
   
   # Read fasta files and ensure sequences are in uppercase
-  ref <- read_fasta_sequence(path_to_ref)
-  query <- read_fasta_sequence(path_to_query)
+  ref <- readFasta(pathToRef)
+  query <- readFasta(pathToQuery)
   
   # Convert the sequences to character vectors
-  ref_chars <- strsplit(ref, split = "")[[1]]
-  query_chars <- strsplit(query, split = "")[[1]]
+  refChars <- strsplit(ref, split = "")[[1]]
+  queryChars <- strsplit(query, split = "")[[1]]
   
   # Calculate proportions of transitions and transversions
-  tt <- calculate_transitions_transversions(ref_chars, query_chars)
+  tt <- calcTransitionTransversions(refChars, queryChars)
   P <- tt$P
   Q <- tt$Q
   
@@ -169,35 +169,30 @@ calc_kimura_2p_distance <- function(path_to_ref, path_to_query) {
 }
 
 # Example usage
-calc_kimura_2p_distance(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query = "./data/tmp_query.fasta")
+calcKimura2pDistance(pathToRef = "./data/tmp_ref_b99.fasta", pathToQuery = "./data/tmp_query.fasta")
 
 
 # calculate Tamura 3-parameter genetic distance
-calc_tamura_3p_distance <- function(path_to_ref, path_to_query) {
-  # read_fasta_sequence 
-  ref <- toupper(read_fasta_sequence(path_to_ref))
-  query <- toupper(read_fasta_sequence(path_to_query))
+calcTamura3pDistance <- function(pathToRef, pathToQuery) {
+  # Assuming readFasta is defined elsewhere
+  ref <- toupper(readFasta(pathToRef))
+  query <- toupper(readFasta(pathToQuery))
   
   # Convert sequences to character vectors
-  ref_chars <- strsplit(ref, "")[[1]]
-  query_chars <- strsplit(query, "")[[1]]
+  refChars <- strsplit(ref, "")[[1]]
+  queryChars <- strsplit(query, "")[[1]]
   
   # Calculate base frequencies for both sequences
-  gc_content_ref <- sum(ref_chars %in% c("G", "C")) / length(ref_chars)
-  gc_content_query <- sum(query_chars %in% c("G", "C")) / length(query_chars)
+  gcContentRef <- sum(refChars %in% c("G", "C")) / length(refChars)
+  gcContentQuery <- sum(queryChars %in% c("G", "C")) / length(queryChars)
   
-  # Calculate transitions and transversions
-  transitions <- sum((ref_chars == "A" & query_chars == "G") | (ref_chars == "G" & query_chars == "A") |
-                       (ref_chars == "C" & query_chars == "T") | (ref_chars == "T" & query_chars == "C"))
-  transversions <- sum((ref_chars != query_chars) & !((ref_chars == "A" & query_chars == "G") | (ref_chars == "G" & query_chars == "A") |
-                                                        (ref_chars == "C" & query_chars == "T") | (ref_chars == "T" & query_chars == "C")))
+  # Use calcTransitionTransversions to calculate transitions and transversions
+  tt_results <- calcTransitionTransversions(refChars, queryChars)
+  P <- tt_results$P
+  Q <- tt_results$Q
   
-  positions_scored <- sum(ref_chars != "-" & query_chars != "-" & !is.na(ref_chars) & !is.na(query_chars))
-  P <- transitions / positions_scored
-  Q <- transversions / positions_scored
-  
-  theta1 <- gc_content_ref
-  theta2 <- gc_content_query
+  theta1 <- gcContentRef
+  theta2 <- gcContentQuery
   C <- theta1 + theta2 - 2 * theta1 * theta2
   
   # Tamura distance calculation
@@ -212,7 +207,7 @@ calc_tamura_3p_distance <- function(path_to_ref, path_to_query) {
 
 
 # Example usage
-calc_tamura_3p_distance(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query = "./data/tmp_query.fasta")
+calcTamura3pDistance(pathToRef = "./data/tmp_ref_b99.fasta", pathToQuery = "./data/tmp_query.fasta")
 
 
 # Tamura-Nei model  (complex!!!)
@@ -220,5 +215,13 @@ calc_tamura_3p_distance(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query 
 # General Time Reversible (GTR) Model (complex!!!)
 
 # Maximum Composite Likelihood method? (possibly too complex for regular scripting!!!)
+
+
+
+
+
+
+
+
 
 
