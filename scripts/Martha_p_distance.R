@@ -201,12 +201,9 @@ calc_tamura_3p_distance <- function(path_to_ref, path_to_query) {
   return(t92_distance)
 }
 
-
 # Example usage
 calc_tamura_3p_distance(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query = "./data/tmp_query.fasta")
 
-
-# end 
 
 # Tamura-Nei model  (complex!!!)
 
