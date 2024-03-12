@@ -219,9 +219,25 @@ calcTamura3pDistance(pathToRef = "./data/tmp_ref_b99.fasta", pathToQuery = "./da
 
 
 
+assignTypes <- function(pathToRef, pathToQuery, model="p-distance"){
+  
+  
+  
+}
 
 
 
+getPrototypeSeqs <- function(species="A", dest_path){
+  
+  
+  
+}
 
+
+overallMeanDistance <- function(queryMultipleSequenceAlignment){
+  
+  
+  
+}
 
 
