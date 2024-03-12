@@ -13,7 +13,7 @@ read_fasta_sequence <- function(fasta_file) {
 
 # Example usage
 read_fasta_sequence("./data/tmp_query.fasta")
-
+read_fasta_sequence("./data/tmp_ref_b99.fasta")
 
 # Function 2
 # Compare sequence lengths
@@ -172,10 +172,9 @@ calc_kimura_2p_distance <- function(path_to_ref, path_to_query) {
 calc_kimura_2p_distance(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query = "./data/tmp_query.fasta")
 
 
-
-# Function to calculate Tamura 3-parameter genetic distance
+# calculate Tamura 3-parameter genetic distance
 calc_tamura_3p_distance <- function(path_to_ref, path_to_query) {
-  # Read sequences and convert to uppercase
+  # read_fasta_sequence 
   ref <- toupper(read_fasta_sequence(path_to_ref))
   query <- toupper(read_fasta_sequence(path_to_query))
   
@@ -183,23 +182,34 @@ calc_tamura_3p_distance <- function(path_to_ref, path_to_query) {
   ref_chars <- strsplit(ref, "")[[1]]
   query_chars <- strsplit(query, "")[[1]]
   
-  # Calculate base frequencies
-  gc_content <- sum(ref_chars %in% c("G", "C")) / length(ref_chars)
+  # Calculate base frequencies for both sequences
+  gc_content_ref <- sum(ref_chars %in% c("G", "C")) / length(ref_chars)
+  gc_content_query <- sum(query_chars %in% c("G", "C")) / length(query_chars)
   
   # Calculate transitions and transversions
   transitions <- sum((ref_chars == "A" & query_chars == "G") | (ref_chars == "G" & query_chars == "A") |
                        (ref_chars == "C" & query_chars == "T") | (ref_chars == "T" & query_chars == "C"))
-  transversions <- sum(ref_chars != query_chars) - transitions
+  transversions <- sum((ref_chars != query_chars) & !((ref_chars == "A" & query_chars == "G") | (ref_chars == "G" & query_chars == "A") |
+                                                        (ref_chars == "C" & query_chars == "T") | (ref_chars == "T" & query_chars == "C")))
   
-  total_sites <- length(ref_chars)
-  P <- transitions / total_sites
-  Q <- transversions / total_sites
+  positions_scored <- sum(ref_chars != "-" & query_chars != "-" & !is.na(ref_chars) & !is.na(query_chars))
+  P <- transitions / positions_scored
+  Q <- transversions / positions_scored
   
-  # Tamura 3-parameter distance calculation
-  t92_distance <- -0.5 * log(1 - 2 * P - Q) - 0.25 * log(1 - 2 * Q)
+  theta1 <- gc_content_ref
+  theta2 <- gc_content_query
+  C <- theta1 + theta2 - 2 * theta1 * theta2
   
-  return(t92_distance)
+  # Tamura distance calculation
+  if ((1 - P/C - Q) > 0 && (1 - 2*Q) > 0) {
+    distance <- -C * log(1 - P/C - Q) - 0.5 * (1 - C) * log(1 - 2*Q)
+  } else {
+    distance <- NA  # Distance cannot be calculated under these conditions
+  }
+  
+  return(distance)
 }
+
 
 # Example usage
 calc_tamura_3p_distance(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query = "./data/tmp_query.fasta")
