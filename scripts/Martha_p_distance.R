@@ -209,6 +209,6 @@ calc_tamura_3p_distance(path_to_ref = "./data/tmp_ref_b99.fasta", path_to_query 
 
 # General Time Reversible (GTR) Model (complex!!!)
 
-# Maximum Composite Likelihood method? (complex!!!)
+# Maximum Composite Likelihood method? (possibly too complex for regular scripting!!!)
 
 
