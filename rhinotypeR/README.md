@@ -22,7 +22,7 @@ GenBank and reference prototype strains from www.picornaviridae.com
 
 The input datasets (target, reference and prototype) are fasta files.
 Here’s an example of a FASTA file: ![fasta
-file](%22man/figures/example_fasta_file.png%22)
+file](%22https://github.com/omicscodeathon/rhinotyper/blob/main/rhinotypeR/man/figures/example_fasta_file.png%22)
 
 ## Installation
 
@@ -49,7 +49,7 @@ The list of functions and their roles are summarized in Table 1.
 | `allPrototypeDistances()` | Generates pairwise distance between query and prototype sequences | fasta file |        |
 | `overallMeanDistance()`   | Calculates overall genetic distance of query sequences            | fasta file |        |
 
-#### Running the functions using our test data
+### Running the functions using our test data
 
 ##### Load Library
 
@@ -108,7 +108,7 @@ overallMeanDistance(RVAPrototype)
 #> [1] 0.2203165
 ```
 
-#### Running the functions on your own dataset
+### Running the functions on your own dataset
 
 ##### Load library
 
@@ -119,7 +119,7 @@ library(Rhinotyper)
 ##### Function 1: Assign genotypes to query sequence
 
 The model could be either p-distance, JC, Kimura2p, Tamura3p based on
-your preference The threshhold can also be changed based on your needs
+your preference. The threshhold can also be changed based on your needs.
 
 ``` r
 #assignTypes("path to reference sequence e.g RVBPrototype", "path to query sequence", model = "Tamura3p", threshold = 0.105)
@@ -129,7 +129,7 @@ your preference The threshhold can also be changed based on your needs
 
 Ensure you create an output directory in your current directory before
 running this function, otherwise it will throw an error saying “output”
-folder is not found
+folder is not found.
 
 ``` r
 getPrototypeSeqs(destinationFolder = "./output")
@@ -139,7 +139,7 @@ getPrototypeSeqs(destinationFolder = "./output")
 ##### Function 3: Generate pairwise distance between query and prototype sequences
 
 The model could be either p-distance, JC, Kimura2p, Tamura3p based on
-your preference
+your preference.
 
 ``` r
 #allPrototypeDistances("path to reference sequence e.g RVBPrototype", "path to query sequence", "Tamura3p")
