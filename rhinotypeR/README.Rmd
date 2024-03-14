@@ -1,0 +1,61 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# rhinotypeR
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of rhinotypeR is to perform genotyping on rhinovirus sequences. 
+
+- The package does the following:
+  * Assigns genotypes to query sequences
+  * Computes for pairwise distance among query sequences
+  * Calculates pairwise distance between query and prototype sequences
+  * Calculates overall genetic distance of query sequences
+  
+## Data Format
+The input data is a reference fasta file. 
+
+## Installation
+
+You can install the development version of rhinotypeR from [GitHub](https://github.com) with:
+
+``` r
+devtools::install_github("omicscodeathon/rhinotyper/rhinotypeR")
+```
+
+## Example
+
+How to run the functions using our test data:
+
+```{r }
+library(Rhinotyper)
+```
+
+```{r }
+assignTypes(pathToRef, pathToQuery, model = "p-distance", threshold = 0.105)
+```
+
+```{r }
+#Create an output directory in your current directory before running this function
+getPrototypeSeqs(destinationFolder = "./output")
+```
+
+```{r }
+allPrototypeDistances(RVBPrototype, pathToQuery, "p-distance")
+```
+
+```{r }
+overallMeanDistance(RVAPrototype)
+```
