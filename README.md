@@ -28,38 +28,7 @@ Our methodology involves:
 3. Integration of methods for constructing Maximum Likelihood phylogenetic 
 trees.
 
-
-### Package installation 
-
-The package can be installed as follows:
-
-    install.packages("devtools")
-
-    library(devtools)
-
-    devtools::install_github("omicscodeathon/rhinotyper/Package")
-
-    library(rhinotyper)
-    
-## Functions
-The package will encompass functions to compute genetic distances, perform phylogenetic clustering, and compare sequences against RV prototype strains. 
-These functionalities will be designed to be user-friendly and adaptable to various research needs.
-
-The list of functions and their roles are represented in Table 1.
-
-| Function        | Role                                   | Input                    | Output                     |
-|-----------------|----------------------------------------|--------------------------|-----------------------------|
-| `requirement()` | Install required packages              | -                        | -                           |
-| `compute genetic distances()`|                  |  files              | files                   |
-| `phylogenetic clustering()`      |                     |  files                |  file                    |
-| `compare sequences()`  |                      |  files                |  file                    |
-
-
-#### Programming language: R 4.2.1
-
-#### Requirements: 
-
-## License  
+More details on the package can be accessed here:
 
 ## Citation
 
