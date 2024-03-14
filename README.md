@@ -18,7 +18,7 @@ Our methodology involves:
 3. Integration of methods for constructing Maximum Likelihood phylogenetic 
 trees.
 
-More details on the package can be accessed here: [rhinotypeR](https://github.com/omicscodeathon/rhinotyper/tree/main/rhinotypeR)
+Details on the package can be accessed here: [rhinotypeR](https://github.com/omicscodeathon/rhinotyper/tree/main/rhinotypeR)
 
 ## Citation
 
