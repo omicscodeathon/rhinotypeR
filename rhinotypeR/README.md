@@ -22,7 +22,7 @@ GenBank and reference prototype strains from www.picornaviridae.com
 
 The input datasets (target, reference and prototype) are fasta files.
 Here’s an example of a FASTA file: ![fasta
-file](%22https://github.com/omicscodeathon/rhinotyper/blob/main/rhinotypeR/man/figures/example_fasta_file.png%22)
+file](https://github.com/omicscodeathon/rhinotyper/blob/main/rhinotypeR/man/figures/example_fasta_file.png)
 
 ## Installation
 
