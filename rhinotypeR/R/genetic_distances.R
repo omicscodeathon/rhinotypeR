@@ -118,38 +118,49 @@ handleGaps <- function(refSeq, querySeq, option = "delete") {
 # Function 4
 # Count SNPs
 countSNPs <- function(pathToRef, pathToQuery) {
-  # Read refs and query sequences along with their headers
+  # Read reference sequences and headers
   fastaRef <- readFasta(pathToRef)
   refs <- fastaRef$sequences
   refHeaders <- fastaRef$headers
-
+  
+  # Read query sequences and headers
   fastaQuery <- readFasta(pathToQuery)
-  query <- fastaQuery$sequences[[1]] # Assuming only one query sequence
-  queryHeader <- fastaQuery$headers[[1]] # Assuming only one query header
-
-  # Prepare the matrix to store SNP counts, using the query header for row name
-  snpMatrix <- matrix(nrow = 1, ncol = length(refs), dimnames = list(c(queryHeader), refHeaders))
-
-  # Convert the query sequence to character vector
-  queryChars <- strsplit(query, split = "")[[1]]
-
-  for (i in seq_along(refs)) {
-    # Convert the current reference sequence to character vector
-    refChars <- strsplit(refs[[i]], split = "")[[1]]
-
-    # Ensure both sequences are of the same length for comparison
-    if (length(refChars) == length(queryChars)) {
-      # Count the differences (SNPs)
-      snps <- sum(refChars != queryChars)
-    } else {
-      snps <- NA  # Mark as NA if sequences are of different lengths
+  queries <- fastaQuery$sequences
+  queryHeaders <- fastaQuery$headers
+  
+  # Initialize matrix to store SNP counts
+  snpMatrix <- matrix(nrow = length(queries), ncol = length(refs))
+  
+  # Convert reference sequences to character vectors
+  refSeqs <- lapply(refs, function(ref) unlist(strsplit(ref, split = "")))
+  
+  # Iterate over each query sequence
+  for (q in seq_along(queries)) {
+    query <- queries[[q]]
+    queryHeader <- queryHeaders[[q]]
+    
+    # Convert query sequence to character vector
+    queryChars <- unlist(strsplit(query, split = ""))
+    
+    # Iterate over each reference sequence
+    for (i in seq_along(refSeqs)) {
+      refChars <- refSeqs[[i]]
+      
+      # Ensure both sequences are of the same length for comparison
+      if (length(refChars) == length(queryChars)) {
+        # Count the differences (SNPs)
+        snpMatrix[q, i] <- sum(refChars != queryChars)
+      } else {
+        snpMatrix[q, i] <- NA  # Mark as NA if sequences are of different lengths
+      }
     }
-
-    # Store SNP counts
-    snpMatrix[1, i] <- snps
   }
-
-  # Output
+  
+  # Set row and column names
+  rownames(snpMatrix) <- queryHeaders
+  colnames(snpMatrix) <- refHeaders
+  
+  # Return SNP counts matrix
   return(snpMatrix)
 }
 
