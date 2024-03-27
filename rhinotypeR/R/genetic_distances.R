@@ -163,30 +163,42 @@ countSNPs <- function(pathToRef, pathToQuery) {
 # Function 5
 # p-distance
 calcPDistance <- function(pathToRef, pathToQuery) {
-  # Count the SNPs between the query and each reference sequence
-  snpCounts <- countSNPs(pathToRef, pathToQuery)
-
-  # Read query sequence to obtain the query header
-  fastaQuery <- readFasta(pathToQuery)
-  queryHeader <- fastaQuery$headers[1]  # Assuming only one query sequence
-
-  # Directly calculate reference sequence lengths
+  # Read reference sequences and headers
   fastaRef <- readFasta(pathToRef)
+  refs <- fastaRef$sequences
   refHeaders <- fastaRef$headers
-  refLengths <- sapply(fastaRef$sequences, function(seq) length(unlist(strsplit(seq, ""))))
-
-  # Prepare a matrix for p-distances with appropriate dimensions and names
-  pDistancesMatrix <- matrix(nrow = 1, ncol = length(refLengths), dimnames = list(queryHeader, refHeaders))
-
-  # Calculate p-distance for each reference sequence
-  for (i in seq_along(refLengths)) {
-    if (!is.na(snpCounts[1, i])) {
-      pDistancesMatrix[1, i] <- snpCounts[1, i] / refLengths[i]
-    } else {
-      pDistancesMatrix[1, i] <- NA  # Assign NA if SNP count was NA
+  
+  # Read query sequences and headers
+  fastaQuery <- readFasta(pathToQuery)
+  queries <- fastaQuery$sequences
+  queryHeaders <- fastaQuery$headers
+  
+  # Initialize matrix to store p-distances
+  pDistancesMatrix <- matrix(nrow = length(queries), ncol = length(refs))
+  
+  # Iterate over each query sequence
+  for (q in seq_along(queries)) {
+    query <- queries[[q]]
+    queryHeader <- queryHeaders[[q]]
+    
+    # Count SNPs between the query and each reference sequence
+    snpCounts <- countSNPs(pathToRef, pathToQuery)
+    
+    # Calculate p-distance for each reference sequence
+    for (i in seq_along(refHeaders)) {
+      ref <- refs[[i]]
+        #print(ref) Debugging
+      snpCount <- snpCounts[q, i]  # SNP count between query and reference
+      
+      # Calculate p-distance
+      pDistancesMatrix[q, i] <- snpCount / nchar(ref)
     }
   }
-
+  
+  # Set row and column names
+  rownames(pDistancesMatrix) <- queryHeaders
+  colnames(pDistancesMatrix) <- refHeaders
+  
   return(pDistancesMatrix)
 }
 
