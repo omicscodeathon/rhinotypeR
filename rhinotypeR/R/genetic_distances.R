@@ -362,6 +362,39 @@ allPrototypeDistances <- function(pathToRef, pathToQuery, model = "p-distance") 
 }
 
 
+PlotPrototypeDistances <- function(pairwisedist, title="Dissimilarity Matrix Heatmap",xlabel='Prototype Refs',
+                                   ylabel='Query sequences'){
+  # This function takes a matrix of pairwise distance from allprotypeDistances func
+  # Use gplot:heatmap.2, dark red shows more similarity
+  # Modify the column names
+  colnames(pairwisedist) <- sub(".*?_", "", colnames(pairwisedist)) # Comment out if you want to keep ref seq names as they are
+  heatmap <- heatmap.2(pairwisedist,
+                       Rowv = NULL, Colv = NULL,
+                       dendrogram = 'none',
+                       trace = 'none',
+                       col = heat.colors(256),
+                       scale = 'row',
+                       margins = c(5, 10),
+                       main = title,
+                       ylab=ylabel,
+                       xlab=xlabel,
+                       cex.axis = 0.8,
+                       cex.lab = 0.8,
+                       srtCol = 45,
+                       adjCol = c(0, 0))   # Turn off this code to adjust the position
+
+  return(heatmap$call) # Return the plot
+}
+
+#pairwisedist <- allPrototypeDistances(RVBPrototype, pathToQuery, "p-distance")
+#PlotPrototypeDistances(pairwisedist)
+#usethis::use_data(pathToRef)
+
+# Usage
+#PlotPrototypeDistances(dist)
+
+# -------------------------------------------------------------------------
+
 # Example usage
 #allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "p-distance")
 #allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "JC")

@@ -48,9 +48,11 @@ The list of functions and their roles are summarized in Table 1.
 
 | Function        | Role                                   | Input                    | Output                     
 |-----------------|----------------------------------------|--------------------------|-----------------------------
-| `assignTypes()` | Assigns genotypes to query sequence | fasta file |                           
+| `assignTypes()` | Assigns genotypes to query sequence | fasta file | CSV file  
+| `PlotFrequency()` | Plot the assigned genotypes | output from assignTypes | Barplot
 | `getPrototypeSeqs()`| Creates an output directory for the prototype files | fasta file |                    
 | `allPrototypeDistances()` | Generates pairwise distance between query and prototype sequences | fasta file |
+| `PlotPrototypeDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
 | `overallMeanDistance()` | Calculates overall genetic distance of query sequences  |  fasta file |          
 
 ### Running the functions using our test data
@@ -58,26 +60,35 @@ The list of functions and their roles are summarized in Table 1.
 ##### Load Library
 
 ```{r }
-library(Rhinotyper)
+library(rhinotypeR)
 ```
 
 ##### Function 1: Assign genotypes to query sequence
 ```{r }
 assignTypes(pathToRef, pathToQuery, model = "p-distance", threshold = 0.105)
 ```
+##### Function 2: Plot frequency
+```{r }
+PlotFrequency(genotypeassigned)
+```
 
-##### Function 2: Create an output directory for the prototype files
+##### Function 3: Create an output directory for the prototype files
 ```{r }
 #Create an output directory in your current directory before running this function
 getPrototypeSeqs(destinationFolder = "./output")
 ```
 
-##### Function 3: Generate pairwise distance between query and prototype sequences
+##### Function 4: Generate pairwise distance between query and prototype sequences
 ```{r }
 allPrototypeDistances(RVBPrototype, pathToQuery, "p-distance")
 ```
 
-##### Function 4: Calculate overall genetic distance of query sequences
+##### Function 5: Plot Prototype distances
+```{r }
+#PlotPrototypeDistances(pairwisedist)
+```
+
+##### Function 6: Calculate overall genetic distance of query sequences
 ```{r }
 overallMeanDistance(RVAPrototype)
 ```
@@ -98,21 +109,34 @@ The threshhold can also be changed based on your needs.
 #assignTypes("path to reference sequence e.g RVBPrototype", "path to query sequence", model = "Tamura3p", threshold = 0.105)
 ```
 
-##### Function 2: Create an output directory for the prototype files
+##### Function 2: Plot frequency
+The output of the assign genotype (function 1) is the input.
+```{r }
+#genotypeassigned <- assignTypes(pathToRef, pathToQuery, model = "p-distance", threshold = 0.105)
+#PlotFrequency(genotypeassigned)
+```
+
+##### Function 3: Create an output directory for the prototype files
 Ensure you create an output directory in your current directory before running this function, otherwise it will throw an error saying "output" folder is not found.
 
 ```{r }
 getPrototypeSeqs(destinationFolder = "./output")
 ```
 
-##### Function 3: Generate pairwise distance between query and prototype sequences
+##### Function 4: Generate pairwise distance between query and prototype sequences
 The model could be either p-distance, JC, Kimura2p, Tamura3p based on your preference.
 
 ```{r }
 #allPrototypeDistances("path to reference sequence e.g RVBPrototype", "path to query sequence", "Tamura3p")
 ```
 
-##### Function 4: Calculate overall genetic distance of query sequences
+##### Function 5: Plot Prototype distances
+The output of the generate pairwise distance between query and prototype sequences (function 4) is the input data.
+```{r }
+#PlotPrototypeDistances(pairwisedist)
+```
+
+##### Function 6: Calculate overall genetic distance of query sequences
 
 ```{r }
 #overallMeanDistance("path to reference sequence e.g RVAPrototype")

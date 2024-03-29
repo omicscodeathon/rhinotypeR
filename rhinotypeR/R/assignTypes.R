@@ -34,11 +34,30 @@ assignTypes <- function(pathToRef, pathToQuery, model = "p-distance", threshold 
   return(outputDf)
 }
 
+
+# -------------------------------------------------------------------------
+PlotFrequency <- function(genotypeassigned, xlab='The assigned RV genotype',ylab='Sample genotype frequency'){
+  # This function takes assignTypes() output and the user-supplied x and y-axis labels.
+  # It tabulates the frequency of unique entries of the assigned_type column
+  # Visualize using a bar plot the frequency of each genotype present in user samples
+  plot=genotypeassigned %>%
+    count(assigned_type) %>%
+    ggplot(aes(x=assigned_type,y=n,fill=assigned_type))+
+    geom_col()+
+    labs(x=xlab, y=ylab)+
+    theme(axis.text.x = element_text(angle = 30, hjust = 0.5, vjust = 0.5))
+  return(plot)
+}
+
+
 #Save data in rda format
 #pathToRef <- "../data/RVBPrototypeAligned.fasta"
 #usethis::use_data(pathToRef)
 #pathToQuery <- "../data/tmp_query.fasta"
 #usethis::use_data(pathToQuery)
+#genotypeassigned <- assignTypes(pathToRef, pathToQuery, model = "p-distance", threshold = 0.105)
+#usethis::use_data(genotypeassigned)
+
 
 # Example usage
 #assignTypes(pathToRef, pathToQuery, "p-distance", 0.105)
