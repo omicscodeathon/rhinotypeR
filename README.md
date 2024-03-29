@@ -36,7 +36,7 @@ You can install the development version of rhinotypeR from
 [GitHub](https://github.com) with:
 
 ``` r
-devtools::install_github("omicscodeathon/rhinotyper")
+devtools::install_github("omicscodeathon/rhinotypeR")
 ```
 
 ##### Load Library
