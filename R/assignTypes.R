@@ -51,9 +51,9 @@ PlotFrequency <- function(genotypeassigned, xlab='The assigned RV genotype',ylab
 
 
 #Save data in rda format
-#pathToRef <- "../data/RVBPrototypeAligned.fasta"
+#pathToRef <- "./data/RVBPrototypeAligned.fasta"
 #usethis::use_data(pathToRef)
-#pathToQuery <- "../data/tmp_query.fasta"
+#pathToQuery <- "./data/tmp_query.fasta"
 #usethis::use_data(pathToQuery)
 #genotypeassigned <- assignTypes(pathToRef, pathToQuery, model = "p-distance", threshold = 0.105)
 #usethis::use_data(genotypeassigned)
