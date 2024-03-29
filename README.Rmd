@@ -40,6 +40,12 @@ You can install the development version of rhinotypeR from [GitHub](https://gith
 devtools::install_github("omicscodeathon/rhinotypeR")
 ```
 
+### Load Library
+```{r }
+library(rhinotypeR)
+```
+
+
 ## Functions
 The package encompasses functions to compute genetic distances, perform phylogenetic clustering, and compare sequences against RV prototype strains. 
 These functionalities are designed to be user-friendly and adaptable to various research needs.
@@ -58,10 +64,6 @@ The list of functions and their roles are summarized in Table 1.
 ### Running the functions using our test data
 
 ##### Load Library
-
-```{r }
-library(rhinotypeR)
-```
 
 ##### Function 1: Assign genotypes to query sequence
 ```{r }
@@ -94,12 +96,6 @@ overallMeanDistance(RVAPrototype)
 ```
 
 ### Running the functions on your own dataset
-
-##### Load library
-
-```{r }
-library(Rhinotyper)
-```
 
 ##### Function 1: Assign genotypes to query sequence
 The model could be either p-distance, JC, Kimura2p, Tamura3p based on your preference.
