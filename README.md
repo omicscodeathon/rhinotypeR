@@ -30,6 +30,9 @@ Our methodology involves:
 3. Integration of methods for constructing Maximum Likelihood phylogenetic 
 trees.
 
+### Workflow
+![workflow](https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/workflow.png)
+
 ### Installation
 
 You can install the development version of rhinotypeR from
