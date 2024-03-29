@@ -21,7 +21,6 @@ Here’s an example of a FASTA file:
 
 ## Workflow
 ![workflow](https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/workflow.png)
-
 ## Package
 Our project aims to develop an R package to automate RV genotype assignment, facilitating genomic scientists in efficiently genotyping RV infections.
 
