@@ -1,4 +1,4 @@
-# Rhinotyper: A package for rhinovirus ghenotyping
+# rhinotypeR: A package for rhinovirus genotyping
 
 ## Table of Contents
 1. [Background](#Background)
