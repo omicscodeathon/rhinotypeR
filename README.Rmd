@@ -37,7 +37,7 @@ Here's an example of a FASTA file:
 You can install the development version of rhinotypeR from [GitHub](https://github.com) with:
 
 ``` r
-devtools::install_github("omicscodeathon/rhinotyper/rhinotypeR")
+devtools::install_github("omicscodeathon/rhinotypeR")
 ```
 
 ## Functions
@@ -133,7 +133,7 @@ The model could be either p-distance, JC, Kimura2p, Tamura3p based on your prefe
 ##### Function 5: Plot Prototype distances
 The output of the generate pairwise distance between query and prototype sequences (function 4) is the input data.
 ```{r }
-#PlotPrototypeDistances(pairwisedist)
+#PlotPrototypeDistances("output from 'allPrototypeDistances'")
 ```
 
 ##### Function 6: Calculate overall genetic distance of query sequences
