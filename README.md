@@ -15,12 +15,11 @@ Rhinoviruses (RV), common respiratory pathogens, are positive-sense, single-stra
 The project utilizes VP4/2 sequences available in the public domain from
 GenBank and reference prototype strains from www.picornaviridae.com
 
-### Data Format
+#### Data Format
 
 The input datasets (target, reference and prototype) are fasta files.
 Here’s an example of a FASTA file: 
-
-![fasta file](https://github.com/omicscodeathon/rhinotyper/blob/main/rhinotypeR/man/figures/example_fasta_file.png)
+![fasta file](https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/example_fasta_file.png)
 
 ## Package
 Our project aims to develop an R package to automate RV genotype assignment, facilitating genomic scientists in efficiently genotyping RV infections.
@@ -37,7 +36,7 @@ You can install the development version of rhinotypeR from
 [GitHub](https://github.com) with:
 
 ``` r
-devtools::install_github("omicscodeathon/rhinotypeR")
+devtools::install_github("omicscodeathon/rhinotyper")
 ```
 
 ##### Load Library
