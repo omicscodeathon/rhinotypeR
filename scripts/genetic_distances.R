@@ -370,11 +370,12 @@ allPrototypeDistances <- function(pathToRef, pathToQuery, model = "p-distance") 
 
 
 
-
 # Example usage
 allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "p-distance")
 allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "JC")
 allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "Kimura2p")
 allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "Tamura3p")
+
+
 
 
