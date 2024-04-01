@@ -28,9 +28,13 @@ plotSequenceDifferences <- function(fastaFile) {
     diffList[[i - 1]]$color[isOther] <- "black"
   }
   
+  # Adjust left margin to ensure y-axis labels are not truncated
+  oldPar <- par(mar = c(5, 8, 4, 2) + 0.1) # Increase the left margin
+  # plot
   plot(NULL, xlim = c(1, genomeLength), ylim = c(0.5, length(sequences)), type = 'n',
-       xlab = paste("Genome Position of", seqNames[1], ", acting as reference"),
-       ylab = "Sequence", yaxt = 'n')
+       xlab = paste0("Genome Position of ", seqNames[1], ", acting as reference"),
+       ylab = "", 
+       yaxt = 'n')
   axis(2, at = 1:length(sequences), labels = seqNames, las = 2)
   
   # Plot small vertical bars for each difference using mapped colors
@@ -42,6 +46,7 @@ plotSequenceDifferences <- function(fastaFile) {
                x1 = diffList[[i]]$position[j], y1 = yPosEnd[j] + 0.25, col = diffList[[i]]$color[j])
     }
   }
+  par(oldPar) # Reset to old graphical parameters after plotting
 }
 
 

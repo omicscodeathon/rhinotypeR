@@ -1,6 +1,6 @@
 
 
-source("./scripts/genetic_distances.R")
+source("./scripts/04_genetic_distances.R")
 
 assignTypes <- function(pathToRef, pathToQuery, model = "p-distance", threshold = 0.105) {
   # Compute distances using the specified model

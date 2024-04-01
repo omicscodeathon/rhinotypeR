@@ -2,54 +2,7 @@
 
 # Base R functions
 
-
-# Function 1 
-# Function to read sequences from a FASTA file
-readFasta <- function(fastaFile) {
-  # Read all lines from the FASTA file
-  lines <- readLines(fastaFile)
-  
-  # Initialize lists to store sequences and their headers
-  seqList <- list()
-  headerList <- c()
-  
-  # Temporary storage for the current sequence being read
-  currentSeq <- NULL
-  
-  # Iterate through each line of the FASTA file
-  for (line in lines) {
-    if (startsWith(line, ">")) {
-      # If currentSeq is not NULL, it means we've finished reading a sequence
-      # Add it to seqList
-      if (!is.null(currentSeq)) {
-        seqList[[length(seqList) + 1]] <- paste(currentSeq, collapse = "")
-      }
-      # Reset currentSeq for the next sequence
-      currentSeq <- c()
-      # Add the header (without the ">" character) to headerList
-      headerList <- c(headerList, substring(line, 2))
-    } else {
-      # If the line is not a header, it's part of the current sequence
-      # Convert it to uppercase and add it to currentSeq
-      currentSeq <- c(currentSeq, toupper(line))
-    }
-  }
-  
-  # After the loop, add the last sequence to seqList if it exists
-  if (!is.null(currentSeq)) {
-    seqList[[length(seqList) + 1]] <- paste(currentSeq, collapse = "")
-  }
-  
-  # Return a list containing the sequences and their corresponding headers
-  return(list(sequences = seqList, headers = headerList))
-}
-
-
-
-
-# Example usage
-readFasta("./data/RVAPrototypeAligned.fasta")
-readFasta("./data/tmp_ref_b99.fasta")
+source("./scripts/02_readFasta.R")
 
 # Function 2
 # Compare sequence lengths
@@ -346,35 +299,6 @@ calcTamura3pDistance(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery
 
 # Maximum Composite Likelihood method? (possibly too complex for regular scripting!!!)
 
-
-
-
-
-allPrototypeDistances <- function(pathToRef, pathToQuery, model = "p-distance") {
-  # Determine which model to use based on user input
-  if (model == "p-distance") {
-    result <- calcPDistance(pathToRef, pathToQuery)
-  } else if (model == "JC") {
-    result <- calcJukesCantorDistance(pathToRef, pathToQuery)
-  } else if (model == "Kimura2p") {
-    result <- calcKimura2pDistance(pathToRef, pathToQuery)
-  } else if (model == "Tamura3p") {
-    result <- calcTamura3pDistance(pathToRef, pathToQuery)
-  } else {
-    stop("Unknown model specified. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p'.")
-  }
-  
-  # Return the result of the chosen model
-  return(result)
-}
-
-
-
-# Example usage
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "p-distance")
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "JC")
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "Kimura2p")
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "Tamura3p")
 
 
 
