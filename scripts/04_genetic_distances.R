@@ -81,29 +81,34 @@ countSNPs <- function(pathToRef, pathToQuery) {
   refHeaders <- fastaRef$headers
   
   fastaQuery <- readFasta(pathToQuery)
-  query <- fastaQuery$sequences[[1]] # Assuming only one query sequence
-  queryHeader <- fastaQuery$headers[[1]] # Assuming only one query header
+  queries <- fastaQuery$sequences
+  queryHeaders <- fastaQuery$headers
   
-  # Prepare the matrix to store SNP counts, using the query header for row name
-  snpMatrix <- matrix(nrow = 1, ncol = length(refs), dimnames = list(c(queryHeader), refHeaders))
+  # Prepare the matrix to store SNP counts, using query headers for row names
+  snpMatrix <- matrix(nrow = length(queries), ncol = length(refs), dimnames = list(queryHeaders, refHeaders))
   
-  # Convert the query sequence to character vector
-  queryChars <- strsplit(query, split = "")[[1]]
-  
-  for (i in seq_along(refs)) {
-    # Convert the current reference sequence to character vector
-    refChars <- strsplit(refs[[i]], split = "")[[1]]
+  for (q in seq_along(queries)) {
+    query <- queries[[q]]
+    queryHeader <- queryHeaders[q]
     
-    # Ensure both sequences are of the same length for comparison
-    if (length(refChars) == length(queryChars)) {
-      # Count the differences (SNPs)
-      snps <- sum(refChars != queryChars)
-    } else {
-      snps <- NA  # Mark as NA if sequences are of different lengths
+    # Convert the query sequence to character vector
+    queryChars <- strsplit(query, split = "")[[1]]
+    
+    for (i in seq_along(refs)) {
+      # Convert the current reference sequence to character vector
+      refChars <- strsplit(refs[[i]], split = "")[[1]]
+      
+      # Ensure both sequences are of the same length for comparison
+      if (length(refChars) == length(queryChars)) {
+        # Count the differences (SNPs)
+        snps <- sum(refChars != queryChars)
+      } else {
+        snps <- NA  # Mark as NA if sequences are of different lengths
+      }
+      
+      # Store SNP counts
+      snpMatrix[q, i] <- snps
     }
-    
-    # Store SNP counts
-    snpMatrix[1, i] <- snps
   }
   
   # Output
@@ -111,21 +116,20 @@ countSNPs <- function(pathToRef, pathToQuery) {
 }
 
 
-
 # Example usage
-countSNPs(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery="./data/tmp_query.fasta")
+countSNPs(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery="./data/tmp.fasta")
 
 
 
 # Function 5
 # p-distance
 calcPDistance <- function(pathToRef, pathToQuery) {
-  # Count the SNPs between the query and each reference sequence
-  snpCounts <- countSNPs(pathToRef, pathToQuery)
+  # Count the SNPs between each query and each reference sequence
+  snpCounts <- countSNPs(pathToRef, pathToQuery)  # Assuming countSNPs is already adapted for multiple queries
   
-  # Read query sequence to obtain the query header
+  # Read query sequences to obtain the query headers
   fastaQuery <- readFasta(pathToQuery)
-  queryHeader <- fastaQuery$headers[1]  # Assuming only one query sequence
+  queryHeaders <- fastaQuery$headers
   
   # Directly calculate reference sequence lengths
   fastaRef <- readFasta(pathToRef)
@@ -133,14 +137,16 @@ calcPDistance <- function(pathToRef, pathToQuery) {
   refLengths <- sapply(fastaRef$sequences, function(seq) length(unlist(strsplit(seq, ""))))
   
   # Prepare a matrix for p-distances with appropriate dimensions and names
-  pDistancesMatrix <- matrix(nrow = 1, ncol = length(refLengths), dimnames = list(queryHeader, refHeaders))
+  pDistancesMatrix <- matrix(nrow = length(queryHeaders), ncol = length(refLengths), dimnames = list(queryHeaders, refHeaders))
   
-  # Calculate p-distance for each reference sequence
-  for (i in seq_along(refLengths)) {
-    if (!is.na(snpCounts[1, i])) {
-      pDistancesMatrix[1, i] <- snpCounts[1, i] / refLengths[i]
-    } else {
-      pDistancesMatrix[1, i] <- NA  # Assign NA if SNP count was NA
+  # Calculate p-distance for each query-reference pair
+  for (q in 1:nrow(snpCounts)) {
+    for (i in seq_along(refLengths)) {
+      if (!is.na(snpCounts[q, i])) {
+        pDistancesMatrix[q, i] <- snpCounts[q, i] / refLengths[i]
+      } else {
+        pDistancesMatrix[q, i] <- NA  # Assign NA if SNP count was NA
+      }
     }
   }
   
@@ -149,25 +155,33 @@ calcPDistance <- function(pathToRef, pathToQuery) {
 
 
 # Example usage
-calcPDistance(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery = "./data/tmp_query.fasta")
+calcPDistance(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery = "./data/tmp.fasta")
 
 
 # Jukes Cantor
 
 # Function to calculate Jukes-Cantor genetic distance
 calcJukesCantorDistance <- function(pathToRef, pathToQuery) {
-  # Calculate p-distance
-  p_dist <- calcPDistance(pathToRef, pathToQuery)
+  # Calculate p-distance for multiple queries
+  p_dist <- calcPDistance(pathToRef, pathToQuery)  # This now handles multiple queries
   
-  # Calculate Jukes-Cantor genetic distance
+  # Initialize a matrix to store Jukes-Cantor distances
+  jc_dist <- matrix(nrow = nrow(p_dist), ncol = ncol(p_dist), dimnames = dimnames(p_dist))
+  
+  # Apply the Jukes-Cantor formula to each element in the p-distance matrix
   jc_dist <- -3/4 * log(1 - 4/3 * p_dist)
   
-  # Return the Jukes-Cantor genetic distance
+  # Handling cases where p_dist >= 0.75, setting JC distance to Inf 
+  # JC assumes that all nt substitutions are equally probable and independent, which might not always hold true in real data. 
+      #The handling of cases where p_dist >= 0.75 with Inf is to indicate that the Jukes-Cantor model might not be valid for these high levels of divergence due to the assumption of the model being violated. 
+  jc_dist[p_dist >= 0.75] <- Inf  
+  
+  # Return the Jukes-Cantor genetic distance matrix
   return(jc_dist)
 }
-
 # Example usage
-calcJukesCantorDistance(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery = "./data/tmp_query.fasta")
+calcJukesCantorDistance(pathToRef = "./data/RVBPrototypeAligned.fasta", 
+                                       pathToQuery = "./data/tmp.fasta")
 
 
 # Kimura 2 parameter (transitions vs transversions)
@@ -197,36 +211,49 @@ calcTransitionTransversions <- function(refChars, queryChars) {
 
 ## Function to calculate Kimura 2-parameter genetic distance
 calcKimura2pDistance <- function(pathToRef, pathToQuery) {
-  # Read multiple reference sequences and one query sequence
+  # Load reference sequences
   refsData <- readFasta(pathToRef)
   refs <- refsData$sequences
   refHeaders <- refsData$headers
   
+  # Load query sequences (now handling multiple queries)
   queryData <- readFasta(pathToQuery)
-  query <- queryData$sequences[[1]]  # Assuming only one query sequence
-  queryHeader <- queryData$headers[[1]]  # Assuming only one query header
+  queries <- queryData$sequences
+  queryHeaders <- queryData$headers
   
-  # Initialize a matrix to store the distances
-  k2pMatrix <- matrix(nrow = 1, ncol = length(refs), 
-                      dimnames = list(c(queryHeader), refHeaders))
+  # Initialize a matrix to store the distances, with dimensions based on the number of queries and refs
+  k2pMatrix <- matrix(nrow = length(queries), ncol = length(refs), 
+                      dimnames = list(queryHeaders, refHeaders))
   
-  # Convert the query sequence to character vector
-  queryChars <- strsplit(query, split = "")[[1]]
-  
-  # Iterate over each reference sequence
-  for (i in seq_along(refs)) {
-    refChars <- strsplit(refs[[i]], split = "")[[1]]
+  # Iterate over each query sequence
+  for (q in 1:length(queries)) {
+    queryChars <- strsplit(queries[[q]], split = "")[[1]]
     
-    # Calculate proportions of transitions and transversions
-    tt <- calcTransitionTransversions(refChars, queryChars)
-    P <- tt$P
-    Q <- tt$Q
-    
-    # Calculate Kimura 2-parameter genetic distance
-    K2P_distance <- -0.5 * log((1 - 2*P - Q) * sqrt(1 - 2*Q))
-    
-    # Store the distance
-    k2pMatrix[1, i] <- K2P_distance
+    # Iterate over each reference sequence
+    for (r in 1:length(refs)) {
+      refChars <- strsplit(refs[[r]], split = "")[[1]]
+      
+      # Ensure lengths match to avoid errors in distance calculation
+      if (length(queryChars) == length(refChars)) {
+        # Calculate proportions of transitions and transversions
+        tt <- calcTransitionTransversions(refChars, queryChars)
+        P <- tt$P
+        Q <- tt$Q
+        
+        # Calculate Kimura 2-parameter genetic distance
+        # Handling potential division by zero or negative values under the log function
+        if ((1 - 2*P - Q) > 0 && (1 - 2*Q) > 0) {
+          K2P_distance <- -0.5 * log((1 - 2*P - Q) * sqrt(1 - 2*Q))
+        } else {
+          K2P_distance <- NA  # Assign NA if the calculation is not possible
+        }
+        
+        # Store the distance
+        k2pMatrix[q, r] <- K2P_distance
+      } else {
+        k2pMatrix[q, r] <- NA  # Assign NA if sequence lengths do not match
+      }
+    }
   }
   
   # Return the matrix of Kimura 2-parameter genetic distances
@@ -235,62 +262,66 @@ calcKimura2pDistance <- function(pathToRef, pathToQuery) {
 
 
 # Example usage
-calcKimura2pDistance(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery = "./data/tmp_query.fasta")
+calcKimura2pDistance(pathToRef = "./data/RVBPrototypeAligned.fasta", 
+                                    pathToQuery = "./data/tmp.fasta")
 
 
 # calculate Tamura 3-parameter genetic distance
 calcTamura3pDistance <- function(pathToRef, pathToQuery) {
-  # Read multiple reference sequences and one query sequence
+  # Load reference sequences
   refsData <- readFasta(pathToRef)
   refs <- refsData$sequences
   refHeaders <- refsData$headers
   
+  # Load query sequences (handling multiple queries)
   queryData <- readFasta(pathToQuery)
-  query <- queryData$sequences[[1]]  # Assuming only one query sequence
-  queryHeader <- queryData$headers[[1]]  # Assuming only one query header
+  queries <- queryData$sequences
+  queryHeaders <- queryData$headers
   
-  # Initialize a matrix to store the distances
-  tamuraMatrix <- matrix(nrow = 1, ncol = length(refs), 
-                         dimnames = list(c(queryHeader), refHeaders))
+  # Initialize a matrix to store the distances, with dimensions based on the number of queries and refs
+  tamuraMatrix <- matrix(nrow = length(queries), ncol = length(refs), 
+                         dimnames = list(queryHeaders, refHeaders))
   
-  # Convert the query sequence to character vector
-  queryChars <- strsplit(query, split = "")[[1]]
-  
-  # Iterate over each reference sequence
-  for (i in seq_along(refs)) {
-    refChars <- strsplit(refs[[i]], split = "")[[1]]
+  # Iterate over each query sequence
+  for (q in 1:length(queries)) {
+    queryChars <- strsplit(queries[[q]], split = "")[[1]]
     
-    # Calculate base frequencies for both sequences
-    gcContentRef <- sum(refChars %in% c("G", "C")) / length(refChars)
-    gcContentQuery <- sum(queryChars %in% c("G", "C")) / length(queryChars)
-    
-    # Calculate transitions and transversions
-    tt_results <- calcTransitionTransversions(refChars, queryChars)
-    P <- tt_results$P
-    Q <- tt_results$Q
-    
-    theta1 <- gcContentRef
-    theta2 <- gcContentQuery
-    C <- theta1 + theta2 - 2 * theta1 * theta2
-    
-    # Tamura distance calculation
-    if ((1 - P/C - Q) > 0 && (1 - 2*Q) > 0) {
-      distance <- -C * log(1 - P/C - Q) - 0.5 * (1 - C) * log(1 - 2*Q)
-    } else {
-      distance <- NA  # Distance cannot be calculated under these conditions
+    # Iterate over each reference sequence
+    for (r in 1:length(refs)) {
+      refChars <- strsplit(refs[[r]], split = "")[[1]]
+      
+      # Ensure sequence lengths match for comparison
+      if (length(queryChars) == length(refChars)) {
+        # Calculate base frequencies and transitions/transversions
+        gcContentRef <- sum(refChars %in% c("G", "C")) / length(refChars)
+        gcContentQuery <- sum(queryChars %in% c("G", "C")) / length(queryChars)
+        tt_results <- calcTransitionTransversions(refChars, queryChars)
+        P <- tt_results$P
+        Q <- tt_results$Q
+        theta1 <- gcContentRef
+        theta2 <- gcContentQuery
+        C <- theta1 + theta2 - 2 * theta1 * theta2
+        
+        # Calculate Tamura 3-parameter distance with error handling
+        if ((1 - P/C - Q) > 0 && (1 - 2*Q) > 0) {
+          distance <- -C * log(1 - P/C - Q) - 0.5 * (1 - C) * log(1 - 2*Q)
+        } else {
+          distance <- NA  # Assign NA if distance cannot be calculated
+        }
+        
+        tamuraMatrix[q, r] <- distance
+      } else {
+        tamuraMatrix[q, r] <- NA  # Assign NA if sequence lengths do not match
+      }
     }
-    
-    # Store the distance
-    tamuraMatrix[1, i] <- distance
   }
   
-  # Return the matrix of Tamura 3-parameter genetic distances
   return(tamuraMatrix)
 }
 
-
 # Example usage
-calcTamura3pDistance(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery = "./data/tmp_query.fasta")
+calcTamura3pDistance(pathToRef = "./data/RVBPrototypeAligned.fasta", 
+                                    pathToQuery = "./data/tmp.fasta")
 
 
 # Tamura-Nei model  (complex!!!)

@@ -1,7 +1,7 @@
 
 
 
-source("scripts/03_genetic_distances.R")
+source("scripts/04_genetic_distances.R")
 
 allPrototypeDistances <- function(pathToRef, pathToQuery, model = "p-distance") {
   # Determine which model to use based on user input
@@ -14,7 +14,7 @@ allPrototypeDistances <- function(pathToRef, pathToQuery, model = "p-distance") 
   } else if (model == "Tamura3p") {
     result <- calcTamura3pDistance(pathToRef, pathToQuery)
   } else {
-    stop("Unknown model specified. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p'.")
+    stop("Unknown model specified. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p' ")
   }
   
   # Return the result of the chosen model
@@ -24,8 +24,8 @@ allPrototypeDistances <- function(pathToRef, pathToQuery, model = "p-distance") 
 
 
 # Example usage
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "p-distance")
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "JC")
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "Kimura2p")
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp_query.fasta", "Tamura3p")
+allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp.fasta", "p-distance")
+allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp.fasta", "JC")
+allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp.fasta", "Kimura2p")
+allPrototypeDistances("./data/RVBPrototypeAligned.fasta", "./data/tmp.fasta", "Tamura3p")
 
