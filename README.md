@@ -1,6 +1,6 @@
 # rhinotypeR: A package for rhinovirus genotyping
 
-
+```
 
            /**       /**                       /**                                   /*** *** 
           | **      |**/                      | **                                  | **__  **
@@ -14,7 +14,7 @@
                                                       |  ******/| **                          
                                                        \______/ |__/                          
 
-
+```
 
 ## Table of Contents
 1. [Background](#Background)
