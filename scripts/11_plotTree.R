@@ -20,4 +20,12 @@ distance_object <- as.dist(distance_matrix)
 hc <- hclust(distance_object, method = "complete")
 
 # Plot the dendrogram
-plot(hc, hang = -1, cex = 0.6, main = "A simple tree")
+plot(hc, hang = -1, cex = 0.6, main = "A simple tree", xlab = "", #ann = par("ann"),
+     ylab = "Genetic distance")
+
+
+
+
+
+
+
