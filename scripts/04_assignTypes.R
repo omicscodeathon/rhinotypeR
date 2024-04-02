@@ -2,6 +2,8 @@
 
 source("./scripts/04_genetic_distances.R")
 
+source("./scripts/05_allPrototypeDistances.R")
+
       #. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p'
 
 assignTypes <- function(pathToRef, pathToQuery, model = "p-distance", threshold = 0.105) {

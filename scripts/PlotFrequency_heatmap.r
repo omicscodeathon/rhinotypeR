@@ -1,3 +1,7 @@
+
+
+
+
 PlotFrequency <- function(genotypeassigned,xlab='The assigned RV genotype',ylab='Sample genotype frequency'){
     # This function takes assignTypes() output and the user-supplied x and y-axis labels.
     # It tabulates the frequency of unique entries of the assigned_type column

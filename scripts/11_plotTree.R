@@ -1,0 +1,23 @@
+
+
+
+source("./scripts/06_queryPairwiseDistances.R")
+
+
+distancesToPrototypes <- queryPairwiseDistances("./data/testData.fasta", 
+                                                "p-distance")
+
+
+# Convert the data to a matrix 
+distance_matrix <- as.matrix(distancesToPrototypes)
+
+
+
+# Convert the distance matrix into a "dist" object which is required by hclust
+distance_object <- as.dist(distance_matrix)
+
+# Perform hierarchical clustering using complete linkage
+hc <- hclust(distance_object, method = "complete")
+
+# Plot the dendrogram
+plot(hc, hang = -1, cex = 0.6, main = "A simple tree")
