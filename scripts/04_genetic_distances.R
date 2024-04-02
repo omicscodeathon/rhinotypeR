@@ -74,7 +74,7 @@ handleGaps <- function(refSeq, querySeq, option = "delete") {
 
 # Function 4
 # Count SNPs
-countSNPs <- function(pathToRef, pathToQuery) {
+countSNPsHelper <- function(pathToRef, pathToQuery) {
   # Read refs and query sequences along with their headers
   fastaRef <- readFasta(pathToRef)
   refs <- fastaRef$sequences
@@ -117,7 +117,7 @@ countSNPs <- function(pathToRef, pathToQuery) {
 
 
 # Example usage
-countSNPs(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery="./data/tmp.fasta")
+countSNPsHelper(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery="./data/tmp.fasta")
 
 
 
@@ -125,7 +125,7 @@ countSNPs(pathToRef = "./data/RVBPrototypeAligned.fasta", pathToQuery="./data/tm
 # p-distance
 calcPDistance <- function(pathToRef, pathToQuery) {
   # Count the SNPs between each query and each reference sequence
-  snpCounts <- countSNPs(pathToRef, pathToQuery)  # Assuming countSNPs is already adapted for multiple queries
+  snpCounts <- countSNPsHelper(pathToRef, pathToQuery)
   
   # Read query sequences to obtain the query headers
   fastaQuery <- readFasta(pathToQuery)
