@@ -1,14 +1,14 @@
 
 
-source("./scripts/04_genetic_distances.R")
 
+source("./scripts/04_genetic_distances.R")
 source("./scripts/05_allPrototypeDistances.R")
 
       #. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p'
 
-assignTypes <- function(pathToRef, pathToQuery, model = "p-distance", threshold = 0.105) {
+assignTypes <- function(pathToRef, queryFastaData, model = "p-distance", threshold = 0.105) {
   # run allPrototypeDistances to calculate distances
-  distances <- allPrototypeDistances(pathToRef, pathToQuery, model)
+  distances <- allPrototypeDistances(pathToRef, queryFastaData, model)
   
   # Initialize vectors to store output data
   queryVec <- character(0)
@@ -58,5 +58,5 @@ assignTypes <- function(pathToRef, pathToQuery, model = "p-distance", threshold 
 }
 
 # Example usage
-assignTypes("./data/RVBPrototypeAligned.fasta", "./data/tmp.fasta", "p-distance", 0.105)
-assignTypes("./data/RVBPrototypeAligned.fasta", "./data/tmp_off_sequence.fasta", "Tamura3p", 0.105)
+assignTypes("./data/RVBPrototypeAligned.fasta", queryFastaData, "p-distance", 0.105)
+assignTypes("./data/RVBPrototypeAligned.fasta", queryFastaData, "Tamura3p", 0.105)

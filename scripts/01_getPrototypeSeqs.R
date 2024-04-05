@@ -19,3 +19,4 @@ getPrototypeSeqs <- function(destinationFolder){
 
 # Example usage (download into the output folder)
 getPrototypeSeqs(destinationFolder = "./output")
+

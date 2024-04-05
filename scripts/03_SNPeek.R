@@ -1,7 +1,8 @@
 
 
-plotSequenceDifferences <- function(fastaFile) {
-  fastaData <- readFasta(fastaFile)
+source("./scripts/02_readFasta.R")
+
+SNPeek <- function(fastaData) {
   sequences <- fastaData$sequences
   seqNames <- fastaData$headers
   genomeLength <- max(sapply(sequences, nchar))
@@ -32,10 +33,10 @@ plotSequenceDifferences <- function(fastaFile) {
   oldPar <- par(mar = c(5, 8, 4, 2) + 0.1) # Increase the left margin
   # plot
   plot(NULL, xlim = c(1, genomeLength), ylim = c(0.5, length(sequences)), type = 'n',
-       xlab = paste0("Genome Position of ", seqNames[1], ", acting as reference"),
+       xlab = paste0("Genome Position of ", seqNames[length(seqNames)], ", acting as reference"),
        ylab = "", 
        yaxt = 'n')
-  axis(2, at = 1:length(sequences), labels = seqNames, las = 2)
+  axis(2, at = 1:length(sequences), labels = seqNames, las = 2, cex.axis = 0.8)
   
   # Plot small vertical bars for each difference using mapped colors
   for (i in seq_along(diffList)) {
@@ -52,4 +53,7 @@ plotSequenceDifferences <- function(fastaFile) {
 
 
 # Example usage:
-plotSequenceDifferences(fastaFile = "data/output/RVCRefs.fasta")
+
+fastaData <- readFasta(fastaFile = "data/tmp.fasta")
+
+SNPeek(fastaData)

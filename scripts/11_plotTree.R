@@ -1,10 +1,10 @@
 
 
 
-source("./scripts/06_queryPairwiseDistances.R")
+source("./scripts/06_pairwiseDistances.R")
 
 
-distancesToPrototypes <- queryPairwiseDistances("./data/testData.fasta", 
+distancesToPrototypes <- pairwiseDistances("./data/testData.fasta", 
                                                 "p-distance")
 
 

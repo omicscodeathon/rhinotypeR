@@ -4,14 +4,14 @@ source("scripts/04_genetic_distances.R")
 
 countSNPs <- function(inputSequencesPath){
   pathToRef = inputSequencesPath
-  pathToQuery = inputSequencesPath
+  queryFastaData = readFasta(inputSequencesPath)
   # run countSNP function
-  snps <- countSNPsHelper(pathToRef, pathToQuery)
+  snps <- countSNPsHelper(pathToRef, queryFastaData)
   # output
   return(snps)
 }
 
-
+# Example usage
 countSNPs(inputSequencesPath = "./data/RVBPrototypeAligned.fasta")
 
 
