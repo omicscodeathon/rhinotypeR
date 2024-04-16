@@ -1,16 +1,13 @@
 # Download prototype strains
 
-# @Ruth, the data will now be a system.file, package = rhinotypeR, 
-#so adjust the 'from' paths accordingly
-
 getPrototypeSeqs <- function(destinationFolder){
   
   # copy files
-  file.copy(from = "./data/RVAPrototypeAligned.fasta", 
+  file.copy(from = RVAPrototype,
             to = file.path(destinationFolder,"RVARefs.fasta"), overwrite = TRUE)
-  file.copy(from = "./data/RVBPrototypeAligned.fasta", 
+  file.copy(from = RVBPrototype,
             to = file.path(destinationFolder,"RVBRefs.fasta"), overwrite = TRUE)
-  file.copy(from = "./data/RVCPrototypeAligned.fasta", 
+  file.copy(from = RVCPrototype,
             to = file.path(destinationFolder,"RVCRefs.fasta"), overwrite = TRUE)
   
   print(paste0("The reference sequences have been downloaded to ", destinationFolder))

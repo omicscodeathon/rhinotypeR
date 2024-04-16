@@ -17,7 +17,7 @@ getPrototypeSeqs(destinationFolder = "./output")
   \item{destinationFolder}{
 %%     ~~Describe \code{x} here~~
   Provide a path that will act as an output folder for the Prototype sequences.
-  Default is set to "output" folder that you need to create on your current directory.
+  The default is set to "output", but you will need to create it prior to running the command in your current directory.
 }
 }
 \details{

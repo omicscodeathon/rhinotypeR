@@ -1,23 +1,27 @@
-\name{overallMeanDistance}
-\alias{overallMeanDistance}
+\name{plotFrequency}
+\alias{plotFrequency}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
-Calculates the overall genetic distance of query sequences
+%%  ~~function to do ... ~~ 
+Create a barplot of genotype frequencies
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-overallMeanDistance(RVPrototype, model)
+plotFrequency(target_data, ref_data, model = "Tamura3p")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{RVPrototype}{
+\item{target_data}{
   %%     ~~Describe \code{pathToRef} here~~
-  RVPrototype ids the name of the Rhinovirus prototype. Default is set to "RVAPrototype"
+  path to target fasta file. 
   }
-  \item{model}{
+  \item{ref_data}{
+  %%     ~~Describe \code{pathToRef} here~~
+  path to reference fasta file.
+  }
+ \item{model}{
   %%     ~~Describe \code{pathToRef} here~~
   It is used to select the model used to assign genotypes to the query sequence. Default is set to p-distance.
   }
@@ -34,10 +38,10 @@ overallMeanDistance(RVPrototype, model)
 }
 \references{
 %% ~put references to the literature/web site here ~
-Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 }
 \author{
 %%  ~~who you are~~
+Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 }
 \note{
 %%  ~~further notes~~
@@ -52,10 +56,10 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 ##---- Should be DIRECTLY executable !! ----
 
 ## The function is currently defined as
-overallMeanDistance(RVPrototype, model="p-distance")
+plotFrequency("target_data", "ref_data", model = "Tamura3p")
 
-## An example:
-overallMeanDistance(readFasta(RVAPrototype), model="p-distance")
+Example run
+plotFrequency(target_fasta_2, refSeq, "Tamura3p")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

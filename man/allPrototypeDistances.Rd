@@ -56,10 +56,10 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 ##---- Should be DIRECTLY executable !! ----
 
 ## The function is currently defined as
-allPrototypeDistances("RVPrototype", "pathToQuery", "p-distance")
+allPrototypeDistances("RVPrototype", "fastaFile", "p-distance")
 
 ## An example on the test dataset will be:
-allPrototypeDistances(RVBPrototype, pathToQuery, "p-distance")
+allPrototypeDistances(RVBPrototype, target, "p-distance")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

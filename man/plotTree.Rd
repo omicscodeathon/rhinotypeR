@@ -1,23 +1,23 @@
-\name{overallMeanDistance}
-\alias{overallMeanDistance}
+\name{plotTree}
+\alias{plotTree}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Calculates the overall genetic distance of query sequences
+Plot a simple phylogenetic tree based on distances
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-overallMeanDistance(RVPrototype, model)
+plotTree(prototypefile, model = "p-distance")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{RVPrototype}{
   %%     ~~Describe \code{pathToRef} here~~
-  RVPrototype ids the name of the Rhinovirus prototype. Default is set to "RVAPrototype"
+  pathToRef is path to the Rhinovirus prototype. 
   }
-  \item{model}{
+ \item{model}{
   %%     ~~Describe \code{pathToRef} here~~
   It is used to select the model used to assign genotypes to the query sequence. Default is set to p-distance.
   }
@@ -34,10 +34,10 @@ overallMeanDistance(RVPrototype, model)
 }
 \references{
 %% ~put references to the literature/web site here ~
-Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 }
 \author{
 %%  ~~who you are~~
+Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 }
 \note{
 %%  ~~further notes~~
@@ -52,10 +52,10 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 ##---- Should be DIRECTLY executable !! ----
 
 ## The function is currently defined as
-overallMeanDistance(RVPrototype, model="p-distance")
+plotTree(prototypefile, model = "p-distance")
 
-## An example:
-overallMeanDistance(readFasta(RVAPrototype), model="p-distance")
+Example run
+plotTree(RVBPrototype, "p-distance")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

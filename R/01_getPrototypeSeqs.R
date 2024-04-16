@@ -1,11 +1,11 @@
 # Download prototype strains
 
 #Save data in rda format
-RVAPrototype <- "./data/RVAPrototypeAligned.fasta"
+#RVAPrototype <- "./data/RVAPrototypeAligned.fasta"
 #usethis::use_data(RVAPrototype)
-RVBPrototype <- "./data/RVBPrototypeAligned.fasta"
+#RVBPrototype <- "./data/RVBPrototypeAligned.fasta"
 #usethis::use_data(RVBPrototype)
-RVCPrototype <- "./data/RVCPrototypeAligned.fasta"
+#RVCPrototype <- "./data/RVCPrototypeAligned.fasta"
 #usethis::use_data(RVCPrototype)
 
 getPrototypeSeqs <- function(destinationFolder){
@@ -23,4 +23,4 @@ getPrototypeSeqs <- function(destinationFolder){
 }
 
 # Example usage (download into the output folder)
-getPrototypeSeqs(destinationFolder = "./output")
+#getPrototypeSeqs(destinationFolder = "./output")

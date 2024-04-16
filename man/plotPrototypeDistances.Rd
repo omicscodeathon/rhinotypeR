@@ -1,23 +1,23 @@
-\name{overallMeanDistance}
-\alias{overallMeanDistance}
+\name{plotPrototypeDistances}
+\alias{plotPrototypeDistances}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Calculates the overall genetic distance of query sequences
+Visualize genetic distances of the query to prototype sequences
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-overallMeanDistance(RVPrototype, model)
+plotPrototypeDistances(prototypefile, model = "p-distance")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{RVPrototype}{
+  \item{prototypefile}{
   %%     ~~Describe \code{pathToRef} here~~
-  RVPrototype ids the name of the Rhinovirus prototype. Default is set to "RVAPrototype"
+  pathToRef is path to the Rhinovirus prototype. 
   }
-  \item{model}{
+ \item{model}{
   %%     ~~Describe \code{pathToRef} here~~
   It is used to select the model used to assign genotypes to the query sequence. Default is set to p-distance.
   }
@@ -34,10 +34,10 @@ overallMeanDistance(RVPrototype, model)
 }
 \references{
 %% ~put references to the literature/web site here ~
-Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 }
 \author{
 %%  ~~who you are~~
+Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 }
 \note{
 %%  ~~further notes~~
@@ -52,10 +52,10 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 ##---- Should be DIRECTLY executable !! ----
 
 ## The function is currently defined as
-overallMeanDistance(RVPrototype, model="p-distance")
+plotPrototypeDistances("prototypefile", model = "p-distance")
 
-## An example:
-overallMeanDistance(readFasta(RVAPrototype), model="p-distance")
+Example run
+plotPrototypeDistances(RVBPrototype, "p-distance")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

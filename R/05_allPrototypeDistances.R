@@ -19,9 +19,10 @@ allPrototypeDistances <- function(pathToRef, queryFastaData, model = "p-distance
 }
 
 
+
 # Example usage
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", queryFastaData, "p-distance")
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", queryFastaData, "JC")
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", queryFastaData, "Kimura2p")
-allPrototypeDistances("./data/RVBPrototypeAligned.fasta", queryFastaData, "Tamura3p")
+#allPrototypeDistances("./data/RVBPrototypeAligned.fasta", queryFastaData, "p-distance")
+#allPrototypeDistances("./data/RVBPrototypeAligned.fasta", queryFastaData, "JC")
+#allPrototypeDistances("./data/RVBPrototypeAligned.fasta", queryFastaData, "Kimura2p")
+#allPrototypeDistances("./data/RVBPrototypeAligned.fasta", queryFastaData, "Tamura3p")
 

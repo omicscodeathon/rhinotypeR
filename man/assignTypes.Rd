@@ -60,10 +60,10 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 ##---- Should be DIRECTLY executable !! ----
 
 ## The function is currently defined as
-assignTypes("pathToRef", "pathToQuery", model = "p-distance", threshold = 0.105)
+assignTypes("refseq", "queryseq", model = "p-distance", threshold = 0.105)
 
 ## An example will be:
-assignTypes(pathToRef, pathToQuery, model = "p-distance", threshold = 0.105)
+assignTypes(RVBPrototype, readFasta(target_fasta_file), "p-distance", 0.105)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):
