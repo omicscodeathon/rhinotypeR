@@ -64,7 +64,7 @@ The list of functions and their roles are summarized in Table 1.
 | `countSNPs`()` | Assigns genotypes to query sequence | fasta file | CSV file
 | `PlotFrequency()` | Plot the assigned genotypes | output from assignTypes | Barplot
 | `PlotPrototypeDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
-| `PlotTree()` | Plot the assigned genotypes | output from assignTypes | Barplot
+| `PlotTree()` | Plot the pairwise distance | output from pairwiseDistances | Barplot
 
 
 ### Running the functions using our test data
