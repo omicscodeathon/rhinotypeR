@@ -52,7 +52,7 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 }
 \examples{
 
-fastaFile(RVAPrototype)
+readFasta(RVAPrototype)
 }
 
 
