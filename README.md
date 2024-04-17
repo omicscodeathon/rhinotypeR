@@ -74,6 +74,8 @@ These functionalities are designed to be user-friendly and adaptable to various 
  
 #### Table 1. A summary of the functions
 
+| Function        | Role                                   | Input                    | Output                     
+|-----------------|----------------------------------------|--------------------------|-----------------------------
 | `getPrototypeSeqs()`| Creates an output directory for the prototype files | fasta file | output directory
 | `readFasta`()` | Assigns genotypes to query sequence | fasta file | CSV file
 | `SNPeek()` | Assigns genotypes to query sequence | fasta file | CSV file
