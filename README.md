@@ -77,21 +77,21 @@ These functionalities are designed to be user-friendly and adaptable to various 
 | Function        | Role                                   | Input                    | Output                     
 |-----------------|----------------------------------------|--------------------------|-----------------------------
 | `getPrototypeSeqs()`| Creates an output directory for the prototype files | fasta file | output directory
-| `readFasta`()` | Assigns genotypes to query sequence | fasta file | CSV file
-| `SNPeek()` | Assigns genotypes to query sequence | fasta file | CSV file
+| `readFasta`()` | Read sequences from a FASTA file | fasta file | CSV file
+| `SNPeek()` | Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file | fasta file | CSV file
 | `assignTypes()` | Assigns genotypes to query sequence | fasta file | CSV file  
 | `allPrototypeDistances()` | Generates pairwise distance between query and prototype sequences | fasta file |  CSV file
-| `pairwiseDistances()` | Assigns genotypes to query sequence | fasta file | CSV file
+| `pairwiseDistances()` | Calculate pairwise distance among input sequences | fasta file | CSV file
 | `overallMeanDistance()` | Calculates overall genetic distance of query sequences  |  fasta file |  CSV file
-| `countSNPs`()` | Assigns genotypes to query sequence | fasta file | CSV file
-| `PlotFrequency()` | Plot the assigned genotypes | output from assignTypes | Barplot
+| `countSNPs`()` | Count SNPs among input sequences | fasta file | CSV file
+| `PlotFrequency()` | Create a barplot of genotype frequencies | output from assignTypes | Barplot
 | `PlotPrototypeDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
-| `PlotTree()` | Plot the pairwise distance | output from pairwiseDistances | Barplot
+| `PlotTree()` | Plot a simple phylogenetic tree based on distances | output from pairwise distances | Barplot
 
 
 ### Running the functions
 
-##### Function 1: getPrototypeSeqs 
+#### Function 1: getPrototypeSeqs 
 - Create an output directory for the prototype files
 - Ensure you create an output directory in your current directory before running this function, otherwise it will throw an error saying "output" folder is not found.
 
@@ -105,7 +105,7 @@ Own data
 #getPrototypeSeqs(destinationFolder = "path to an output folder")
 ```
 
-##### Function 2: readFasta 
+#### Function 2: readFasta 
 - Read sequences from a FASTA file
 
 Example
@@ -118,7 +118,7 @@ Own data
 #readFasta("path to fastaFile")
 ```
 
-##### Function 3: SNPeek 
+#### Function 3: SNPeek 
 - Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file
 
 Example
@@ -131,7 +131,8 @@ Own data
 #SNPeek(readFasta("path to fasta file"))
 ```
 
-##### Function 4: assignTypes - Assign genotypes to the query sequence
+#### Function 4: assignTypes 
+- Assign genotypes to the query sequence
 - The model could be either p-distance, JC, Kimura2p, Tamura3p based on your preference.
 - The threshhold can also be changed based on your needs.
 
@@ -145,7 +146,7 @@ Own data
 #assignTypes("path to reference sequence e.g RVBPrototype", readFasta("path to query sequence"), model, threshold = 0.105)
 ```
 
-##### Function 4: allPrototypeDistances 
+#### Function 4: allPrototypeDistances 
 - Calculates pairwise distance between query and prototype sequences
 - The model could be either p-distance, JC, Kimura2p, Tamura3p based on your preference.
 
@@ -159,7 +160,7 @@ Own data
 #allPrototypeDistances("path to reference sequence e.g RVBPrototype", readFasta("path to query sequence"), "Tamura3p")
 ```
 
-##### Function 5: pairwiseDistances 
+#### Function 5: pairwiseDistances 
 - Calculate pairwise distance among input sequences
 
 Example
@@ -172,7 +173,7 @@ Own data
 #pairwiseDistances("path to prototype file", model = "p-distance")
 ```
 
-##### Function 6: overallMeanDistance 
+#### Function 6: overallMeanDistance 
 - Calculates the overall genetic distance of query sequences
 
 Example
@@ -185,7 +186,7 @@ Own data
 #overallMeanDistance(readFasta("path to reference sequence e.g RVAPrototype"),  model="p-distance")
 ```
 
-##### Function 7: countSNPs 
+#### Function 7: countSNPs 
 - Count SNPs among input sequences
 
 Example
@@ -197,12 +198,44 @@ Own data
 ```{r }
 #countSNPs(inputSequencesPath = "path to prototype file") 
 ```
-##### Function 8: Plot frequency
+#### Function 8: Plot frequency
 - Create a barplot of genotype frequencies
 
 Example
 ```{r }
 plotFrequency(target_fasta_2, refSeq, "Tamura3p")
+```
+
+Own data
+```{r }
+#plotFrequency("target_data", "ref_data", model = "Tamura3p")
+```
+
+#### Function 9: plotPrototypeDistances 
+- Visualize genetic distances of the query to prototype sequences
+- The output of the generate pairwise distance between query and prototype sequences (function 4) is the input data.
+
+Example
+```{r }
+plotPrototypeDistances(RVBPrototype, "p-distance")
+```
+
+Own data
+```{r }
+#plotPrototypeDistances("prototypefile", model = "p-distance")
+```
+
+#### Function 10: plotTree 
+- Plot a simple phylogenetic tree based on distances
+
+Example
+```{r }
+plotTree(RVBPrototype, "p-distance")
+```
+
+Own data
+```{r }
+#plotTree(prototypefile, model = "p-distance")
 ```
 
 ## Citation
