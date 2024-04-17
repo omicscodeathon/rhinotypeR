@@ -21,8 +21,9 @@
 2. [Test-Data](#Test-Data)
 3. [Workflow](#Workflow)
 4. [Package](#Package)
-5. [Citation](#Installation)
-6. [Contributors](#Contributors)
+5. [Installation](#Insttallation)
+6. [Citation](#Citation)
+7. [Contributors](#Contributors)
 
 ## Background
 Rhinoviruses (RV), common respiratory pathogens, are positive-sense, single-stranded RNA viruses characterized by a high antigenic diversity and mutation rate. With their genome approximately 7.2 kb in length, RVs exhibit mutation rates between 10^-3 and 10^-5 mutations per nucleotide per replication event. These viruses are classified into 169 types across three species: RV-A, RV-B, and RV-C. Genotype assignment, a critical aspect of RV research, is based on pairwise genetic distances and phylogenetic clustering with prototype strains, a process currently executed manually and laboriously. 
