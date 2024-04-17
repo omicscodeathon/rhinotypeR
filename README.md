@@ -80,16 +80,16 @@ These functionalities are designed to be user-friendly and adaptable to various 
 | `readFasta`()` | Assigns genotypes to query sequence | fasta file | CSV file
 | `SNPeek()` | Assigns genotypes to query sequence | fasta file | CSV file
 | `assignTypes()` | Assigns genotypes to query sequence | fasta file | CSV file  
-| `allPrototypeDistances()` | Generates pairwise distance between query and prototype sequences | fasta file |
+| `allPrototypeDistances()` | Generates pairwise distance between query and prototype sequences | fasta file |  CSV file
 | `pairwiseDistances()` | Assigns genotypes to query sequence | fasta file | CSV file
-| `overallMeanDistance()` | Calculates overall genetic distance of query sequences  |  fasta file | 
+| `overallMeanDistance()` | Calculates overall genetic distance of query sequences  |  fasta file |  CSV file
 | `countSNPs`()` | Assigns genotypes to query sequence | fasta file | CSV file
 | `PlotFrequency()` | Plot the assigned genotypes | output from assignTypes | Barplot
 | `PlotPrototypeDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
 | `PlotTree()` | Plot the assigned genotypes | output from assignTypes | Barplot
 
 
-### Running the functions using our test data
+### Running the functions
 
 ##### Function 1: getPrototypeSeqs 
 - Create an output directory for the prototype files
