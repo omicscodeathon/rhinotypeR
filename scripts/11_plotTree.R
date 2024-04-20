@@ -4,10 +4,10 @@
 source("./scripts/06_pairwiseDistances.R")
 
 
-plotTree <- function(pdistances) {
+plotTree <- function(distance_matrix) {
   
   # Convert the data to a matrix 
-  distance_matrix <- as.matrix(distancesToPrototypes)
+  distance_matrix <- as.matrix(distance_matrix)
   
   # Convert the distance matrix into a "dist" object required by hclust
   distance_object <- as.dist(distance_matrix)
@@ -22,9 +22,9 @@ plotTree <- function(pdistances) {
 
 
 # Example usage
+fastaD <- readFasta("./data/RVBPrototypeAligned.fasta")
 
-distancesToPrototypes <- pairwiseDistances("./data/testData.fasta", 
-                                           "p-distance")
+distancesToPrototypes <- pairwiseDistances(fastaD, "p-distance")
 
 plotTree(distancesToPrototypes)
 

@@ -1,6 +1,24 @@
 
 # Function 1 
-# Function to read sequences from a FASTA file
+# Compare lengths among input sequences to truncate very long sequences or pad short sequences with "-"
+compareLengths <- function(seq, desired_length = 430) {
+  seq_length <- nchar(seq)
+  # If the sequence is longer than 430 characters, truncate it to 430 characters
+  if (seq_length > desired_length){
+    seq <- substr(seq, 1,desired_length)
+    
+    # If the sequence is shorter than 430 characters, pad it with hyphens
+  }else if (seq_length < desired_length) {
+    seq <- paste0(seq, paste0(rep("-", desired_length - seq_length), collapse = ""))
+  }
+  return(seq)
+}
+
+
+
+
+# Function 2
+# Function to read sequences from a FASTA file and adjust their lengths
 readFasta <- function(fastaFile) {
   # Read all lines from the FASTA file
   lines <- readLines(fastaFile)
@@ -16,9 +34,11 @@ readFasta <- function(fastaFile) {
   for (line in lines) {
     if (startsWith(line, ">")) {
       # If currentSeq is not NULL, it means we've finished reading a sequence
-      # Add it to seqList
       if (!is.null(currentSeq)) {
-        seqList[[length(seqList) + 1]] <- paste(currentSeq, collapse = "")
+        # Join all parts of the sequence into one and adjust its length
+        fullSeq <- paste(currentSeq, collapse = "")
+        adjustedSeq <- compareLengths(fullSeq)
+        seqList[[length(seqList) + 1]] <- adjustedSeq
       }
       # Reset currentSeq for the next sequence
       currentSeq <- c()
@@ -26,14 +46,15 @@ readFasta <- function(fastaFile) {
       headerList <- c(headerList, substring(line, 2))
     } else {
       # If the line is not a header, it's part of the current sequence
-      # Convert it to uppercase and add it to currentSeq
       currentSeq <- c(currentSeq, toupper(line))
     }
   }
   
   # After the loop, add the last sequence to seqList if it exists
   if (!is.null(currentSeq)) {
-    seqList[[length(seqList) + 1]] <- paste(currentSeq, collapse = "")
+    fullSeq <- paste(currentSeq, collapse = "")
+    adjustedSeq <- compareLengths(fullSeq)
+    seqList[[length(seqList) + 1]] <- adjustedSeq
   }
   
   # Return a list containing the sequences and their corresponding headers
@@ -41,8 +62,6 @@ readFasta <- function(fastaFile) {
 }
 
 
-
-
 # Example usage
-#readFasta("./data/RVAPrototypeAligned.fasta")
-#readFasta("./data/tmp_ref_b99.fasta")
+# readFasta("./data/RVAPrototypeAligned.fasta")
+# readFasta("./data/tmp.fasta")
