@@ -1,13 +1,11 @@
 source("R/06_pairwiseDistances.R")
 
-plotTree <- function(inputSequencesPath, model = "p-distance") {
-  
-  distancesToPrototypes <- pairwiseDistances(inputSequencesPath, "p-distance")
+plotTree <- function(pdistances) {
   
   # Convert the data to a matrix 
   distance_matrix <- as.matrix(distancesToPrototypes)
   
-  # Convert the distance matrix into a "dist" object which is required by hclust
+  # Convert the distance matrix into a "dist" object required by hclust
   distance_object <- as.dist(distance_matrix)
   
   # Perform hierarchical clustering using complete linkage
@@ -16,8 +14,15 @@ plotTree <- function(inputSequencesPath, model = "p-distance") {
   # Plot the dendrogram
   plot(hc, hang = -1, cex = 0.6, main = "A simple tree", xlab = "", #ann = par("ann"),
        ylab = "Genetic distance")
-
 }
+
+
+# Example usage
+
+# distancesToPrototypes <- pairwiseDistances("./data/testData.fasta", 
+ #                                          "p-distance")
+
+#plotTree(distancesToPrototypes)
 
 
 
