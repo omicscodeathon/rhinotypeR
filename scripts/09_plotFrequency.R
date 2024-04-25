@@ -2,14 +2,13 @@
 
 # get input data from assignTypes.R
 
-source("./scripts/04_assignTypes.R")
+source("./scripts/06_assignTypes.R")
 
 
 
 source("./scripts/02_readFasta.R")
 queryFastaData <- readFasta("./data/testData.fasta")
-df <- assignTypes(pathToRef = "./data/output/RVBRefs.fasta", queryFastaData, 
-            "Tamura3p", 0.105)
+df <- assignTypes( queryFastaData, "Tamura3p")
 
   
   # Your provided list of values to randomly assign

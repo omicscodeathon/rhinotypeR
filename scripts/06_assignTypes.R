@@ -71,4 +71,4 @@ assignTypes <- function(fastaData, model = "p-distance", threshold = 0.105) {
 
 fastaD <- readFasta("./data/input_aln.fasta")
 
-assignTypes(fastaD,"p-distance", 0.105)
+assignTypes(fastaD,"p-distance")

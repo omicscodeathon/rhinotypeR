@@ -1,7 +1,7 @@
 
 # Function 1 
 # Compare lengths among input sequences to truncate very long sequences or pad short sequences with "-"
-compareLengths <- function(seq, desired_length = 430) {
+compareLengths <- function(seq, desired_length) {
   seq_length <- nchar(seq)
   # If the sequence is longer than 430 characters, truncate it to 430 characters
   if (seq_length > desired_length){
@@ -19,7 +19,7 @@ compareLengths <- function(seq, desired_length = 430) {
 
 # Function 2
 # Function to read sequences from a FASTA file and adjust their lengths
-readFasta <- function(fastaFile) {
+readFasta <- function(fastaFile, desiredLength = 430) {
   # Read all lines from the FASTA file
   lines <- readLines(fastaFile)
   
@@ -37,7 +37,7 @@ readFasta <- function(fastaFile) {
       if (!is.null(currentSeq)) {
         # Join all parts of the sequence into one and adjust its length
         fullSeq <- paste(currentSeq, collapse = "")
-        adjustedSeq <- compareLengths(fullSeq)
+        adjustedSeq <- compareLengths(fullSeq, desiredLength)
         seqList[[length(seqList) + 1]] <- adjustedSeq
       }
       # Reset currentSeq for the next sequence
@@ -53,7 +53,7 @@ readFasta <- function(fastaFile) {
   # After the loop, add the last sequence to seqList if it exists
   if (!is.null(currentSeq)) {
     fullSeq <- paste(currentSeq, collapse = "")
-    adjustedSeq <- compareLengths(fullSeq)
+    adjustedSeq <- compareLengths(fullSeq, desiredLength)
     seqList[[length(seqList) + 1]] <- adjustedSeq
   }
   
