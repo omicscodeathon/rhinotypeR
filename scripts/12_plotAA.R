@@ -1,6 +1,6 @@
 source("./scripts/02_readFasta.R")
 
-plotAA <- function(fastaData) {
+plotAA <- function(fastaData, showLegend = FALSE) {
   sequences <- fastaData$sequences
   seqNames <- fastaData$headers
   proteinLength <- max(sapply(sequences, nchar))
@@ -14,11 +14,11 @@ plotAA <- function(fastaData) {
   }
   
   colorMap <- c(
-    R = "red", H = "red", K = "red",      # Positively charged
-    D = "blue", E = "blue",               # Negatively charged
-    S = "green", T = "green", N = "green", Q = "green", # Polar
+    R = "red", H = "red", K = "red",      # Positively charged amino acid 
+    D = "blue", E = "blue",               # Negatively charged amino acid 
+    S = "green", T = "green", N = "green", Q = "green", # Polar amino acid 
     A = "yellow", V = "yellow", I = "yellow", L = "yellow", M = "yellow", F = "yellow", 
-    W = "yellow", P = "yellow", G = "yellow", Y = "yellow", C = "yellow"  # Nonpolar
+    W = "yellow", P = "yellow", G = "yellow", Y = "yellow", C = "yellow"  # Nonpolar amino acid 
   )
   
   diffList <- list()
@@ -47,6 +47,7 @@ plotAA <- function(fastaData) {
     }
   }
   
+  if (showLegend){
   # Add a semi-transparent legend in the top-left corner
   legend("topleft", inset=c(0.78, 0),
          legend=c("+ve charged", "-ve charged", "Polar", "Non-polar", "Other"),
@@ -54,10 +55,11 @@ plotAA <- function(fastaData) {
          box.col="gray", bg=adjustcolor("white", alpha.f=0.7))
   
   par(oldPar) # Reset to old graphical parameters after plotting
+  }
 }
 
 # Example usage:
 
-fastaData <- readFasta(fastaFile = "data/RVBPrototypeAligned_translated.fasta", desiredLength = 170)
+fastaData <- readFasta(fastaFile = "data/test.fasta", desiredLength = 170)
 
-plotAA(fastaData)
+plotAA(fastaData, showLegend = T)

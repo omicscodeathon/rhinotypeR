@@ -22,9 +22,9 @@ plotTree <- function(distance_matrix) {
 
 
 # Example usage
-fastaD <- readFasta("./data/RVBPrototypeAligned.fasta")
+fastaD <- readFasta("./data/input_aln.fasta")
 
-distancesToPrototypes <- pairwiseDistances(fastaD, "p-distance")
+pdistances <- pairwiseDistances(fastaD, "p-distance")
 
-plotTree(distancesToPrototypes)
+plotTree(pdistances)
 

@@ -58,11 +58,10 @@ countSNPsHelper <- function(fastaData, pairwiseDeletion = FALSE) {
   return(snpMatrix)
 }
 
-# Example usage with pairwise deletion of gaps
-queryFastaData <- readFasta("./data/tmp.fasta")
-snpMatrixWithoutDeletion <- countSNPsHelper(queryFastaData, pairwiseDeletion = FALSE)
-snpMatrixWithDeletion <- countSNPsHelper(queryFastaData, pairwiseDeletion = TRUE)
-
+# Test
+queryFastaData <- readFasta("./data/test.fasta")
+countSNPsHelper(queryFastaData, pairwiseDeletion = FALSE)
+countSNPsHelper(queryFastaData, pairwiseDeletion = TRUE)
 
 
 # p-distance
@@ -94,9 +93,9 @@ calcPDistance <- function(fastaData, pairwiseDeletion = FALSE) {
 }
 
 
-# Example usage
+# Test
 # Read in the query data first
-queryFastaData <- readFasta("./data/tmp.fasta")
+queryFastaData <- readFasta("./data/test.fasta")
 calcPDistance(queryFastaData, pairwiseDeletion = F)
 
 
@@ -122,9 +121,10 @@ calcJukesCantorDistance <- function(fastaData, pairwiseDeletion = FALSE) {
   return(jc_dist)
 }
 
-# Example usage
+
+# Test
 # Read in the query data first
-queryFastaData <- readFasta("./data/tmp.fasta")
+queryFastaData <- readFasta("./data/test.fasta")
 calcJukesCantorDistance(queryFastaData)
 calcJukesCantorDistance(queryFastaData, pairwiseDeletion = TRUE)
 
@@ -203,9 +203,10 @@ calcKimura2pDistance <- function(fastaData, pairwiseDeletion = FALSE) {
 }
 
 
-# Example usage
+
+# Test
 # Read in the query data first
-queryFastaData <- readFasta("./data/tmp.fasta")
+queryFastaData <- readFasta("./data/test.fasta")
 calcKimura2pDistance(queryFastaData)
 
 
@@ -257,13 +258,12 @@ calcTamura3pDistance <- function(fastaData, pairwiseDeletion = FALSE) {
   return(tamuraMatrix)
 }
 
-# Example usage
+
+# Test
 # Read in the query data first
-queryFastaData <- readFasta("./data/tmp.fasta")
+queryFastaData <- readFasta("./data/test.fasta")
 calcTamura3pDistance(queryFastaData)
 
-
-# Tamura-Nei model?
 
 
 

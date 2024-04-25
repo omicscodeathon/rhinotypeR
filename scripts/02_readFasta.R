@@ -63,5 +63,5 @@ readFasta <- function(fastaFile, desiredLength = 430) {
 
 
 # Example usage
-# readFasta("./data/RVAPrototypeAligned.fasta")
-# readFasta("./data/tmp.fasta")
+# readFasta("./data/test.fasta")
+# readFasta("./data/test.fasta")

@@ -193,9 +193,10 @@ overallMeanDistance<- function(fastaData, model) {
 # Example usage
 
 source("./scripts/02_readFasta.R")
-fastaData <- readFasta("./data/RVAPrototypeAligned.fasta")
+fastaData <- readFasta("./data/input_aln.fasta")
 
 overallMeanDistance(fastaData, model="p-distance")
 overallMeanDistance(fastaData, model="JC")
 overallMeanDistance(fastaData, model="Kimura2p")
 overallMeanDistance(fastaData, model="Tamura3p")
+

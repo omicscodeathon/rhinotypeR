@@ -2,7 +2,7 @@
 
 source("./scripts/02_readFasta.R")
 
-SNPeek <- function(fastaData) {
+SNPeek <- function(fastaData, showLegend = FALSE) {
   sequences <- fastaData$sequences
   seqNames <- fastaData$headers
   genomeLength <- max(sapply(sequences, nchar))
@@ -47,11 +47,14 @@ SNPeek <- function(fastaData) {
                x1 = diffList[[i]]$position[j], y1 = yPosEnd[j] + 0.25, col = diffList[[i]]$color[j])
     }
   }
-  # Add a semi-transparent legend in the top-left corner
-  legend("topleft", inset=c(0.8, 0),
-         legend=c("A", "T", "C",  "G", "Other"),
-         fill=c( "green", "red", "blue", "yellow", "black"), cex=0.5, bty="n", 
-         box.col="gray", bg=adjustcolor("white", alpha.f=0.7))
+  
+  if (showLegend){
+    # Add a semi-transparent legend in the top-left corner
+    legend("topleft", inset=c(0.8, 0),
+           legend=c("A", "T", "C",  "G", "Other"),
+           fill=c( "green", "red", "blue", "yellow", "black"), cex=0.5, bty="n", 
+           box.col="gray", bg=adjustcolor("white", alpha.f=0.7))
+  }
   
   par(oldPar) # Reset to old graphical parameters after plotting
 }
@@ -60,6 +63,6 @@ SNPeek <- function(fastaData) {
 
 # Example usage:
 
-fastaData <- readFasta(fastaFile = "data/tmp.fasta", desiredLength = 480)
+fastaData <- readFasta(fastaFile = "data/test.fasta", desiredLength = 480)
 
-SNPeek(fastaData)
+SNPeek(fastaData, showLegend = F)

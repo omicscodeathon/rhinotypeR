@@ -11,7 +11,7 @@ countSNPs <- function(fastaData){
 
 # Example usage
 source("./scripts/02_readFasta.R")
-fastaData <- readFasta("./data/RVAPrototypeAligned.fasta")
+fastaData <- readFasta("./data/test.fasta")
 countSNPs(fastaData)
 
 
