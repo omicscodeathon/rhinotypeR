@@ -37,6 +37,12 @@ Here’s an example of a FASTA file:
 
 ## Workflow
 ![workflow](https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/workflow.png)
+
+RhinotypeR workflow. The user downloads prototype strains using `getPrototypeSeqs()` function, combines these with their newly generated VP4/2 sequences, aligns and manually curates the alignment. 
+The user then reads the curated alignment into R using `readFasta()` function. The readFasta object can then be used to run all the second-level functions, including `assignTypes()` which assigns the sequences into genotypes, filters out the prototype sequences and returns the genotype assignment of the new sequences. This output can be used to visualise the frequency of assigned genotypes.
+The distance matrix object, an output of `pairwiseDistance()` function, can be used to create a phylogenetic tree or a heatmap to visualize genetic relatedness of sequences.  
+
+
 ## Package
 Our project aims to develop an R package to automate RV genotype assignment, facilitating genomic scientists in efficiently genotyping RV infections.
 
@@ -81,12 +87,11 @@ These functionalities are designed to be user-friendly and adaptable to various 
 | `SNPeek()` | Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file | fasta file | A plot highlighting SNPs per sequence
 | `plotAA()` | Visualise amino acid substitutions using a user-specified sequence as the reference | Amino acid fasta file | A plot highlighting amino acid substitutions per sequence
 | `assignTypes()` | Assigns genotypes to query sequence | fasta file | CSV file with three columns: sequence header, assigned type, and genetic distance  
-| `allPrototypeDistances()` | Generates pairwise distance between query and prototype sequences | fasta file |  CSV file
 | `pairwiseDistances()` | Calculate pairwise distance among input sequences using a user-specified evolutionary model | fasta file | A dense distance matrix
 | `overallMeanDistance()` | Calculates the overall mean genetic distance of query sequences using a user-specified evolutionary model  |  fasta file |  A single numeric value
 | `countSNPs`()` | Count pairwise SNPs among query sequences | fasta file | A dense matrix
 | `PlotFrequency()` | Create a barplot of genotype frequencies | output from assignTypes | Barplot
-| `PlotPrototypeDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
+| `PlotDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
 | `PlotTree()` | Plot a simple phylogenetic tree based on distances | output from pairwise distances | A simple phylogenetic tree
 
 
