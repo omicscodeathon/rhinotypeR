@@ -76,17 +76,18 @@ These functionalities are designed to be user-friendly and adaptable to various 
 
 | Function        | Role                                   | Input                    | Output                     
 |-----------------|----------------------------------------|--------------------------|-----------------------------
-| `getPrototypeSeqs()`| Creates an output directory for the prototype files | fasta file | output directory
-| `readFasta`()` | Read sequences from a FASTA file | fasta file | CSV file
-| `SNPeek()` | Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file | fasta file | CSV file
-| `assignTypes()` | Assigns genotypes to query sequence | fasta file | CSV file  
+| `getPrototypeSeqs()`| Downloads RV prototypes into a user-specified local directory | Destination path | RV prototypes are downloaded into the local machine
+| `readFasta`()` | Read sequences from a FASTA file | fasta file | A fasta file imported into R
+| `SNPeek()` | Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file | fasta file | A plot highlighting SNPs per sequence
+| `plotAA()` | Visualise amino acid substitutions using a user-specified sequence as the reference | Amino acid fasta file | A plot highlighting amino acid substitutions per sequence
+| `assignTypes()` | Assigns genotypes to query sequence | fasta file | CSV file with three columns: sequence header, assigned type, and genetic distance  
 | `allPrototypeDistances()` | Generates pairwise distance between query and prototype sequences | fasta file |  CSV file
-| `pairwiseDistances()` | Calculate pairwise distance among input sequences | fasta file | CSV file
-| `overallMeanDistance()` | Calculates overall genetic distance of query sequences  |  fasta file |  CSV file
-| `countSNPs`()` | Count SNPs among input sequences | fasta file | CSV file
+| `pairwiseDistances()` | Calculate pairwise distance among input sequences using a user-specified evolutionary model | fasta file | A dense distance matrix
+| `overallMeanDistance()` | Calculates the overall mean genetic distance of query sequences using a user-specified evolutionary model  |  fasta file |  A single numeric value
+| `countSNPs`()` | Count pairwise SNPs among query sequences | fasta file | A dense matrix
 | `PlotFrequency()` | Create a barplot of genotype frequencies | output from assignTypes | Barplot
 | `PlotPrototypeDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
-| `PlotTree()` | Plot a simple phylogenetic tree based on distances | output from pairwise distances | Simple phylo tree
+| `PlotTree()` | Plot a simple phylogenetic tree based on distances | output from pairwise distances | A simple phylogenetic tree
 
 
 ### Running the functions
