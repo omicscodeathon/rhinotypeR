@@ -87,12 +87,11 @@ These functionalities are designed to be user-friendly and adaptable to various 
 | `SNPeek()` | Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file | fasta file | A plot highlighting SNPs per sequence
 | `plotAA()` | Visualise amino acid substitutions using a user-specified sequence as the reference | Amino acid fasta file | A plot highlighting amino acid substitutions per sequence
 | `assignTypes()` | Assigns genotypes to query sequence | fasta file | CSV file with three columns: sequence header, assigned type, and genetic distance  
-| `allPrototypeDistances()` | Generates pairwise distance between query and prototype sequences | fasta file |  CSV file
 | `pairwiseDistances()` | Calculate pairwise distance among input sequences using a user-specified evolutionary model | fasta file | A dense distance matrix
 | `overallMeanDistance()` | Calculates the overall mean genetic distance of query sequences using a user-specified evolutionary model  |  fasta file |  A single numeric value
 | `countSNPs`()` | Count pairwise SNPs among query sequences | fasta file | A dense matrix
 | `PlotFrequency()` | Create a barplot of genotype frequencies | output from assignTypes | Barplot
-| `PlotPrototypeDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
+| `PlotDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
 | `PlotTree()` | Plot a simple phylogenetic tree based on distances | output from pairwise distances | A simple phylogenetic tree
 
 
