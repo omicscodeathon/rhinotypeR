@@ -1,27 +1,23 @@
-\name{allPrototypeDistances}
-\alias{allPrototypeDistances}
+\name{plotPrototypeDistances}
+\alias{plotPrototypeDistances}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Calculates pairwise distance between query and prototype sequences
+Plots prototype distances
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-allPrototypeDistances("RVPrototype", "pathToQuery", "p-distance")
+plotPrototypeDistances(prototypefile, model = "p-distance")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{RVPrototype}{
+  \item{prototypefile}{
   %%     ~~Describe \code{pathToRef} here~~
-  pathToRef is path to the Rhinovirus prototype. Default is set to RVBPrototype
+  pathToRef is path to the Rhinovirus prototype. 
   }
-  \item{pathToQuery}{
-  %%     ~~Describe \code{pathToRef} here~~
-  pathToRef is path to the target sequence
-  }
-  \item{model}{
+ \item{model}{
   %%     ~~Describe \code{pathToRef} here~~
   It is used to select the model used to assign genotypes to the query sequence. Default is set to p-distance.
   }
@@ -53,13 +49,15 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-
-## The function is currently defined as
-allPrototypeDistances("RVPrototype", "fastaFile", "p-distance")
-
-## An example on the test dataset will be:
-allPrototypeDistances(RVBPrototype, readFasta(target_fasta_file), "p-distance")
+\dontrun{
+  # Load the dataset
+  test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
+  
+  # Example usage
+  fastaD <- readFasta(test)
+  distancesToPrototypes <- pairwiseDistances(fastaD, "p-distance")
+  plotDistances(distancesToPrototypes)
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

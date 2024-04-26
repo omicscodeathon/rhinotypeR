@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Calculates the overall genetic distance of query sequences
+Calculates the overall mean genetic distance of query sequences using a user-specified evolutionary model
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -49,13 +49,18 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-
-## The function is currently defined as
-overallMeanDistance(RVPrototype, model="p-distance")
-
-## An example:
-overallMeanDistance(readFasta(RVAPrototype), model="p-distance")
+  \dontrun{
+  # Load the dataset
+  test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
+  
+  # usage
+  fastaData <- readFasta(test)
+  
+  overallMeanDistance(fastaData, model="p-distance")
+  overallMeanDistance(fastaData, model="JC")
+  overallMeanDistance(fastaData, model="Kimura2p")
+  overallMeanDistance(fastaData, model="Tamura3p")
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

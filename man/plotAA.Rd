@@ -1,26 +1,21 @@
-\name{plotPrototypeDistances}
-\alias{plotPrototypeDistances}
+\name{plotAA}
+\alias{plotAA}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Visualize genetic distances of the query to prototype sequences
+Visualise amino acid substitutions using a user-specified sequence as the reference
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-plotPrototypeDistances(prototypefile, model = "p-distance")
+plotAA(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{prototypefile}{
-  %%     ~~Describe \code{pathToRef} here~~
-  pathToRef is path to the Rhinovirus prototype. 
-  }
- \item{model}{
-  %%     ~~Describe \code{pathToRef} here~~
-  It is used to select the model used to assign genotypes to the query sequence. Default is set to p-distance.
-  }
+  \item{x}{
+%%     ~~Describe \code{x} here~~
+}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -49,13 +44,21 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-
-## The function is currently defined as
-plotPrototypeDistances("prototypefile", model = "p-distance")
-
-Example run
-plotPrototypeDistances(RVBPrototype, "p-distance")
+\dontrun{
+  # Load the dataset
+  test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
+  
+  # usage
+  fastaData <- readFasta(fastaFile = test, desiredLength = 170)
+  plotAA(fastaData, showLegend = T)
+  
+  # Legend
+   # R = "red", H = "red", K = "red",      # Positively charged amino acid 
+   # D = "blue", E = "blue",               # Negatively charged amino acid 
+   # S = "green", T = "green", N = "green", Q = "green", # Polar amino acid 
+   # A = "yellow", V = "yellow", I = "yellow", L = "yellow", M = "yellow", F = "yellow", 
+   # W = "yellow", P = "yellow", G = "yellow", Y = "yellow", C = "yellow"  # Nonpolar amino acid 
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

@@ -45,7 +45,14 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-SNPeek(readFasta(RVAPrototype))
+  \dontrun{
+  # Load the dataset
+  test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
+
+  fastaData <- readFasta(fastaFile = test, desiredLength = 480)
+
+  SNPeek(fastaData, showLegend = F)
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

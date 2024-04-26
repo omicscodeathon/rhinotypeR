@@ -1,9 +1,12 @@
 source("R/04_genetic_distances.R")
+source("R/02_readFasta.R")
 
- # 1. p-distance
+# Function to calculate overall mean distance of a multiple sequence alignment
+
+# 1. p-distance
 
 overallPDistance <- function(fastaData) {
-   # estract seq data from the fastaData (a product of readFasta)
+  # estract seq data from the fastaData (a product of readFasta)
   sequences <- fastaData$sequences
   
   num_sequences <- length(sequences)
@@ -183,14 +186,3 @@ overallMeanDistance<- function(fastaData, model) {
   # Return the result of the chosen model
   return(result)
 }
-
-
-# Example usage
-
-source("R/02_readFasta.R")
-#fastaData <- readFasta("./data/RVAPrototypeAligned.fasta")
-
-#overallMeanDistance(fastaData, model="p-distance")
-#overallMeanDistance(fastaData, model="JC")
-#overallMeanDistance(fastaData, model="Kimura2p")
-#overallMeanDistance(fastaData, model="Tamura3p")

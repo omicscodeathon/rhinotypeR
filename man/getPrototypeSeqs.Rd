@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Extracts prototype sequence to a folder named output
+Downloads RV prototypes into a user-specified local directory
 
 }
 \description{
@@ -47,11 +47,10 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-
-## The function is currently defined as
-getPrototypeSeqs(destinationFolder = "./output")
-
+  \dontrun{
+  # Load the dataset
+  getPrototypeSeqs(destinationFolder = "./output")
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

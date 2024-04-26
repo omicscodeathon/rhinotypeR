@@ -57,13 +57,14 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-
-## The function is currently defined as
-assignTypes("refseq", "queryseq", model = "p-distance", threshold = 0.105)
-
-## An example will be:
-assignTypes(RVBPrototype, readFasta(target_fasta_file), "p-distance", 0.105)
+\dontrun{
+  # Load the dataset
+  test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
+  
+  # run command
+  fastaD <- readFasta(test)
+  assignTypes(fastaD, "p-distance")
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

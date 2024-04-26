@@ -51,8 +51,13 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-
-readFasta(RVAPrototype)
+  \dontrun{
+  # Load the dataset
+  test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
+  
+  # run command
+  readFasta(test, desiredLength = 430)
+   }
 }
 
 

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Count SNPs among input sequences
+Count pairwise SNPs among query sequences
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -32,6 +32,7 @@ countSNPs(inputSequencesPath)
 }
 \author{
 %%  ~~who you are~~
+Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 }
 \note{
 %%  ~~further notes~~
@@ -43,12 +44,14 @@ countSNPs(inputSequencesPath)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-
-## The function is currently defined as
-countSNPs(inputSequencesPath = "path to prototype file") 
-
-countSNPs(inputSequencesPath = RVBPrototypeAligned)
+    \dontrun{
+  # Load the dataset
+  test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
+  
+  # run
+  fastaData <- readFasta(test)
+  countSNPs(fastaData)
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

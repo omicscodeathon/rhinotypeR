@@ -53,13 +53,19 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-
-## The function is currently defined as
-plotFrequency("target_data", "ref_data", model = "Tamura3p")
-
-Example run
-plotFrequency(target_fasta_2, refSeq, "Tamura3p")
+ \dontrun{
+  # Load the dataset
+  test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
+  
+  # Run 
+  queryFastaData <- readFasta(test)
+  df <- assignTypes(queryFastaData, "p-distance")
+  
+  plotFrequency(df)
+  
+  # Color legend
+  # "A" = "blue", "B" = "red", "C" = "green", "Other" = "grey"
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):

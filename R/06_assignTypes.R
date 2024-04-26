@@ -1,11 +1,25 @@
-source("R/04_genetic_distances.R")
-source("R/05_allPrototypeDistances.R")
+ source("R/04_genetic_distances.R")
+ source("R/05_pairwiseDistances.R")
 
-      #. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p'
+#. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p'
 
-assignTypes <- function(pathToRef, queryFastaData, model = "p-distance", threshold = 0.105) {
-  # run allPrototypeDistances to calculate distances
-  distances <- allPrototypeDistances(pathToRef, queryFastaData, model)
+assignTypes <- function(fastaData, model = "p-distance", threshold = 0.105) {
+  
+  # Load the system dataset
+  ref <- system.file("extdata", "prototypes.csv", package = "rhinotypeR")
+  
+  prototypes <- read.csv(ref)
+  
+  names_to_keep <- prototypes$Accession
+  
+  # run pairwiseDistances to calculate distances
+  distances <- pairwiseDistances(fastaData, model = model)
+  
+  # Filter columns based on the prototypes
+  distances <- distances[, colnames(distances) %in% names_to_keep]
+  
+  # Filter rows to remove the same names as in the list
+  distances <- distances[!rownames(distances) %in% names_to_keep, ]
   
   # Initialize vectors to store output data
   queryVec <- character(0)
@@ -53,7 +67,3 @@ assignTypes <- function(pathToRef, queryFastaData, model = "p-distance", thresho
   
   return(outputDf)
 }
-
-# Example usage
-#assignTypes("./data/RVBPrototypeAligned.fasta", queryFastaData, "p-distance", 0.105)
-#assignTypes("./data/RVBPrototypeAligned.fasta", queryFastaData, "Tamura3p", 0.105)

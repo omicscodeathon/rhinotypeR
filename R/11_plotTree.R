@@ -1,9 +1,9 @@
-source("R/06_pairwiseDistances.R")
+source("R/05_pairwiseDistances.R")
 
-plotTree <- function(pdistances) {
+plotTree <- function(distance_matrix) {
   
   # Convert the data to a matrix 
-  distance_matrix <- as.matrix(distancesToPrototypes)
+  distance_matrix <- as.matrix(distance_matrix)
   
   # Convert the distance matrix into a "dist" object required by hclust
   distance_object <- as.dist(distance_matrix)
@@ -15,16 +15,3 @@ plotTree <- function(pdistances) {
   plot(hc, hang = -1, cex = 0.6, main = "A simple tree", xlab = "", #ann = par("ann"),
        ylab = "Genetic distance")
 }
-
-
-# Example usage
-
-# distancesToPrototypes <- pairwiseDistances("./data/testData.fasta", 
- #                                          "p-distance")
-
-#plotTree(distancesToPrototypes)
-
-
-
-
-

@@ -49,13 +49,15 @@ Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-
-## The function is currently defined as
-plotTree(prototypefile, model = "p-distance")
-
-Example run
-plotTree(RVBPrototype, "p-distance")
+\dontrun{
+  # Load the dataset
+  test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
+  
+  # Example usage
+  fastaD <- readFasta(test)
+  pdistances <- pairwiseDistances(fastaD, "p-distance")
+  plotTree(pdistances)
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory (show via RShowDoc("KEYWORDS")):
