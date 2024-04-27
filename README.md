@@ -62,7 +62,7 @@ You can install the development version of rhinotypeR from [GitHub](https://gith
 devtools::install_github("omicscodeathon/rhinotypeR")
 ```
 
-#Load Library
+Load Library
 
 ``` r
 library("rhinotypeR")
