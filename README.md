@@ -136,7 +136,7 @@ getPrototypeSeqs(destinationFolder = "./output")
 Own data
 
 ``` r
-#getPrototypeSeqs(destinationFolder = "path to an output folder")
+# getPrototypeSeqs(destinationFolder = "path to an output folder")
 ```
 
 ##### Function 2: readFasta
@@ -166,7 +166,7 @@ Example
 Own data
 
 ``` r
-#readFasta("path to fastaFile")
+# readFasta("path to fastaFile", desiredLength = 430)
 ```
 
 ##### Function 3: SNPeek
@@ -189,7 +189,8 @@ Example
 Own data
 
 ``` r
-#SNPeek(readFasta("path to fasta file"))
+  # fastaData <- readFasta(fastaFile = "path to fasta file", desiredLength = 480)
+  # SNPeek(fastaData, showLegend = F)
 ```
 
 ##### Function 4: assignTypes - Assign genotypes to the query sequence
@@ -219,7 +220,8 @@ Example
 Own data
 
 ``` r
-#assignTypes("path to reference sequence e.g RVBPrototype", readFasta("path to query sequence"), model, threshold = 0.105)
+  # fastaD <- readFasta("path to fasta file")
+  # assignTypes(fastaD, "p-distance")
 ```
 
 ##### Function 5: pairwiseDistances
@@ -244,7 +246,8 @@ Example
 Own data
 
 ``` r
-#pairwiseDistances("path to prototype file", model = "p-distance", pairwiseDeletion = FALSE)
+# fastaD <- readFasta("path to fasta file")
+# pairwiseDistances(fastaD, model = "p-distance", pairwiseDeletion = FALSE)
 ```
 
 ##### Function 6: overallMeanDistance
@@ -273,7 +276,8 @@ Example
 Own data
 
 ``` r
-#overallMeanDistance(readFasta("path to reference sequence e.g RVAPrototype"),  model="p-distance")
+# fastaD <- readFasta("path to fasta file")
+# overallMeanDistance(fastaD,  model="p-distance")
 ```
 
 ##### Function 7: countSNPs
@@ -297,7 +301,8 @@ Example
 Own data
 
 ``` r
-#countSNPs(inputSequencesPath = "path to prototype file") 
+# fastaD <- readFasta("path to fasta file")
+# countSNPs(fastaD) 
 ```
 
 ##### Function 8: plotFrequency
@@ -328,7 +333,9 @@ Example
 Own data
 
 ``` r
-#plotFrequency("target_data", model = "Tamura3p")
+  #queryFastaData <- readFasta("path to fasta file")
+  #df <- assignTypes(queryFastaData, "p-distance")
+  #plotFrequency(df)
 ```
 
 ##### Function 9: plotDistances
@@ -354,7 +361,9 @@ Example
 Own data
 
 ``` r
-#plotPrototypeDistances("prototypefile", model = "p-distance")
+  #fastaD <- readFasta("path to fasta file")
+  #distancesToPrototypes <- pairwiseDistances(fastaD, "p-distance")
+  #plotDistances(distancesToPrototypes)
 ```
 
 ##### Function 10: plotTree
@@ -378,7 +387,9 @@ Example
 Own data
 
 ``` r
-#plotTree(prototypefile, model = "p-distance")
+ #fastaD <- readFasta("path to fasta file")
+ #pdistances <- pairwiseDistances(fastaD, "p-distance")
+ #plotTree(pdistances)
 ```
 
 ##### Function 11: plotAA
@@ -411,6 +422,6 @@ Example
 Own data
 
 ``` r
-  #fastaData <- readFasta(fastaFile = "path to fasta file", desiredLength = 170)
+  #fastaD <- readFasta("path to fasta file", desiredLength = 170)
   #plotAA(fastaData, showLegend = T)
 ```
