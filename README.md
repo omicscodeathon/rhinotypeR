@@ -66,7 +66,7 @@ devtools::install_github("omicscodeathon/rhinotypeR")
 library("rhinotypeR")
 ```
 
-#### Functions
+### Functions
 
 The package encompasses functions to compute genetic distances, perform phylogenetic clustering, and compare sequences against RV prototype strains. The functionalities, summarized in Table 1, are designed to be user-friendly and adaptable to various research needs. 
 
@@ -87,7 +87,7 @@ The package encompasses functions to compute genetic distances, perform phylogen
 | `PlotTree()` | Plot a simple phylogenetic tree based on distances | output from pairwise distances | A simple phylogenetic tree
 
 
-### Running the functions
+#### Running the functions
 
 #### Function 1: getPrototypeSeqs
 
@@ -109,7 +109,7 @@ Own data
 # getPrototypeSeqs(destinationFolder = "path to an output folder")
 ```
 
-##### Function 2: readFasta
+#### Function 2: readFasta
 
 - Read sequences from a FASTA file
 
@@ -139,7 +139,7 @@ Own data
 # readFasta("path to fastaFile", desiredLength = 430)
 ```
 
-##### Function 3: SNPeek
+#### Function 3: SNPeek
 
 - Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file
 
@@ -163,7 +163,7 @@ Own data
   # SNPeek(fastaData, showLegend = F)
 ```
 
-##### Function 4: assignTypes - Assign genotypes to the query sequence
+#### Function 4: assignTypes - Assign genotypes to the query sequence
 
 - The model could be either p-distance, JC, Kimura2p, Tamura3p based on
   your preference.
@@ -194,7 +194,7 @@ Own data
   # assignTypes(fastaD, "p-distance")
 ```
 
-##### Function 5: pairwiseDistances
+#### Function 5: pairwiseDistances
 
 - Calculate pairwise distance among input sequences
 
@@ -220,7 +220,7 @@ Own data
 # pairwiseDistances(fastaD, model = "p-distance", pairwiseDeletion = FALSE)
 ```
 
-##### Function 6: overallMeanDistance
+#### Function 6: overallMeanDistance
 
 - Calculates the overall genetic distance of query sequences
 
@@ -250,7 +250,7 @@ Own data
 # overallMeanDistance(fastaD,  model="p-distance")
 ```
 
-##### Function 7: countSNPs
+#### Function 7: countSNPs
 
 - Count SNPs among input sequences
 
@@ -275,7 +275,7 @@ Own data
 # countSNPs(fastaD) 
 ```
 
-##### Function 8: plotFrequency
+#### Function 8: plotFrequency
 
 - Create a barplot of genotype frequencies
 
@@ -308,7 +308,7 @@ Own data
   #plotFrequency(df)
 ```
 
-##### Function 9: plotDistances
+#### Function 9: plotDistances
 
 - Visualize genetic distances of the query to prototype sequences
 - The output of the generate pairwise distance between query and
@@ -336,7 +336,7 @@ Own data
   #plotDistances(distancesToPrototypes)
 ```
 
-##### Function 10: plotTree
+#### Function 10: plotTree
 
 - Plot a simple phylogenetic tree based on distances
 
@@ -362,7 +362,7 @@ Own data
  #plotTree(pdistances)
 ```
 
-##### Function 11: plotAA
+#### Function 11: plotAA
 
 - Plot a simple phylogenetic tree based on distances
 
