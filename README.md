@@ -74,19 +74,19 @@ The package encompasses functions to compute genetic distances, perform phylogen
 
 #### Table 1. A summary of the functions
 
-| Function        | Role                                   | Input                    | Output                     
-|-----------------|----------------------------------------|--------------------------|-----------------------------
-| `getPrototypeSeqs()`| Downloads RV prototypes into a user-specified local directory | Destination path | RV prototypes are downloaded into the local machine
-| `readFasta`()` | Read sequences from a FASTA file | fasta file | A fasta file imported into R
-| `SNPeek()` | Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file | fasta file | A plot highlighting SNPs per sequence
-| `plotAA()` | Visualise amino acid substitutions using a user-specified sequence as the reference | Amino acid fasta file | A plot highlighting amino acid substitutions per sequence
-| `assignTypes()` | Assigns genotypes to query sequence | fasta file | CSV file with three columns: sequence header, assigned type, and genetic distance  
-| `pairwiseDistances()` | Calculate pairwise distance among input sequences using a user-specified evolutionary model | fasta file | A dense distance matrix
-| `overallMeanDistance()` | Calculates the overall mean genetic distance of query sequences using a user-specified evolutionary model  |  fasta file |  A single numeric value
-| `countSNPs`()` | Count pairwise SNPs among query sequences | fasta file | A dense matrix
-| `PlotFrequency()` | Create a barplot of genotype frequencies | output from assignTypes | Barplot
-| `PlotDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
-| `PlotTree()` | Plot a simple phylogenetic tree based on distances | output from pairwise distances | A simple phylogenetic tree
+|No | Function        | Role            | Input                    | Output                     
+|---------------------|-----------------|---------------|--------------|-----------------
+| 1. | `getPrototypeSeqs()`| Downloads RV prototypes into a user-specified local directory | Destination path | RV prototypes are downloaded into the local machine
+| 2. | `readFasta`()` | Read sequences from a FASTA file | fasta file | A fasta file imported into R
+| 3. | `SNPeek()` | Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file | fasta file | A plot highlighting SNPs per sequence
+| 4. | `plotAA()` | Visualise amino acid substitutions using a user-specified sequence as the reference | Amino acid fasta file | A plot highlighting amino acid substitutions per sequence
+| 5. | `assignTypes()` | Assigns genotypes to query sequence | fasta file | CSV file with three columns: sequence header, assigned type, and genetic distance  
+| 6. | `pairwiseDistances()` | Calculate pairwise distance among input sequences using a user-specified evolutionary model | fasta file | A dense distance matrix
+| 7. | `overallMeanDistance()` | Calculates the overall mean genetic distance of query sequences using a user-specified evolutionary model  |  fasta file |  A single numeric value
+| 8. | `countSNPs`()` | Count pairwise SNPs among query sequences | fasta file | A dense matrix
+| 9. | `PlotFrequency()` | Create a barplot of genotype frequencies | output from assignTypes | Barplot
+| 10. | `PlotDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
+| 11. | `PlotTree()` | Plot a simple phylogenetic tree based on distances | output from pairwise distances | A simple phylogenetic tree
 
 
 #### Running the functions
