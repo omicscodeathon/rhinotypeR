@@ -39,8 +39,7 @@ The project utilizes VP4/2 sequences available in the public domain from GenBank
 
 <figure>
 <img
-src="https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/workflow.png"
-alt="workflow" />
+src="https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/workflow.png"/>
 <figcaption aria-hidden="true">workflow</figcaption>
 </figure>
 
