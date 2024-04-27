@@ -1,8 +1,4 @@
-
 # rhinotypeR
-
-<!-- badges: start -->
-<!-- badges: end -->
 
 
                /**       /**                       /**                                   /*** *** 
@@ -23,27 +19,17 @@
 2.  [Test-Data](#Test-Data)
 3.  [Workflow](#Workflow)
 4.  [Package](#Package)
-5.  [Citation](#Citation)
-6.  [Contributors](#Contributors)
+5.  [Installation](#Installation)
+6.  [Citation](#Citation)
+7.  [Contributors](#Contributors)
 
 ## Background
 
-Rhinoviruses (RV), common respiratory pathogens, are positive-sense,
-single-stranded RNA viruses characterized by a high antigenic diversity
-and mutation rate. With their genome approximately 7.2 kb in length, RVs
-exhibit mutation rates between 10^-3 and 10^-5 mutations per nucleotide
-per replication event. These viruses are classified into 169 types
-across three species: RV-A, RV-B, and RV-C. Genotype assignment, a
-critical aspect of RV research, is based on pairwise genetic distances
-and phylogenetic clustering with prototype strains, a process currently
-executed manually and laboriously.
+Rhinoviruses (RV), common respiratory pathogens, are positive-sense, single-stranded RNA viruses characterized by a high antigenic diversity and mutation rate. With their genome approximately 7.2 kb in length, RVs exhibit mutation rates between 10^-3 and 10^-5 mutations per nucleotide per replication event. These viruses are classified into 169 types across three species: RV-A, RV-B, and RV-C. Genotype assignment, a critical aspect of RV research, is based on pairwise genetic distances and phylogenetic clustering with prototype strains, a process currently executed manually and laboriously.
 
 ## Test-Data
 
-The project utilizes VP4/2 sequences available in the public domain from
-GenBank and reference prototype strains from www.picornaviridae.com The
-input datasets (target, reference and prototype) are fasta files. Here’s
-an example of a FASTA file:![fastafile](https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/example_fasta_file.png)
+The project utilizes VP4/2 sequences available in the public domain from GenBank and reference prototype strains from www.picornaviridae.com The input datasets (target, reference and prototype) are fasta files. Here’s an example of a FASTA file:![fastafile](https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/example_fasta_file.png)
 
 ## Workflow
 
@@ -54,57 +40,35 @@ alt="workflow" />
 <figcaption aria-hidden="true">workflow</figcaption>
 </figure>
 
-RhinotypeR workflow. The user downloads prototype strains using
-`getPrototypeSeqs()` function, combines these with their newly generated
-VP4/2 sequences, aligns and manually curates the alignment. The user
-then reads the curated alignment into R using `readFasta()` function.
-The readFasta object can then be used to run all the second-level
-functions, including `assignTypes()` which assigns the sequences into
-genotypes, filters out the prototype sequences and returns the genotype
-assignment of the new sequences. This output can be used to visualise
-the frequency of assigned genotypes. The distance matrix object, an
-output of `pairwiseDistance()` function, can be used to create a
-phylogenetic tree or a heatmap to visualize genetic relatedness of
-sequences.
+RhinotypeR workflow. The user downloads prototype strains using `getPrototypeSeqs()` function, combines these with their newly generated VP4/2 sequences, aligns and manually curates the alignment. The user then reads the curated alignment into R using `readFasta()` function. The readFasta object can then be used to run all the second-level
+functions, including `assignTypes()` which assigns the sequences into genotypes, filters out the prototype sequences and returns the genotype assignment of the new sequences. This output can be used to visualise the frequency of assigned genotypes. The distance matrix object, an output of `pairwiseDistance()` function, can be used to create a phylogenetic tree or a heatmap to visualize genetic relatedness of sequences.
 
 ## Package
 
-Our project aims to develop an R package to automate RV genotype
-assignment, facilitating genomic scientists in efficiently genotyping RV
-infections.
+Our project aims to develop an R package to automate RV genotype assignment, facilitating genomic scientists in efficiently genotyping RV infections.
 
-Our methodology involves: 1. Parsing and preprocessing of VP4/2 sequence
-data. 2. Implementation of algorithms to calculate pairwise genetic
-distances. 3. Integration of methods for constructing Maximum Likelihood
-phylogenetic trees.
+Our methodology involves : 
+1. Parsing and preprocessing of VP4/2 sequence data.
+2. Implementation of algorithms to calculate pairwise genetic distances.
+3. Integration of methods for constructing Maximum Likelihood phylogenetic trees.
 
 ### Installation
 
-You can install the development version of rhinotypeR from
-[GitHub](https://github.com) with:
+You can install the development version of rhinotypeR from [GitHub](https://github.com) with:
 
 ``` r
 devtools::install_github("omicscodeathon/rhinotypeR")
 ```
 
-##### Load Library
+#Load Library
 
 ``` r
 library("rhinotypeR")
 ```
 
-## Functions
+#### Functions
 
-The package encompasses functions to compute genetic distances, perform
-phylogenetic clustering, and compare sequences against RV prototype
-strains. These functionalities are designed to be user-friendly and
-adaptable to various research needs.
-
-- The package (summarized in Table 1) does the following:
-  - Assigns genotypes to query sequences
-  - Computes for pairwise distance among query sequences
-  - Calculates pairwise distance between query and prototype sequences
-  - Calculates overall genetic distance of query sequences
+The package encompasses functions to compute genetic distances, perform phylogenetic clustering, and compare sequences against RV prototype strains. The functionalities, summarized in Table 1, are designed to be user-friendly and adaptable to various research needs. 
 
 #### Table 1. A summary of the functions
 
@@ -121,6 +85,7 @@ adaptable to various research needs.
 | `PlotFrequency()` | Create a barplot of genotype frequencies | output from assignTypes | Barplot
 | `PlotDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
 | `PlotTree()` | Plot a simple phylogenetic tree based on distances | output from pairwise distances | A simple phylogenetic tree
+
 
 ### Running the functions
 
@@ -430,3 +395,11 @@ Own data
   #fastaD <- readFasta("path to fasta file", desiredLength = 170)
   #plotAA(fastaData, showLegend = T)
 ```
+
+## Citation
+
+## Contributors
+- Ruth Nanjala
+- Martha Luka
+- Wafaa Rashid
+- Winfred Gatua
