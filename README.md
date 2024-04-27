@@ -40,7 +40,6 @@ The project utilizes VP4/2 sequences available in the public domain from GenBank
 <figure>
 <img
 src="https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/workflow.png"/>
-<figcaption aria-hidden="true">workflow</figcaption>
 </figure>
 
 Legend: The user downloads prototype strains using `getPrototypeSeqs()` function, combines these with their newly generated VP4/2 sequences, aligns and manually curates the alignment. The user then reads the curated alignment into R using `readFasta()` function. The readFasta object can then be used to run all the second-level
