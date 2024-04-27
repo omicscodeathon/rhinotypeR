@@ -403,5 +403,5 @@ Own data
 ## Contributors
 - Ruth Nanjala
 - Martha Luka
-- Wafaa Rashid
+- Wafaa M. Rashed
 - Winfred Gatua
