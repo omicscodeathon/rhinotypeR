@@ -16,16 +16,20 @@
 ## Table of Contents
 
 1.  [Background](#Background)
-2.  [Test-Data](#Test-Data)
-3.  [Workflow](#Workflow)
-4.  [Package](#Package)
-5.  [Installation](#Installation)
-6.  [Citation](#Citation)
-7.  [Contributors](#Contributors)
+2.  [Aim](#Aim)
+3.  [Test-Data](#Test-Data)
+4.  [Workflow](#Workflow)
+5.  [Package](#Package)
+6.  [Installation](#Installation)
+7.  [Citation](#Citation)
+8.  [Contributors](#Contributors)
 
 ## Background
 
 Rhinoviruses (RV), common respiratory pathogens, are positive-sense, single-stranded RNA viruses characterized by a high antigenic diversity and mutation rate. With their genome approximately 7.2 kb in length, RVs exhibit mutation rates between 10^-3 and 10^-5 mutations per nucleotide per replication event. These viruses are classified into 169 types across three species: RV-A, RV-B, and RV-C. Genotype assignment, a critical aspect of RV research, is based on pairwise genetic distances and phylogenetic clustering with prototype strains, a process currently executed manually and laboriously.
+
+## Aim
+However, while successful, current genotype assignment procedures can be time-consuming, highlighting a pressing need for more efficient alternatives. We provide "rhinotypeR," an R tool that addresses these issues by offering an integrated platform for the quick classification of RV genotypes. By automating the comparison of sequencing data against prototype strains and applying predetermined pairwise distance limits, rhinotypeR intends to make genotype assignment more accessible to researchers. This approach is a big step forward in the drive to improve our epidemiological toolkit, allowing for more effective surveillance and analysis of RVs and possibly other viral diseases with complicated genetic landscapes.
 
 ## Test-Data
 
@@ -40,7 +44,7 @@ alt="workflow" />
 <figcaption aria-hidden="true">workflow</figcaption>
 </figure>
 
-RhinotypeR workflow. The user downloads prototype strains using `getPrototypeSeqs()` function, combines these with their newly generated VP4/2 sequences, aligns and manually curates the alignment. The user then reads the curated alignment into R using `readFasta()` function. The readFasta object can then be used to run all the second-level
+Legend: The user downloads prototype strains using `getPrototypeSeqs()` function, combines these with their newly generated VP4/2 sequences, aligns and manually curates the alignment. The user then reads the curated alignment into R using `readFasta()` function. The readFasta object can then be used to run all the second-level
 functions, including `assignTypes()` which assigns the sequences into genotypes, filters out the prototype sequences and returns the genotype assignment of the new sequences. This output can be used to visualise the frequency of assigned genotypes. The distance matrix object, an output of `pairwiseDistance()` function, can be used to create a phylogenetic tree or a heatmap to visualize genetic relatedness of sequences.
 
 ## Package
