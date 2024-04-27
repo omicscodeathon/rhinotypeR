@@ -2,7 +2,7 @@ Package: rhinotypeR
 Type: Package
 Title: Rhinovirus genotyping
 Version: 0.1.0
-Author: Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
+Author: Martha Luka, Winfred Gatua, Wafaa M. Rashed, Ruth Nanjala
 Description: By  automating  the  comparison  of  sequence  data  against 
     prototype  strains  and  implementing  predefined  pairwise distance  thresholds,  "rhinotypeR"  aims  to  streamline  the 
     genotype  assignment  process,  making  it  accessible  to 
