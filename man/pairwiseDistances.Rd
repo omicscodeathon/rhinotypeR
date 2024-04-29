@@ -37,7 +37,7 @@ pairwiseDistances(prototypefile, model = "p-distance")
 }
 \author{
 %%  ~~who you are~~
-Martha Luka, Ruth Nanjala, Wafaa Rashid, Winfred Gatua, Olaitan Awe 
+Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
 }
 \note{
 %%  ~~further notes~~

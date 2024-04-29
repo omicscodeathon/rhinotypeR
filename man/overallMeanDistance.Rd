@@ -34,7 +34,7 @@ overallMeanDistance(RVPrototype, model)
 }
 \references{
 %% ~put references to the literature/web site here ~
-Martha Luka, Ruth Nanjala, Wafaa Rashid, Winfred Gatua, Olaitan Awe 
+Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
 }
 \author{
 %%  ~~who you are~~

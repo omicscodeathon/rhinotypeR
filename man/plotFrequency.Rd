@@ -41,7 +41,7 @@ plotFrequency(target_data, ref_data, model = "Tamura3p")
 }
 \author{
 %%  ~~who you are~~
-Martha Luka, Ruth Nanjala, Wafaa Rashid, Winfred Gatua, Olaitan Awe 
+Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
 }
 \note{
 %%  ~~further notes~~
