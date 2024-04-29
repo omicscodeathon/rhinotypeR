@@ -21,8 +21,9 @@
 4.  [Workflow](#Workflow)
 5.  [Package](#Package)
 6.  [Installation](#Installation)
-7.  [Citation](#Citation)
-8.  [Contributors](#Contributors)
+7.  [Help](#Help)
+8.  [Citation](#Citation)
+9.  [Contributors](#Contributors)
 
 ## Background
 
@@ -398,10 +399,19 @@ Own data
   #plotAA(fastaData, showLegend = T)
 ```
 
+## Help
+Find a description of each function and how to run it by invoking a question mark before the function in R console.
+```
+#Example
+? plotAA
+```
+
 ## Citation
 
+
 ## Contributors
-- Ruth Nanjala
 - Martha M. Luka
+- Ruth Nanjala
 - Wafaa M. Rashed
 - Winfred Gatua
+- Olaitan I. Awe
