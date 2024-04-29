@@ -403,7 +403,7 @@ Own data
 Find a description of each function and how to run it by invoking a question mark before the function in R console.
 ```
 #Example
-? plotAA
+?plotAA
 ```
 
 ## Citation
