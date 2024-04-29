@@ -33,7 +33,7 @@ The fastaFile used here is the output from the function "readFasta"
 }
 \author{
 %%  ~~who you are~~
-Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
+Martha Luka, Ruth Nanjala, Wafaa Rashid, Winfred Gatua, Olaitan Awe 
 }
 \note{
 %%  ~~further notes~~

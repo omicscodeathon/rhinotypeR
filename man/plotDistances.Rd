@@ -1,5 +1,5 @@
-\name{plotPrototypeDistances}
-\alias{plotPrototypeDistances}
+\name{plotDistances}
+\alias{plotDistances}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
@@ -9,7 +9,7 @@ Plots prototype distances
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-plotPrototypeDistances(prototypefile, model = "p-distance")
+plotDistances(prototypefile, model = "p-distance")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -37,7 +37,7 @@ plotPrototypeDistances(prototypefile, model = "p-distance")
 }
 \author{
 %%  ~~who you are~~
-Martha Luka, Winfred Gatua, Wafaa, Ruth Nanjala
+Martha Luka, Ruth Nanjala, Wafaa Rashid, Winfred Gatua, Olaitan Awe 
 }
 \note{
 %%  ~~further notes~~
