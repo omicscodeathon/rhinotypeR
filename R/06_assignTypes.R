@@ -1,5 +1,5 @@
-source("./scripts/04_genetic_distances.R")
-source("scripts/05_pairwiseDistances.R")
+source("R/04_genetic_distances.R")
+source("R/05_pairwiseDistances.R")
 
 
 #. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p'

@@ -1,7 +1,7 @@
 
 # Function to calculate overall mean distance of a multiple sequence alignment
 
-source("./scripts/04_genetic_distances.R")
+source("R/04_genetic_distances.R")
 
  # 1. p-distance
 
