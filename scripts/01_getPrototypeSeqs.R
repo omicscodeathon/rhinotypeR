@@ -13,11 +13,3 @@ getPrototypeSeqs <- function(destinationFolder){
 # Example usage (download into the output folder)
 getPrototypeSeqs(destinationFolder = "./output/")
 
-
-library(seqinr)
-prototypes <- read.fasta("data/prototypes.fasta")
-usethis::use_data(prototypes)
-
-test.fasta <- read("data/test.fasta")
-usethis::use_data(test.fasta)
-
