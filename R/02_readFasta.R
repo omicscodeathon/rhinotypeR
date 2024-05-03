@@ -1,21 +1,27 @@
 # Function 1 
-# Compare lengths among input sequences to truncate very long sequences or pad short sequences with "-"
-compareLengths <- function(seq, desired_length) {
-  seq_length <- nchar(seq)
-  # If the sequence is longer than 430 characters, truncate it to 430 characters
-  if (seq_length > desired_length){
-    seq <- substr(seq, 1,desired_length)
-    
-    # If the sequence is shorter than 430 characters, pad it with hyphens
-  }else if (seq_length < desired_length) {
-    seq <- paste0(seq, paste0(rep("-", desired_length - seq_length), collapse = ""))
-  }
-  return(seq)
+# Compare lengths among input sequences to pad short sequences with "-" until they are as long as the longest seq
+compareLengths <- function(seqs) {
+  # Calculate the maximum length from the list of sequences
+  max_length <- max(sapply(seqs, nchar))
+  
+  # Adjust each sequence to have the same length as the longest sequence
+  adjustedSeqs <- lapply(seqs, function(seq) {
+    seq_length <- nchar(seq)
+    if (seq_length < max_length) {
+      # Pad shorter sequences with hyphens to reach the max length
+      seq <- paste0(seq, paste0(rep("-", max_length - seq_length), collapse = ""))
+    }
+    seq
+  })
+  
+  return(adjustedSeqs)
 }
+
+
 
 # Function 2
 # Function to read sequences from a FASTA file and adjust their lengths
-readFasta <- function(fastaFile, desiredLength = 430) {
+readFasta <- function(fastaFile) {
   # Read all lines from the FASTA file
   lines <- readLines(fastaFile)
   
@@ -31,10 +37,9 @@ readFasta <- function(fastaFile, desiredLength = 430) {
     if (startsWith(line, ">")) {
       # If currentSeq is not NULL, it means we've finished reading a sequence
       if (!is.null(currentSeq)) {
-        # Join all parts of the sequence into one and adjust its length
+        # Join all parts of the sequence into one
         fullSeq <- paste(currentSeq, collapse = "")
-        adjustedSeq <- compareLengths(fullSeq, desiredLength)
-        seqList[[length(seqList) + 1]] <- adjustedSeq
+        seqList[[length(seqList) + 1]] <- fullSeq
       }
       # Reset currentSeq for the next sequence
       currentSeq <- c()
@@ -46,12 +51,14 @@ readFasta <- function(fastaFile, desiredLength = 430) {
     }
   }
   
-  # After the loop, add the last sequence to seqList if it exists
+  # Add the last sequence to seqList if it exists
   if (!is.null(currentSeq)) {
     fullSeq <- paste(currentSeq, collapse = "")
-    adjustedSeq <- compareLengths(fullSeq, desiredLength)
-    seqList[[length(seqList) + 1]] <- adjustedSeq
+    seqList[[length(seqList) + 1]] <- fullSeq
   }
+  
+  # Adjust all sequences to the length of the longest sequence
+  seqList <- compareLengths(seqList)
   
   # Return a list containing the sequences and their corresponding headers
   return(list(sequences = seqList, headers = headerList))

@@ -1,4 +1,4 @@
-source("R/02_readFasta.R")
+source("./scripts/02_readFasta.R")
 
 plotAA <- function(fastaData, showLegend = FALSE) {
   sequences <- fastaData$sequences
@@ -48,12 +48,12 @@ plotAA <- function(fastaData, showLegend = FALSE) {
   }
   
   if (showLegend){
-    # Add a semi-transparent legend in the top-left corner
-    legend("topleft", inset=c(0.78, 0),
-           legend=c("+ve charged", "-ve charged", "Polar", "Non-polar", "Other"),
-           fill=c("red", "blue", "green", "yellow", "gray"), cex=0.45, bty="n", 
-           box.col="gray", bg=adjustcolor("white", alpha.f=0.7))
-    
-    par(oldPar) # Reset to old graphical parameters after plotting
+  # Add a semi-transparent legend in the top-left corner
+  legend("topleft", inset=c(0.78, 0),
+         legend=c("+ve charged", "-ve charged", "Polar", "Non-polar", "Other"),
+         fill=c("red", "blue", "green", "yellow", "gray"), cex=0.45, bty="n", 
+         box.col="gray", bg=adjustcolor("white", alpha.f=0.7))
+  
+  par(oldPar) # Reset to old graphical parameters after plotting
   }
 }
