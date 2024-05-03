@@ -10,9 +10,9 @@ source("scripts/05_pairwiseDistances.R")
 prototypes <- read.csv("./data/prototypes.csv")
 names_to_keep <- prototypes$Accession
 
-assignTypes <- function(fastaData, model = "p-distance", threshold = 0.105) {
+assignTypes <- function(fastaData, model = "p-distance", gapDeletion = TRUE, threshold = 0.105) {
   # run pairwiseDistances to calculate distances
-  distances <- pairwiseDistances(fastaData, model = model)
+  distances <- pairwiseDistances(fastaData, model = model, gapDeletion=gapDeletion)
   
   # Filter columns based on the prototypes
   distances <- distances[, colnames(distances) %in% names_to_keep]

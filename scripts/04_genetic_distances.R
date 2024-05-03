@@ -5,75 +5,87 @@
 source("./scripts/02_readFasta.R")
 
 
-# Function to handle gaps based on the pairwise deletion criteria
-handleGaps <- function(seq1, seq2) {
-  # Identify positions where at least one sequence has a gap
-  gapPositions <- which(seq1 == "-" | seq2 == "-")
+# Optionally delete sites with at least one missing data for all sequences 
+deleteMissingDataSites <- function(seqs) {
+  # Convert list of sequences into a matrix where each sequence is a row
+  seqMatrix <- do.call(rbind, lapply(seqs, function(seq) strsplit(seq, "")[[1]]))
   
-  # Remove the identified gap positions from both sequences
-  seq1NoGaps <- seq1[-gapPositions]
-  seq2NoGaps <- seq2[-gapPositions]
+  # Find columns that do not contain gaps (assuming "-" as the gap symbol)
+  validColumns <- !apply(seqMatrix, 2, function(column) any(column == "-"))
   
-  return(list(seq1 = seq1NoGaps, seq2 = seq2NoGaps))
+  # Extract these columns to create a cleaned matrix
+  cleanedMatrix <- seqMatrix[, validColumns]
+  
+  # Convert cleaned matrix back to a list of sequences
+  cleanedSeqs <- apply(cleanedMatrix, 1, paste, collapse = "")
+  
+  return(cleanedSeqs)
 }
 
-# Function to count SNPs
-countSNPsHelper <- function(fastaData, pairwiseDeletion = FALSE) {
-  # Extract sequences and headers
+
+
+
+# Count SNPs
+# Count SNPs
+countSNPsHelper <- function(fastaData, gapDeletion = TRUE) {
   refs <- fastaData$sequences
   refHeaders <- fastaData$headers
   
-  # Initialize the SNP matrix
-  snpMatrix <- matrix(nrow = length(refs), ncol = length(refs), dimnames = list(refHeaders, refHeaders))
+  # Optionally remove sites with missing data
+  if (gapDeletion) {
+    refs = deleteMissingDataSites(refs)
+  }
   
-  # Loop over all pairs of sequences
-  for (i in seq_along(refs)) {
-    for (j in i:length(refs)) {  # Start from i to avoid repeating comparisons
-      # Convert sequences to character vectors
-      seq1 <- strsplit(refs[[i]], "")[[1]]
-      seq2 <- strsplit(refs[[j]], "")[[1]]
+  # Convert all cleaned sequences to a matrix of character vectors
+  seqMatrix <- do.call(rbind, lapply(refs, function(seq) strsplit(seq, "")[[1]]))
+  
+  # Initialize the SNP matrix
+  snpMatrix <- matrix(nrow = nrow(seqMatrix), ncol = nrow(seqMatrix), dimnames = list(refHeaders, refHeaders))
+  
+  # Loop over all pairs of sequences using matrix indices
+  for (i in 1:nrow(seqMatrix)) {
+    for (j in i:nrow(seqMatrix)) {
+      seq1 <- seqMatrix[i, ]
+      seq2 <- seqMatrix[j, ]
       
-      # Handle gaps if required
-      if (pairwiseDeletion) {
-        handledSeqs <- handleGaps(seq1, seq2)
-        seq1 <- handledSeqs$seq1
-        seq2 <- handledSeqs$seq2
-      }
-      
-      # Ensure sequences are of the same length after handling gaps
-      if (length(seq1) == length(seq2)) {
-        # Count SNPs (differences) between the two sequences
+      # Calculate SNPs
+      if (length(seq1) == length(seq2) && length(seq1) > 0) {
         snps <- sum(seq1 != seq2)
-        
-        # Fill both [i, j] and [j, i] positions in the matrix to make it symmetric
-        snpMatrix[i, j] <- snps
-        snpMatrix[j, i] <- snps
+        snpMatrix[i, j] <- snpMatrix[j, i] <- snps
       } else {
-        # Mark as NA if sequences are of different lengths
-        snpMatrix[i, j] <- NA
-        snpMatrix[j, i] <- NA
+        snpMatrix[i, j] <- snpMatrix[j, i] <- NA
       }
     }
   }
+  
   return(snpMatrix)
 }
 
-# Test
-queryFastaData <- readFasta("./data/test.fasta")
-countSNPsHelper(queryFastaData, pairwiseDeletion = FALSE)
-countSNPsHelper(queryFastaData, pairwiseDeletion = TRUE)
+
+# Read in the query data first
+queryFastaData <- readFasta("./data/test2.fasta")
+countSNPsHelper(queryFastaData, gapDeletion = T)
 
 
+
+# Function 5
 # p-distance
-calcPDistance <- function(fastaData, pairwiseDeletion = FALSE) {
+calcPDistance <- function(fastaData, gapDeletion = TRUE) {
   # Count the SNPs between each query and each reference sequence
-  snpCounts <- countSNPsHelper(fastaData, pairwiseDeletion = pairwiseDeletion)
+  snpCounts <- countSNPsHelper(fastaData, gapDeletion = gapDeletion)
   
   # Extract query headers
   queryHeaders <- refHeaders <- fastaData$headers
   
   # Directly calculate reference sequence lengths
-  refLengths <- sapply(fastaData$sequences, function(seq) length(unlist(strsplit(seq, ""))))
+  refs <- fastaData$sequences
+
+  # Optionally remove sites with missing data
+  if (gapDeletion) {
+    refs <- deleteMissingDataSites(refs)
+  }
+  
+  refLengths <- sapply(refs, function(seq) length(unlist(strsplit(seq, ""))))
   
   # Prepare a matrix for p-distances with appropriate dimensions and names
   pDistancesMatrix <- matrix(nrow = length(queryHeaders), ncol = length(refLengths), dimnames = list(queryHeaders, refHeaders))
@@ -93,18 +105,18 @@ calcPDistance <- function(fastaData, pairwiseDeletion = FALSE) {
 }
 
 
-# Test
+# Example usage
 # Read in the query data first
-queryFastaData <- readFasta("./data/test.fasta")
-calcPDistance(queryFastaData, pairwiseDeletion = F)
+queryFastaData <- readFasta("./data/test2.fasta")
+calcPDistance(queryFastaData, gapDeletion = TRUE)
 
 
 # Jukes Cantor
 
 # Function to calculate Jukes-Cantor genetic distance
-calcJukesCantorDistance <- function(fastaData, pairwiseDeletion = FALSE) {
+calcJukesCantorDistance <- function(fastaData, gapDeletion = TRUE) {
   # Calculate p-distance for multiple queries
-  p_dist <- calcPDistance(fastaData, pairwiseDeletion = pairwiseDeletion)  
+  p_dist <- calcPDistance(fastaData, gapDeletion = gapDeletion)  
   
   # Initialize a matrix to store Jukes-Cantor distances
   jc_dist <- matrix(nrow = nrow(p_dist), ncol = ncol(p_dist), dimnames = dimnames(p_dist))
@@ -121,16 +133,14 @@ calcJukesCantorDistance <- function(fastaData, pairwiseDeletion = FALSE) {
   return(jc_dist)
 }
 
-
-# Test
+# Example usage
 # Read in the query data first
-queryFastaData <- readFasta("./data/test.fasta")
-calcJukesCantorDistance(queryFastaData)
-calcJukesCantorDistance(queryFastaData, pairwiseDeletion = TRUE)
+queryFastaData <- readFasta("./data/test2.fasta")
+calcJukesCantorDistance(queryFastaData, gapDeletion = T)
 
 
-# Kimura 2 parameter (transitions vs transversions)
 
+# helper function for Kimura2P and Tamura3P
 ## Function to calculate proportions of transitions and transversions
 calcTransitionTransversions <- function(refChars, queryChars) {
   transitions <- sum((refChars == 'A' & queryChars == 'G') |
@@ -154,14 +164,19 @@ calcTransitionTransversions <- function(refChars, queryChars) {
   return(list(P = P, Q = Q))
 }
 
+# Kimura 2 parameter
 ## Function to calculate Kimura 2-parameter genetic distance
-  # NOTE: The K2P model typically ignores indels so no need to set pairwiseDeletion = T 
-      # (will actually overestimate distances)
-calcKimura2pDistance <- function(fastaData, pairwiseDeletion = FALSE) {
+calcKimura2pDistance <- function(fastaData, gapDeletion = TRUE) {
   
   # Load reference & query seq data and headers
   refs <- queries <- fastaData$sequences
   refHeaders <- queryHeaders <- fastaData$headers
+  
+  # Optionally remove sites with missing data
+  if (gapDeletion) {
+    refs <- queries <- deleteMissingDataSites(refs)
+  }
+  
   
   # Initialize a matrix to store the distances, with dimensions based on the number of queries and refs
   k2pMatrix <- matrix(nrow = length(queries), ncol = length(refs), 
@@ -203,19 +218,22 @@ calcKimura2pDistance <- function(fastaData, pairwiseDeletion = FALSE) {
 }
 
 
-
-# Test
+# Example usage
 # Read in the query data first
-queryFastaData <- readFasta("./data/test.fasta")
-calcKimura2pDistance(queryFastaData)
+queryFastaData <- readFasta("./data/test2.fasta")
+calcKimura2pDistance(queryFastaData, gapDeletion = T)
 
 
 # calculate Tamura 3-parameter genetic distance
-# NOTE: The T3P model also typically ignores indels
-calcTamura3pDistance <- function(fastaData, pairwiseDeletion = FALSE) {
+calcTamura3pDistance <- function(fastaData, gapDeletion = TRUE) {
   # Load reference & query seq data and headers
   refs <- queries <- fastaData$sequences
   refHeaders <- queryHeaders <- fastaData$headers
+  
+  # Optionally remove sites with missing data
+  if (gapDeletion) {
+    refs <- queries <- deleteMissingDataSites(refs)
+  }
   
   # Initialize a matrix to store the distances, with dimensions based on the number of queries and refs
   tamuraMatrix <- matrix(nrow = length(queries), ncol = length(refs), 
@@ -258,12 +276,10 @@ calcTamura3pDistance <- function(fastaData, pairwiseDeletion = FALSE) {
   return(tamuraMatrix)
 }
 
-
-# Test
+# Example usage
 # Read in the query data first
-queryFastaData <- readFasta("./data/test.fasta")
-calcTamura3pDistance(queryFastaData)
-
+queryFastaData <- readFasta("./data/test2.fasta")
+calcTamura3pDistance(queryFastaData, gapDeletion = TRUE)
 
 
 

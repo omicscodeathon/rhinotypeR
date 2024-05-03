@@ -60,6 +60,6 @@ plotAA <- function(fastaData, showLegend = FALSE) {
 
 # Example usage:
 
-fastaData <- readFasta(fastaFile = "data/test.fasta", desiredLength = 170)
+fastaData <- readFasta(fastaFile = "data/RVBPrototypeAligned_translated.fasta")
 
 plotAA(fastaData, showLegend = T)

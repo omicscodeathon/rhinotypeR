@@ -1,5 +1,3 @@
-
-
 source("./scripts/02_readFasta.R")
 
 SNPeek <- function(fastaData, showLegend = FALSE) {
@@ -63,6 +61,6 @@ SNPeek <- function(fastaData, showLegend = FALSE) {
 
 # Example usage:
 
-fastaData <- readFasta(fastaFile = "data/test.fasta", desiredLength = 480)
+fastaData <- readFasta(fastaFile = "data/test.fasta")
 
 SNPeek(fastaData, showLegend = F)

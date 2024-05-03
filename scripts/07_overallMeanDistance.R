@@ -7,9 +7,14 @@ source("./scripts/04_genetic_distances.R")
 
  # 1. p-distance
 
-overallPDistance <- function(fastaData) {
-   # estract seq data from the fastaData (a product of readFasta)
+overallPDistance <- function(fastaData, gapDeletion=TRUE) {
+   # extract seq data from the fastaData (a product of readFasta)
   sequences <- fastaData$sequences
+  
+  # Optionally remove sites with missing data
+  if (gapDeletion) {
+    sequences <- deleteMissingDataSites(sequences)
+  }
   
   num_sequences <- length(sequences)
   total_distance <- 0
@@ -35,11 +40,16 @@ overallPDistance <- function(fastaData) {
 
 
 # 2. Jukes-Cantor model
-overallJCDistance <- function(fastaData) {
+overallJCDistance <- function(fastaData, gapDeletion=TRUE) {
   sequences <- fastaData$sequences
   num_sequences <- length(sequences)
   total_jc_distance <- 0
   num_comparisons <- 0
+  
+  # Optionally remove sites with missing data
+  if (gapDeletion) {
+    sequences <- deleteMissingDataSites(sequences)
+  }
   
   for (i in 1:(num_sequences - 1)) {
     for (j in (i + 1):num_sequences) {
@@ -71,12 +81,18 @@ overallJCDistance <- function(fastaData) {
 
 
 # Kimura 2 parameter
-overallK2PDistance <- function(fastaData) {
+overallK2PDistance <- function(fastaData, gapDeletion=TRUE) {
   sequences <- fastaData$sequences
   
   num_sequences <- length(sequences)
   total_distance <- 0
   num_comparisons <- 0
+
+  # Optionally remove sites with missing data
+  if (gapDeletion) {
+    sequences <- deleteMissingDataSites(sequences)
+  }
+  
   
   for (i in 1:(num_sequences - 1)) {
     for (j in (i + 1):num_sequences) {
@@ -125,12 +141,17 @@ overallK2PDistance <- function(fastaData) {
 
 # Tamura 3 parameter
 
-overallT3PDistance <- function(fastaData) {
+overallT3PDistance <- function(fastaData, gapDeletion=TRUE) {
   sequences <- fastaData$sequences
   
   num_sequences <- length(sequences)
   total_distance <- 0
   num_comparisons <- 0
+  
+  # Optionally remove sites with missing data
+  if (gapDeletion) {
+    sequences <- deleteMissingDataSites(sequences)
+  }
   
   for (i in 1:(num_sequences - 1)) {
     for (j in (i + 1):num_sequences) {
@@ -170,17 +191,17 @@ overallT3PDistance <- function(fastaData) {
 
 
 
-overallMeanDistance<- function(fastaData, model) {
+overallMeanDistance<- function(fastaData, model, gapDeletion=TRUE) {
   
   # Determine which model to use based on user input
   if (model == "p-distance") {
-    result <- overallPDistance(fastaData)
+    result <- overallPDistance(fastaData, gapDeletion = gapDeletion)
   } else if (model == "JC") {
-    result <- overallJCDistance(fastaData)
+    result <- overallJCDistance(fastaData, gapDeletion = gapDeletion)
   } else if (model == "Kimura2p") {
-    result <- overallK2PDistance(fastaData)
+    result <- overallK2PDistance(fastaData, gapDeletion = gapDeletion)
   } else if (model == "Tamura3p") {
-    result <- overallT3PDistance(fastaData)
+    result <- overallT3PDistance(fastaData, gapDeletion = gapDeletion)
   } else {
     stop("Unknown model specified. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p' ")
   }
