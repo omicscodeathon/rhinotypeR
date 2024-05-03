@@ -1,4 +1,2 @@
 exportPattern("^[[:alpha:]]+")
-import(dplyr)
-import(ggplot2)
-import(gplots)
+
