@@ -59,7 +59,7 @@ assignTypes <- function(fastaData, model = "p-distance", gapDeletion = TRUE, thr
     }
   }
   
-  outputDf <- data.frame(query = queryVec, assigned_type = assignedTypeVec, distance = distanceVec, stringsAsFactors = FALSE)
+  outputDf <- data.frame(query = queryVec, assignedType = assignedTypeVec, distance = distanceVec, stringsAsFactors = FALSE)
   
   return(outputDf)
 }
