@@ -1,2 +1,13 @@
-exportPattern("^[[:alpha:]]+")
+export(SNPeek)
+export(assignTypes)
+export(countSNPs)
+export(getPrototypeSeqs)
+export(overallMeanDistance)
+export(pairwiseDistances)
+export(plotAA)
+export(plotDistances)
+export(plotFrequency)
+export(plotTree)
+export(readFasta)
+
 
