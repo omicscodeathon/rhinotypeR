@@ -407,7 +407,7 @@ Find a description of each function and how to run it by invoking a question mar
 ```
 
 ## Citation
-
+Luka MM, Nanjala R, Rashed WM, Gatua W, Awe OI: rhinotypeR: An R package for Rhinovirus Genotyping (2024)
 
 ## Contributors
 - Martha M. Luka
