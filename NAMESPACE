@@ -1,13 +1,4 @@
-export(SNPeek)
-export(assignTypes)
-export(countSNPs)
-export(getPrototypeSeqs)
-export(overallMeanDistance)
-export(pairwiseDistances)
-export(plotAA)
-export(plotDistances)
-export(plotFrequency)
-export(plotTree)
-export(readFasta)
+export(SNPeek, assignTypes, countSNPs, getPrototypeSeqs, overallMeanDistance, 
+        pairwiseDistances, plotAA, plotDistances, plotFrequency, plotTree, readFasta)
 
 
