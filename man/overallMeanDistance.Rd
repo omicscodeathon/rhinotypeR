@@ -56,10 +56,10 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
   # usage
   fastaData <- readFasta(test)
   
-  overallMeanDistance(fastaData, model="p-distance")
-  overallMeanDistance(fastaData, model="JC")
-  overallMeanDistance(fastaData, model="Kimura2p")
-  overallMeanDistance(fastaData, model="Tamura3p")
+  overallMeanDistance(fastaData, model="p-distance", gapDeletion=TRUE)
+  overallMeanDistance(fastaData, model="JC", gapDeletion=TRUE)
+  overallMeanDistance(fastaData, model="Kimura2p", gapDeletion=TRUE)
+  overallMeanDistance(fastaData, model="Tamura3p", gapDeletion=TRUE)
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

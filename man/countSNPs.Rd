@@ -50,7 +50,7 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
   
   # run
   fastaData <- readFasta(test)
-  countSNPs(fastaData)
+  countSNPs(fastaData, gapDeletion = TRUE))
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

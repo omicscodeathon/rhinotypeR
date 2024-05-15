@@ -9,7 +9,7 @@ Assign genotypes to the query sequence
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-assignTypes("pathToRef", "pathToQuery", model = "p-distance", threshold = 0.105)
+assignTypes(fastaData, model = "p-distance", gapDeletion = TRUE, threshold = 0.105)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -63,7 +63,7 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
   
   # run command
   fastaD <- readFasta(test)
-  assignTypes(fastaD, "p-distance")
+  assignTypes(fastaD, model = "p-distance", gapDeletion = TRUE, threshold = 0.105)
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

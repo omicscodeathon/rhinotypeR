@@ -56,7 +56,7 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
   test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
   
   # run command
-  readFasta(test, desiredLength = 430)
+  readFasta(test)
    }
 }
 

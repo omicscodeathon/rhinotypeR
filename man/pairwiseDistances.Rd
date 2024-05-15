@@ -56,10 +56,10 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
   # Example usage
   fastaD <- readFasta(test)
   
-  pairwiseDistances(fastaD, "p-distance", pairwiseDeletion = FALSE)
-  pairwiseDistances(fastaD, "JC", pairwiseDeletion = FALSE)
-  pairwiseDistances(fastaD, "Kimura2p", pairwiseDeletion = FALSE)
-  pairwiseDistances(fastaD, "Tamura3p", pairwiseDeletion = FALSE)
+  pairwiseDistances(fastaD, "p-distance", gapDeletion = TRUE)
+  pairwiseDistances(fastaD, "JC", gapDeletion = TRUE)
+  pairwiseDistances(fastaD, "Kimura2p", gapDeletion = TRUE)
+  pairwiseDistances(fastaD, "Tamura3p", gapDeletion = TRUE)
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

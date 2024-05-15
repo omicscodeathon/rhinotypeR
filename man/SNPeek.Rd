@@ -9,7 +9,7 @@ Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-SNPeek(fastaFile)
+SNPeek(fastaFile, showLegend = FALS)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -49,7 +49,7 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
   # Load the dataset
   test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
 
-  fastaData <- readFasta(fastaFile = test, desiredLength = 480)
+  fastaData <- readFasta(fastaFile = test)
 
   SNPeek(fastaData, showLegend = F)
   }
