@@ -7,6 +7,7 @@ Assign genotypes to the query sequence
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+assignTypes() rapidly classifies input sequences into their respective genotypes. The input sequences need to contain the prototype sequences, which can be downloaded using getPrototypeSeqs(). Sequences that do not match any of the known RV genotypes are marked as unassigned.    
 }
 \usage{
 assignTypes(fastaData, model = "p-distance", gapDeletion = TRUE, threshold = 0.105)
