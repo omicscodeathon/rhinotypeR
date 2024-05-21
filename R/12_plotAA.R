@@ -46,9 +46,7 @@ plotAA <- function(fastaData, showLegend = FALSE) {
                x1 = diffList[[i]]$position[j], y1 = yPosEnd[j] + 0.25, col = diffList[[i]]$color[j])
     }
   }
-  
-  if (showLegend){
-  # Add a semi-transparent legend in the top-left corner
+  if (showLegend){ # Add a semi-transparent legend in the top-left corner
   legend("topleft", inset=c(0.78, 0),
          legend=c("+ve charged", "-ve charged", "Polar", "Non-polar", "Other"),
          fill=c("red", "blue", "green", "yellow", "gray"), cex=0.45, bty="n", 

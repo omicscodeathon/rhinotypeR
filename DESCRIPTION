@@ -2,20 +2,25 @@ Package: rhinotypeR
 Type: Package
 Title: Rhinovirus genotyping
 Version: 0.1.0
-Authors: Martha M. Luka, Winfred Gatua, Wafaa M. Rashed, Ruth Nanjala, Olaitan Awe
-Description: By  automating  the  comparison  of  sequence  data  against 
-    prototype  strains  and  implementing  predefined  pairwise distance  thresholds,  "rhinotypeR"  aims  to  streamline  the 
-    genotype  assignment  process,  making  it  accessible  to 
-    researchers  and  public  health  professionals  alike.  This  tool 
-    represents  a  significant  step  forward  in  the  quest  to  enhance 
-    our  epidemiological  toolkit,  enabling  more  efficient 
-    surveillance  and  analysis  of  RVs  and  potentially  other  viral 
-    pathogens with complex genomic landscapes.
-License: MIT license
+Authors: Martha Luka, Ruth Nanjala, Winfred Gatua, Wafaa M. Rashed, Olaitan Awe
+Maintainer: Ruth Nanjala <ruth.nanjala@reuben.ox.ac.uk>
+Description: "rhinotypeR" is designed to automate the comparison of sequence data against prototype strains, 
+            streamlining the genotype assignment process. By implementing predefined pairwise distance thresholds, 
+            this package makes genotype assignment accessible to researchers and public health professionals. 
+            This tool enhances our epidemiological toolkit by enabling more efficient surveillance and analysis of 
+            rhinoviruses (RVs) and other viral pathogens with complex genomic landscapes. 
+            Additionally, "rhinotypeR" supports comprehensive visualization and analysis of 
+            single nucleotide polymorphisms (SNPs) and amino acid substitutions, 
+            facilitating in-depth genetic and evolutionary studies.
+License: MIT License
 Encoding: UTF-8
-LazyData: true
+LazyData: false
+biocViews: Sequencing, Genetics, Phylogenetics
 Depends: 
-    R (>= 2.10)
+    R (>= 4.4.0)
 Suggests:
   knitr,
   rmarkdown
+VignetteBuilder: knitr
+URL: https://github.com/omicscodeathon/rhinotypeR
+BugReports: https://github.com/omicscodeathon/rhinotypeR/issues  
