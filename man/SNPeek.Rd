@@ -3,10 +3,10 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Visualizes single nucleotide polymorphisms (SNPs) relative to a specified reference sequence. To specify the reference, move it to the bottom of the alignment. Substitutions are color-coded by nucleotide: A = green, T = red, C = blue, G = yellow.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Visualizes single nucleotide polymorphisms (SNPs) relative to a specified reference sequence. To specify the reference, move it to the bottom of the alignment. Substitutions are color-coded by nucleotide: A = green, T = red, C = blue, G = yellow.
 }
 \usage{
 SNPeek(fastaFile, showLegend = FALS)
