@@ -1,4 +1,8 @@
+
 # rhinotypeR
+
+<!-- badges: start -->
+<!-- badges: end -->
 
 
                /**       /**                       /**                                   /*** *** 
@@ -16,88 +20,111 @@
 ## Table of Contents
 
 1.  [Background](#Background)
-2.  [Aim](#Aim)
-3.  [Test-Data](#Test-Data)
-4.  [Workflow](#Workflow)
-5.  [Package](#Package)
-6.  [Installation](#Installation)
-7.  [Help](#Help)
-8.  [Citation](#Citation)
-9.  [Contributors](#Contributors)
+2.  [Test-Data](#Test-Data)
+3.  [Workflow](#Workflow)
+4.  [Package](#Package)
+5.  [Citation](#Citation)
+6.  [Contributors](#Contributors)
 
 ## Background
 
-Rhinoviruses (RV), common respiratory pathogens, are positive-sense, single-stranded RNA viruses characterized by a high antigenic diversity and mutation rate. With their genome approximately 7.2 kb in length, RVs exhibit mutation rates between 10^-3 and 10^-5 mutations per nucleotide per replication event. These viruses are classified into 169 types across three species: RV-A, RV-B, and RV-C. Genotype assignment, a critical aspect of RV research, is based on pairwise genetic distances and phylogenetic clustering with prototype strains, a process currently executed manually and laboriously.
-
-## Aim
-However, while successful, current genotype assignment procedures can be time-consuming, highlighting a pressing need for more efficient alternatives. We provide "rhinotypeR," an R tool that addresses these issues by offering an integrated platform for the quick classification of RV genotypes. By automating the comparison of sequencing data against prototype strains and applying predetermined pairwise distance limits, rhinotypeR intends to make genotype assignment more accessible to researchers. This approach is a big step forward in the drive to improve our epidemiological toolkit, allowing for more effective surveillance and analysis of RVs and possibly other viral diseases with complicated genetic landscapes.
+Rhinoviruses (RV), common respiratory pathogens, are positive-sense,
+single-stranded RNA viruses characterized by a high antigenic diversity
+and mutation rate. With their genome approximately 7.2 kb in length, RVs
+exhibit mutation rates between 10^-3 and 10^-5 mutations per nucleotide
+per replication event. These viruses are classified into 169 types
+across three species: RV-A, RV-B, and RV-C. Genotype assignment, a
+critical aspect of RV research, is based on pairwise genetic distances
+and phylogenetic clustering with prototype strains, a process currently
+executed manually and laboriously.
 
 ## Test-Data
 
-The project utilizes VP4/2 sequences available in the public domain from GenBank and reference prototype strains from www.picornaviridae.com The input datasets (target, reference and prototype) are fasta files. Here’s an example of a FASTA file:![fastafile](https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/example_fasta_file.png)
+The project utilizes VP4/2 sequences available in the public domain from
+GenBank and reference prototype strains from www.picornaviridae.com The
+input datasets (target, reference and prototype) are fasta files. Here’s
+an example of a FASTA file: ![fasta
+file](https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/example_fasta_file.png)
 
 ## Workflow
 
 <figure>
 <img
-src="https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/workflow.png"/>
+src="https://github.com/omicscodeathon/rhinotyper/blob/main/man/figures/workflow.png"
+alt="workflow" />
+<figcaption aria-hidden="true">workflow</figcaption>
 </figure>
 
-Legend: The user downloads prototype strains using `getPrototypeSeqs()` function, combines these with their newly generated VP4/2 sequences, aligns and manually curates the alignment. The user then reads the curated alignment into R using `readFasta()` function. The readFasta object can then be used to run all the second-level
-functions, including `assignTypes()` which assigns the sequences into genotypes, filters out the prototype sequences and returns the genotype assignment of the new sequences. This output can be used to visualise the frequency of assigned genotypes. The distance matrix object, an output of `pairwiseDistance()` function, can be used to create a phylogenetic tree or a heatmap to visualize genetic relatedness of sequences.
+RhinotypeR workflow. The user downloads prototype strains using
+`getPrototypeSeqs()` function, combines these with their newly generated
+VP4/2 sequences, aligns and manually curates the alignment. The user
+then reads the curated alignment into R using `readFasta()` function.
+The readFasta object can then be used to run all the second-level
+functions, including `assignTypes()` which assigns the sequences into
+genotypes, filters out the prototype sequences and returns the genotype
+assignment of the new sequences. This output can be used to visualise
+the frequency of assigned genotypes. The distance matrix object, an
+output of `pairwiseDistance()` function, can be used to create a
+phylogenetic tree or a heatmap to visualize genetic relatedness of
+sequences.
 
 ## Package
 
-Our project aims to develop an R package to automate RV genotype assignment, facilitating genomic scientists in efficiently genotyping RV infections.
+Our project aims to develop an R package to automate RV genotype
+assignment, facilitating genomic scientists in efficiently genotyping RV
+infections.
 
-Our methodology involves : 
-1. Parsing and preprocessing of VP4/2 sequence data.
-2. Implementation of algorithms to calculate pairwise genetic distances.
-3. Integration of methods for constructing Maximum Likelihood phylogenetic trees.
+Our methodology involves: 1. Parsing and preprocessing of VP4/2 sequence
+data. 2. Implementation of algorithms to calculate pairwise genetic
+distances. 3. Integration of methods for constructing Maximum Likelihood
+phylogenetic trees.
 
 ### Installation
 
-You can install the development version of rhinotypeR from [GitHub](https://github.com) with:
+You can install the development version of rhinotypeR from
+[GitHub](https://github.com) with:
 
 ``` r
 devtools::install_github("omicscodeathon/rhinotypeR")
 ```
 
-Load Library
+##### Load Library
 
 ``` r
 library("rhinotypeR")
 ```
 
-### Functions
+## Functions
 
-The package encompasses functions to compute genetic distances, perform phylogenetic clustering, and compare sequences against RV prototype strains. The functionalities, summarized in Table 1, are designed to be user-friendly and adaptable to various research needs. 
+The package encompasses functions to compute genetic distances, perform
+phylogenetic clustering, and compare sequences against RV prototype
+strains. These functionalities are designed to be user-friendly and
+adaptable to various research needs.
+
+- The package (summarized in Table 1) does the following:
+  - Assigns genotypes to query sequences
+  - Computes for pairwise distance among query sequences
+  - Calculates pairwise distance between query and prototype sequences
+  - Calculates overall genetic distance of query sequences
 
 #### Table 1. A summary of the functions
 
-|No | Function        | Role            | Input                    | Output                     
-|---------------------|-----------------|---------------|--------------|-----------------
-| 1. | `getPrototypeSeqs()`| Downloads RV prototypes into a user-specified local directory | Destination path | RV prototypes are downloaded into the local machine
-| 2. | `readFasta()` | Read sequences from a FASTA file | fasta file | A fasta file imported into R
-| 3. | `SNPeek()` | Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file | fasta file | A plot highlighting SNPs per sequence
-| 4. | `plotAA()` | Visualise amino acid substitutions using a user-specified sequence as the reference | Amino acid fasta file | A plot highlighting amino acid substitutions per sequence
-| 5. | `assignTypes()` | Assigns genotypes to query sequence | fasta file | CSV file with three columns: sequence header, assigned type, and genetic distance  
-| 6. | `pairwiseDistances()` | Calculate pairwise distance among input sequences using a user-specified evolutionary model | fasta file | A dense distance matrix
-| 7. | `overallMeanDistance()` | Calculates the overall mean genetic distance of query sequences using a user-specified evolutionary model  |  fasta file |  A single numeric value
-| 8. | `countSNPs()` | Count pairwise SNPs among query sequences | fasta file | A dense matrix
-| 9. | `PlotFrequency()` | Create a barplot of genotype frequencies | output from assignTypes | Barplot
-| 10. | `PlotDistances()` | Plots prototype distances | distance matrix from prototype distance function | Heatmap
-| 11. | `PlotTree()` | Plot a simple phylogenetic tree based on distances | output from pairwise distances | A simple phylogenetic tree
+| Function                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Role                                                                                                                                                                                                        | Input                                            | Output                                              |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|-----------------------------------------------------|
+| `getPrototypeSeqs()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Downloads rhinovirus prototype strains into a local directory. These sequences should be combined with and aligned alongside newly generated sequences before being imported into R for genotype assignment | Destination path                                 | RV prototypes are downloaded into the local machine |
+| `readFasta`()`| Reads sequence alignment/fasta files into R for processing | fasta file | A fasta file imported into R |`SNPeek()`| Visualizes single nucleotide polymorphisms (SNPs) relative to a specified reference sequence. To specify the reference, move it to the bottom of the alignment. Substitutions are color-coded by nucleotide: A = green, T = red, C = blue, G = yellow | fasta file | A plot highlighting SNPs per sequence |`plotAA()`|Plots amino acid substitutions with a specified sequence as the reference. The input is an amino acid fasta file (translated DNA sequences). To specify the reference sequence, move it to the bottom of the alignment. Changes are coloured by the class of amino acid: Red = Positively charged, Blue = Negatively charged, Green = Polar, Yellow = Non-polar | Amino acid fasta file | A plot highlighting amino acid substitutions per sequence |`assignTypes()`| Rapidly assigns genotypes to input sequences. The input fasta file should include the prototype strains, which can be downloaded using getPrototypeSeqs() | fasta file | CSV file with three columns: sequence header, assigned type, and genetic distance   |`pairwiseDistances()`| Estimates pairwise distances across input sequences using a specified evolutionary model | fasta file | A dense distance matrix |`overallMeanDistance()`| Estimates the overall mean distance of input sequences  |  fasta file |  A single numeric value |`countSNPs`()` | Counts single nucleotide polymorphisms across input sequences                                                                                                                                               | fasta file                                       | A dense matrix                                      |
+| `PlotFrequency()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Plots the frequency of assigned genotypes This function uses the output of assignTypes() as input                                                                                                           | output from assignTypes                          | Barplot                                             |
+| `PlotDistances()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Visualizes pairwise genetic distances in a heatmap. This function uses the output of pairwiseDistances() as input                                                                                           | distance matrix from prototype distance function | Heatmap                                             |
+| `PlotTree()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Plots a simple phylogenetic tree using the genetic distances estimated by pairwiseDistances()                                                                                                               | output from pairwise distances                   | A simple phylogenetic tree                          |
 
-
-#### Running the functions
+### Running the functions
 
 #### Function 1: getPrototypeSeqs
 
-- Create an output directory for the prototype files
-- Ensure you create an output directory in your current directory before
-  running this function, otherwise it will throw an error saying
-  “output” folder is not found.
+- Downloads rhinovirus prototype strains into a local directory. These
+  sequences should be combined with and aligned alongside newly
+  generated sequences before being imported into R for genotype
+  assignment.
 
 Example
 
@@ -112,9 +139,9 @@ Own data
 # getPrototypeSeqs(destinationFolder = "path to an output folder")
 ```
 
-#### Function 2: readFasta
+##### Function 2: readFasta
 
-- Read sequences from a FASTA file
+- Reads sequence alignment/fasta files into R for processing.
 
 Example
 
@@ -123,13 +150,13 @@ Example
   test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
   
   # run command
-  readFasta(test, desiredLength = 430)
+  readFasta(test)
 #> $sequences
 #> $sequences[[1]]
-#> [1] "ATGGGTGCACAGGTTTCAACTCAGAAAAGCGGTTCTCATGAAAATCAGAACATTCTTACCAACGGCTCAAATCAAACATTCACAGTGATTAATTATTACAAGGATGCAGCCAGTTCATCATCCGCTGGACAATCATTATCAATGGATCCAAGCAAGTTTACTGAACCAGTAAAGGACATCATGTTAAAAGGTGCACCAGCACTTAATTCACCTAATATAGAAGCTTGTGGTTATAGTGATAGAGTGGAACAAATAACATTAGGCAATTCCACAATTACCACTCAAGAAGCAGCAAACACAGTTGTTGCTTATGGAGAATGGCCTTCTTTTCTATCAGACAATGATGCTAGTGATGTTAATAAAACTACCAAACCAGATACTTCAGCTTGTAGATTTTATACTTTAGATAGTAAGTTGTGG----------"
+#> [1] "ATGGGTGCACAGGTTTCAACTCAGAAAAGCGGTTCTCATGAAAATCAGAACATTCTTACCAACGGCTCAAATCAAACATTCACAGTGATTAATTATTACAAGGATGCAGCCAGTTCATCATCCGCTGGACAATCATTATCAATGGATCCAAGCAAGTTTACTGAACCAGTAAAGGACATCATGTTAAAAGGTGCACCAGCACTTAATTCACCTAATATAGAAGCTTGTGGTTATAGTGATAGAGTGGAACAAATAACATTAGGCAATTCCACAATTACCACTCAAGAAGCAGCAAACACAGTTGTTGCTTATGGAGAATGGCCTTCTTTTCTATCAGACAATGATGCTAGTGATGTTAATAAAACTACCAAACCAGATACTTCAGCTTGTAGATTTTATACTTTAGATAGTAAGTTGTGG"
 #> 
 #> $sequences[[2]]
-#> [1] "ATGGGAGCTCAGGTGTCTACACAGAAGAGTGGTTCACACGAAAACCAAAACATTTTAACCAATGGGTCTCATCAAACATTTACAGTTATCAACTATTATAAAGATGCAGCAAGTTCATCATCAGCTGGCCAATCTTTGTCAATGGATCCATCCAAATTTACTGAACCAGTGAAAGATCTAATGTTAAAAGGTGCTCCAGCATTGAATTCACCAAATGTTGAGGCATGTGGCTACAGTGATAGAGTTCAGCAGATCACGCTTGGAAATTCAACAATTACAACGCAGGAAGCTGCCAATGCTGTTGTCTGCTATGCAGAATGGCCGGAATATTTATCAGATAATGATGCAAGTGATGTGAACAAAACTTCCAAACCAGACACCTCAGTGTGCAGGTTTTACACACTAGATAGTAAAGATTGG----------"
+#> [1] "ATGGGAGCTCAGGTGTCTACACAGAAGAGTGGTTCACACGAAAACCAAAACATTTTAACCAATGGGTCTCATCAAACATTTACAGTTATCAACTATTATAAAGATGCAGCAAGTTCATCATCAGCTGGCCAATCTTTGTCAATGGATCCATCCAAATTTACTGAACCAGTGAAAGATCTAATGTTAAAAGGTGCTCCAGCATTGAATTCACCAAATGTTGAGGCATGTGGCTACAGTGATAGAGTTCAGCAGATCACGCTTGGAAATTCAACAATTACAACGCAGGAAGCTGCCAATGCTGTTGTCTGCTATGCAGAATGGCCGGAATATTTATCAGATAATGATGCAAGTGATGTGAACAAAACTTCCAAACCAGACACCTCAGTGTGCAGGTTTTACACACTAGATAGTAAAGATTGG"
 #> 
 #> 
 #> $headers
@@ -139,12 +166,15 @@ Example
 Own data
 
 ``` r
-# readFasta("path to fastaFile", desiredLength = 430)
+# readFasta("path to fastaFile")
 ```
 
-#### Function 3: SNPeek
+##### Function 3: SNPeek
 
-- Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file
+- Visualizes single nucleotide polymorphisms (SNPs) relative to a
+  specified reference sequence. To specify the reference, move it to the
+  bottom of the alignment. Substitutions are color-coded by nucleotide:
+  A = green, T = red, C = blue, G = yellow.
 
 Example
 
@@ -152,25 +182,27 @@ Example
   # Load the dataset
   test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
   #read input
-  fastaData <- readFasta(fastaFile = test, desiredLength = 480)
+  fastaData <- readFasta(fastaFile = test)
   # run command
   SNPeek(fastaData, showLegend = F)
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
 Own data
 
 ``` r
-  # fastaData <- readFasta(fastaFile = "path to fasta file", desiredLength = 480)
+  # fastaData <- readFasta(fastaFile = "path to fasta file")
   # SNPeek(fastaData, showLegend = F)
 ```
 
-#### Function 4: assignTypes - Assign genotypes to the query sequence
+##### Function 4: assignTypes
 
+- Rapidly assigns genotypes to input sequences. The input fasta file
+  should include the prototype strains, which can be downloaded using
+  getPrototypeSeqs().
 - The model could be either p-distance, JC, Kimura2p, Tamura3p based on
-  your preference.
-- The threshhold can also be changed based on your needs.
+  your preference
 
 Example
 
@@ -181,13 +213,13 @@ Example
   fastaD <- readFasta(test)
   # run command
   head(assignTypes(fastaD, "p-distance"))
-#>        query assigned_type distance
-#> 1 MT177794.1    unassigned       NA
-#> 2 MT177795.1    unassigned       NA
-#> 3 MT177796.1    unassigned       NA
-#> 4 MT177799.1    unassigned       NA
-#> 5 MT177800.1    unassigned       NA
-#> 6 MT177801.1    unassigned       NA
+#>        query assignedType   distance
+#> 1 MT177836.1   unassigned         NA
+#> 2 MT177837.1   unassigned         NA
+#> 3 MT177838.1          B99 0.08974359
+#> 4 MT177793.1          B42 0.08012821
+#> 5 MT177794.1         B106 0.05769231
+#> 6 MT177795.1         B106 0.05769231
 ```
 
 Own data
@@ -197,35 +229,36 @@ Own data
   # assignTypes(fastaD, "p-distance")
 ```
 
-#### Function 5: pairwiseDistances
+##### Function 5: pairwiseDistances
 
-- Calculate pairwise distance among input sequences
+- Estimates pairwise distances across input sequences using a specified
+  evolutionary model.
 
 Example
 
 ``` r
-# Load the dataset
+  # Load the dataset
   test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
   
   # Example usage
   fastaD <- readFasta(test)
   
-  #head(pairwiseDistances(fastaD, "p-distance", pairwiseDeletion = FALSE))
-  #head(pairwiseDistances(fastaD, "JC", pairwiseDeletion = FALSE))
-  #head(pairwiseDistances(fastaD, "Kimura2p", pairwiseDeletion = FALSE))
-  #head(pairwiseDistances(fastaD, "Tamura3p", pairwiseDeletion = FALSE))
+  output <- pairwiseDistances(fastaD, "p-distance", gapDeletion = TRUE)
+  #pairwiseDistances(fastaD, "JC", gapDeletion = TRUE)
+  #pairwiseDistances(fastaD, "Kimura2p", gapDeletion = TRUE)
+  #pairwiseDistances(fastaD, "Tamura3p", gapDeletion = TRUE)
 ```
 
 Own data
 
 ``` r
 # fastaD <- readFasta("path to fasta file")
-# pairwiseDistances(fastaD, model = "p-distance", pairwiseDeletion = FALSE)
+# pairwiseDistances(fastaD, model = "p-distance", gapDeletion = TRUE)
 ```
 
-#### Function 6: overallMeanDistance
+##### Function 6: overallMeanDistance
 
-- Calculates the overall genetic distance of query sequences
+- Estimates the overall mean distance of input sequences.
 
 Example
 
@@ -237,13 +270,13 @@ Example
   fastaData <- readFasta(test)
   
   overallMeanDistance(fastaData, model="p-distance")
-#> [1] 0.3220081
+#> [1] 0.3332344
   overallMeanDistance(fastaData, model="JC")
-#> [1] 0.4370453
+#> [1] 0.4605268
   overallMeanDistance(fastaData, model="Kimura2p")
-#> [1] 0.4383451
+#> [1] 0.4621316
   overallMeanDistance(fastaData, model="Tamura3p")
-#> [1] 0.4517178
+#> [1] 0.5252031
 ```
 
 Own data
@@ -253,9 +286,9 @@ Own data
 # overallMeanDistance(fastaD,  model="p-distance")
 ```
 
-#### Function 7: countSNPs
+##### Function 7: countSNPs
 
-- Count SNPs among input sequences
+- Counts single nucleotide polymorphisms across input sequences.
 
 Example
 
@@ -278,9 +311,10 @@ Own data
 # countSNPs(fastaD) 
 ```
 
-#### Function 8: plotFrequency
+##### Function 8: plotFrequency
 
-- Create a barplot of genotype frequencies
+- Plots the frequency of assigned genotypes. This function uses the
+  output of assignTypes() as input.
 
 Example
 
@@ -295,7 +329,7 @@ Example
   plotFrequency(df)
 ```
 
-<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" />
 
 ``` r
   
@@ -311,11 +345,10 @@ Own data
   #plotFrequency(df)
 ```
 
-#### Function 9: plotDistances
+##### Function 9: plotDistances
 
-- Visualize genetic distances of the query to prototype sequences
-- The output of the generate pairwise distance between query and
-  prototype sequences (function 4) is the input data.
+- Visualizes pairwise genetic distances in a heatmap. This function uses
+  the output of pairwiseDistances() as input.
 
 Example
 
@@ -329,7 +362,7 @@ Example
   plotDistances(distancesToPrototypes)
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-20-1.png" width="100%" />
 
 Own data
 
@@ -339,9 +372,10 @@ Own data
   #plotDistances(distancesToPrototypes)
 ```
 
-#### Function 10: plotTree
+##### Function 10: plotTree
 
-- Plot a simple phylogenetic tree based on distances
+- Plots a simple phylogenetic tree using the genetic distances estimated
+  by pairwiseDistances().
 
 Example
 
@@ -355,7 +389,7 @@ Example
   plotTree(pdistances)
 ```
 
-<img src="man/figures/README-unnamed-chunk-21-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-22-1.png" width="100%" />
 
 Own data
 
@@ -365,9 +399,14 @@ Own data
  #plotTree(pdistances)
 ```
 
-#### Function 11: plotAA
+##### Function 11: plotAA
 
-- Plot a simple phylogenetic tree based on distances
+- plotAA: Plots amino acid substitutions with a specified sequence as
+  the reference. The input is an amino acid fasta file (translated DNA
+  sequences). To specify the reference sequence, move it to the bottom
+  of the alignment. Changes are coloured by the class of amino acid: Red
+  = Positively charged, Blue = Negatively charged, Green = Polar, Yellow
+  = Non-polar.
 
 Example
 
@@ -376,42 +415,15 @@ Example
   test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
   
   # usage
-  fastaData <- readFasta(fastaFile = test, desiredLength = 170)
+  fastaData <- readFasta(fastaFile = test)
   plotAA(fastaData, showLegend = T)
 ```
 
-<img src="man/figures/README-unnamed-chunk-23-1.png" width="100%" />
-
-``` r
-  
-  # Legend
-   # R = "red", H = "red", K = "red",      # Positively charged amino acid 
-   # D = "blue", E = "blue",               # Negatively charged amino acid 
-   # S = "green", T = "green", N = "green", Q = "green", # Polar amino acid 
-   # A = "yellow", V = "yellow", I = "yellow", L = "yellow", M = "yellow", F = "yellow", 
-   # W = "yellow", P = "yellow", G = "yellow", Y = "yellow", C = "yellow"  # Nonpolar amino acid 
-```
+<img src="man/figures/README-unnamed-chunk-24-1.png" width="100%" />
 
 Own data
 
 ``` r
-  #fastaD <- readFasta("path to fasta file", desiredLength = 170)
+  #fastaD <- readFasta("path to fasta file")
   #plotAA(fastaData, showLegend = T)
 ```
-
-## Help
-Find a description of each function and how to run it by invoking a question mark before the function in R console.
-```
-#Example
-?plotAA
-```
-
-## Citation
-Luka MM, Nanjala R, Rashed WM, Gatua W, Awe OI: rhinotypeR: An R package for Rhinovirus Genotyping (2024)
-
-## Contributors
-- Martha M. Luka
-- Ruth Nanjala
-- Wafaa M. Rashed
-- Winfred Gatua
-- Olaitan I. Awe

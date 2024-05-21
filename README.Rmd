@@ -142,7 +142,7 @@ Example
 
 Own data
 ```{r }
-# readFasta("path to fastaFile", desiredLength = 430)
+# readFasta("path to fastaFile")
 ```
 
 ##### Function 3: SNPeek 
@@ -160,7 +160,7 @@ Example
 
 Own data
 ```{r }
-  # fastaData <- readFasta(fastaFile = "path to fasta file", desiredLength = 480)
+  # fastaData <- readFasta(fastaFile = "path to fasta file")
   # SNPeek(fastaData, showLegend = F)
 ```
 
@@ -196,16 +196,16 @@ Example
   # Example usage
   fastaD <- readFasta(test)
   
-  pairwiseDistances(fastaD, "p-distance", gapDeletion = TRUE)
-  pairwiseDistances(fastaD, "JC", gapDeletion = TRUE)
-  pairwiseDistances(fastaD, "Kimura2p", gapDeletion = TRUE)
-  pairwiseDistances(fastaD, "Tamura3p", gapDeletion = TRUE)
+  output <- pairwiseDistances(fastaD, "p-distance", gapDeletion = TRUE)
+  #pairwiseDistances(fastaD, "JC", gapDeletion = TRUE)
+  #pairwiseDistances(fastaD, "Kimura2p", gapDeletion = TRUE)
+  #pairwiseDistances(fastaD, "Tamura3p", gapDeletion = TRUE)
 ```
 
 Own data
 ```{r }
 # fastaD <- readFasta("path to fasta file")
-# pairwiseDistances(fastaD, model = "p-distance", pairwiseDeletion = FALSE)
+# pairwiseDistances(fastaD, model = "p-distance", gapDeletion = TRUE)
 ```
 
 ##### Function 6: overallMeanDistance 
@@ -327,19 +327,12 @@ Example
   test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
   
   # usage
-  fastaData <- readFasta(fastaFile = test, desiredLength = 170)
+  fastaData <- readFasta(fastaFile = test)
   plotAA(fastaData, showLegend = T)
-  
-  # Legend
-   # R = "red", H = "red", K = "red",      # Positively charged amino acid 
-   # D = "blue", E = "blue",               # Negatively charged amino acid 
-   # S = "green", T = "green", N = "green", Q = "green", # Polar amino acid 
-   # A = "yellow", V = "yellow", I = "yellow", L = "yellow", M = "yellow", F = "yellow", 
-   # W = "yellow", P = "yellow", G = "yellow", Y = "yellow", C = "yellow"  # Nonpolar amino acid 
 ```
 
 Own data
 ```{r }
-  #fastaD <- readFasta("path to fasta file", desiredLength = 170)
+  #fastaD <- readFasta("path to fasta file")
   #plotAA(fastaData, showLegend = T)
 ```
