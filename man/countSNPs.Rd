@@ -3,10 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Counts single nucleotide polymorphisms across input sequences.
+Counts single nucleotide polymorphisms.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Counts single nucleotide polymorphisms across input sequences and produce an output matrix.
 }
 \usage{
 countSNPs(inputSequencesPath)

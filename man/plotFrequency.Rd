@@ -4,10 +4,11 @@
 \title{
 %%  ~~function to do ... ~~ 
 Plots the frequency of assigned genotypes. 
-This function uses the output of assignTypes() as input.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Plots the frequency of assigned genotypes. 
+This function uses the output of assignTypes() as input.
 }
 \usage{
 plotFrequency(target_data, ref_data, model = "Tamura3p")

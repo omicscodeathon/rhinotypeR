@@ -3,10 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Rapidly assigns genotypes to input sequences. The input fasta file should include the prototype strains, which can be downloaded using getPrototypeSeqs().
+Assigns genotypes to input sequences.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Rapidly assigns genotypes to input sequences. The input fasta file should include the prototype strains, which can be downloaded using getPrototypeSeqs().
 }
 \usage{
 assignTypes(fastaData, model = "p-distance", gapDeletion = TRUE, threshold = 0.105)

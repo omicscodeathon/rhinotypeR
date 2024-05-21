@@ -3,11 +3,12 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Download rhinovirus prototype strains into a local directory. These sequences should be combined with and aligned alongside newly generated sequences before being imported into R for genotype assignment.
+Download rhinovirus prototype strains.
 
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Download rhinovirus prototype strains into a local directory. These sequences should be combined with and aligned alongside newly generated sequences before being imported into R for genotype assignment.
 }
 \usage{
 getPrototypeSeqs(destinationFolder = "./output")

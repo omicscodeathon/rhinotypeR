@@ -3,10 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Visualizes pairwise genetic distances in a heatmap. This function uses the output of pairwiseDistances() as input.
+Visualizes pairwise genetic distances.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Visualizes pairwise genetic distances in a heatmap. This function uses the output of pairwiseDistances() as input.
 }
 \usage{
 plotDistances(prototypefile, model = "p-distance")

@@ -3,10 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Plots a simple phylogenetic tree using the genetic distances estimated by pairwiseDistances().
+Plots a simple phylogenetic tree.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Plots a simple phylogenetic tree using the genetic distances estimated by pairwiseDistances().
 }
 \usage{
 plotTree(prototypefile, model = "p-distance")

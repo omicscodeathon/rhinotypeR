@@ -3,10 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Estimates pairwise distances across input sequences using a specified evolutionary model.
+Estimates pairwise distances.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Estimates pairwise distances across input sequences using a specified evolutionary model.
 }
 \usage{
 pairwiseDistances(prototypefile, model = "p-distance")
