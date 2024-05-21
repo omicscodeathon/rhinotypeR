@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Downloads RV prototypes into a user-specified local directory
+Download rhinovirus prototype strains into a local directory. These sequences should be combined with and aligned alongside newly generated sequences before being imported into R for genotype assignment.
 
 }
 \description{

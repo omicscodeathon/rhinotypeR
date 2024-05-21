@@ -3,7 +3,8 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~ 
-Create a barplot of genotype frequencies
+Plots the frequency of assigned genotypes. 
+This function uses the output of assignTypes() as input.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~

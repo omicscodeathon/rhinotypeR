@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Calculates the overall mean genetic distance of query sequences using a user-specified evolutionary model
+Estimates the overall mean distance of input sequences.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Count pairwise SNPs among query sequences
+Counts single nucleotide polymorphisms across input sequences.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~

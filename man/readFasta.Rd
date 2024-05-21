@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Read sequences from a FASTA file
+Reads sequence alignment/fasta files into R for processing.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~

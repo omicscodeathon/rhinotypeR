@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Assign genotypes to the query sequence
+Rapidly assigns genotypes to input sequences. The input fasta file should include the prototype strains, which can be downloaded using getPrototypeSeqs().
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Calculate pairwise distance among input sequences using a user-specified evolutionary model
+Estimates pairwise distances across input sequences using a specified evolutionary model.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Plot a simple phylogenetic tree based on distances
+Plots a simple phylogenetic tree using the genetic distances estimated by pairwiseDistances().
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 %%  ~~function to do ... ~~
-Visualizing Single Nucleotide Polymorphisms (SNPs) in the fasta file
+Visualizes single nucleotide polymorphisms (SNPs) relative to a specified reference sequence. To specify the reference, move it to the bottom of the alignment. Substitutions are color-coded by nucleotide: A = green, T = red, C = blue, G = yellow.
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
