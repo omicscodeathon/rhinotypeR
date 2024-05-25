@@ -1,80 +1,44 @@
 \name{plotFrequency}
 \alias{plotFrequency}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~ 
-Plots the frequency of assigned genotypes. 
-}
+\title{Plots the frequency of assigned genotypes}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-Plots the frequency of assigned genotypes. 
-This function uses the output of assignTypes() as input.
+Plots the frequency of assigned genotypes. This function uses the output of \code{assignTypes()} as input.
 }
 \usage{
 plotFrequency(target_data, ref_data, model = "Tamura3p")
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-\item{target_data}{
-  %%     ~~Describe \code{pathToRef} here~~
-  path to target fasta file. 
+  \item{target_data}{
+  Path to the target fasta file.
   }
   \item{ref_data}{
-  %%     ~~Describe \code{pathToRef} here~~
-  path to reference fasta file.
+  Path to the reference fasta file.
   }
- \item{model}{
-  %%     ~~Describe \code{pathToRef} here~~
-  It is used to select the model used to assign genotypes to the query sequence. Default is set to p-distance.
+  \item{model}{
+  The evolutionary model used for genotype assignment. Default is "Tamura3p".
   }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+This function visualizes the frequency of assigned genotypes based on the provided target and reference data.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
+A plot showing the frequency of assigned genotypes.
 }
 \author{
-%%  ~~who you are~~
 Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{assignTypes}}
 }
 \examples{
- \dontrun{
-  # Load the dataset
-  test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
-  
-  # Run 
-  queryFastaData <- readFasta(test)
-  df <- assignTypes(queryFastaData, "p-distance")
-  
-  plotFrequency(df)
-  
-  # Color legend
-  # "A" = "blue", "B" = "red", "C" = "green", "Other" = "grey"
-  }
+# Load the dataset
+test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
+
+# Run 
+queryFastaData <- readFasta(test)
+df <- assignTypes(queryFastaData, "p-distance")
+
+plotFrequency(df)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory (show via RShowDoc("KEYWORDS")):
-% \keyword{ ~kwd1 }
-% \keyword{ ~kwd2 }
-% Use only one keyword per line.
-% For non-standard keywords, use \concept instead of \keyword:
-% \concept{ ~cpt1 }
-% \concept{ ~cpt2 }
-% Use only one concept per line.
+\keyword{genotype}
+\keyword{visualization}

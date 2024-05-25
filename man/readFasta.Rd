@@ -1,72 +1,35 @@
 \name{readFasta}
 \alias{readFasta}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-Reads sequence alignment/fasta files into R for processing.
-}
+\title{Reads sequence alignment/fasta files into R for processing}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Reads a sequence alignment or fasta file into R for processing.
 }
 \usage{
 readFasta(fastaFile)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{fastaFile}{
-%%     ~~Describe \code{fastaFile} here~~
-A FASTA file is a text-based method for encoding nucleotide or peptide sequences, utilizing single-letter codes to represent base pairs or amino acids. Each sequence in FASTA format commences with a line providing a brief description, succeeded by lines containing the sequence data. 
-
-Example
->Sequence_1
-ATCGATCGATCGATCGATCGATCGATCG
-ATCGATCGATCGATCGATCGATCGATCG
-ATCGATCGATCGATCGATCGATCGATCG
-}
+  Path to the fasta file. A FASTA file is a text-based method for encoding nucleotide or peptide sequences, utilizing single-letter codes to represent base pairs or amino acids. Each sequence in FASTA format commences with a line providing a brief description, succeeded by lines containing the sequence data.
+  }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+This function reads a FASTA file into R and returns the sequence data for further analysis.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
+A list containing the sequence data from the FASTA file.
 }
 \author{
-%%  ~~who you are~~
 Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{countSNPs}}, \code{\link{SNPeek}}
 }
 \examples{
-  \dontrun{
-  # Load the dataset
-  test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
-  
-  # run command
-  readFasta(test)
-   }
+# Load the dataset
+test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
+
+# Run the command
+readFasta(test)
 }
-
-
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory (show via RShowDoc("KEYWORDS")):
-% \keyword{ ~kwd1 }
-% \keyword{ ~kwd2 }
-% Use only one keyword per line.
-% For non-standard keywords, use \concept instead of \keyword:
-% \concept{ ~cpt1 }
-% \concept{ ~cpt2 }
-% Use only one concept per line.
+\keyword{sequence analysis}
+\keyword{data input}

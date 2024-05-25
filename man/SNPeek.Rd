@@ -1,66 +1,38 @@
 \name{SNPeek}
 \alias{SNPeek}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-Visulaize single nucleotide polymorphisms
-}
+\title{Visualize single nucleotide polymorphisms}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
 Visualizes single nucleotide polymorphisms (SNPs) relative to a specified reference sequence. To specify the reference, move it to the bottom of the alignment. Substitutions are color-coded by nucleotide: A = green, T = red, C = blue, G = yellow.
 }
 \usage{
-SNPeek(fastaFile, showLegend = FALS)
+SNPeek(fastaFile, showLegend = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{fastaFile}{
-%%     ~~Describe \code{fastaFile} here~~
-The fastaFile used here is the output from the function "readFasta"
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
-\examples{
-  \dontrun{
-  # Load the dataset
-  test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
-
-  fastaData <- readFasta(fastaFile = test)
-
-  SNPeek(fastaData, showLegend = F)
+  The fasta file used here is the output from the function \code{readFasta}.
+  }
+  \item{showLegend}{
+  Logical indicating whether to show the legend. Default is FALSE.
   }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory (show via RShowDoc("KEYWORDS")):
-% \keyword{ ~kwd1 }
-% \keyword{ ~kwd2 }
-% Use only one keyword per line.
-% For non-standard keywords, use \concept instead of \keyword:
-% \concept{ ~cpt1 }
-% \concept{ ~cpt2 }
-% Use only one concept per line.
+\details{
+This function visualizes SNPs in the provided sequence data, using a color-coding scheme for different nucleotides.
+}
+\value{
+A plot showing the SNPs relative to the reference sequence.
+}
+\author{
+Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
+}
+\seealso{
+\code{\link{readFasta}}
+}
+\examples{
+# Load the dataset
+test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
+
+fastaData <- readFasta(fastaFile = test)
+SNPeek(fastaData, showLegend = FALSE)
+}
+\keyword{SNP}
+\keyword{visualization}

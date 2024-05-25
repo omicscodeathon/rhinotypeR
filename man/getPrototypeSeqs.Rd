@@ -1,64 +1,32 @@
 \name{getPrototypeSeqs}
 \alias{getPrototypeSeqs}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-%%  ~~function to do ... ~~
-Download rhinovirus prototype strains.
-
-}
+\title{Download rhinovirus prototype strains}
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
 Download rhinovirus prototype strains into a local directory. These sequences should be combined with and aligned alongside newly generated sequences before being imported into R for genotype assignment.
 }
 \usage{
 getPrototypeSeqs(destinationFolder = "./output")
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{destinationFolder}{
-%%     ~~Describe \code{x} here~~
-  Provide a path that will act as an output folder for the Prototype sequences.
-  The default is set to "output", but you will need to create it prior to running the command in your current directory.
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
-\examples{
-  \dontrun{
-  # Load the dataset
-  getPrototypeSeqs(destinationFolder = "./output")
+  Provide a path that will act as an output folder for the prototype sequences. The default is set to "output", but you will need to create it prior to running the command in your current directory.
   }
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory (show via RShowDoc("KEYWORDS")):
-% \keyword{ ~kwd1 }
-% \keyword{ ~kwd2 }
-% Use only one keyword per line.
-% For non-standard keywords, use \concept instead of \keyword:
-% \concept{ ~cpt1 }
-% \concept{ ~cpt2 }
-% Use only one concept per line.
+\details{
+This function downloads rhinovirus prototype strains and saves them in the specified folder.
+}
+\value{
+A character vector of the downloaded file paths.
+}
+\author{
+Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
+}
+\seealso{
+\code{\link{assignTypes}}
+}
+\examples{
+# Run the function
+getPrototypeSeqs(destinationFolder = "./output")
+}
+\keyword{genotype}
+\keyword{sequence analysis}
