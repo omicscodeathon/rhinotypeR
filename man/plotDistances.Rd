@@ -9,7 +9,7 @@ plotDistances(distancesMatrix)
 }
 \arguments{
   \item{distancesMatrix}{
-  A matrix of pairwise genetic distances.
+  A matrix of pairwise genetic distances from the function \code{pairwiseDistances}.
   }
 }
 \details{

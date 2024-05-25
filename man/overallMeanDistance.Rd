@@ -5,14 +5,17 @@
 Estimates the overall mean distance of input sequences.
 }
 \usage{
-overallMeanDistance(RVPrototype, model)
+overallMeanDistance(fastaData, model, gapDeletion=TRUE)
 }
 \arguments{
-  \item{RVPrototype}{
-  The name of the Rhinovirus prototype. Default is set to "RVAPrototype".
+  \item{fastaFile}{
+  The fasta file used here is the output from the function \code{readFasta}.
   }
   \item{model}{
   The evolutionary model used to calculate distances. Default is set to "p-distance".
+  }
+  \item{gapDeletion}{
+  Whether or not to delete positions with gaps. Default is set to TRUE.
   }
 }
 \details{

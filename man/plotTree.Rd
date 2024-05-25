@@ -5,18 +5,15 @@
 Plots a simple phylogenetic tree using the genetic distances estimated by \code{pairwiseDistances()}.
 }
 \usage{
-plotTree(prototypefile, model = "p-distance")
+plotTree(distance_matrix)
 }
 \arguments{
-  \item{prototypefile}{
-  Path to the Rhinovirus prototype sequences.
-  }
-  \item{model}{
-  The evolutionary model used for genotype assignment. Default is "p-distance".
+  \item{distance_matrix}{
+  Distance matrix from the function \code{pairwiseDistances}.
   }
 }
 \details{
-This function visualizes a phylogenetic tree based on the pairwise genetic distances calculated from the prototype sequences.
+This function visualizes a phylogenetic tree based on the calculated pairwise genetic distances.
 }
 \value{
 A plot object representing the phylogenetic tree.

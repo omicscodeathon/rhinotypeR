@@ -5,14 +5,17 @@
 Estimates pairwise distances across input sequences using a specified evolutionary model.
 }
 \usage{
-pairwiseDistances(prototypefile, model = "p-distance")
+pairwiseDistances(fastaData, model = "p-distance, gapDeletion = TRUE")
 }
 \arguments{
-\item{prototypefile}{
-  The path to the Rhinovirus prototype sequences.
+\item{fastaData}{
+  The fasta data to be processed.
   }
  \item{model}{
   The evolutionary model used to calculate distances. Default is set to "p-distance".
+  }
+  \item{gapDeletion}{
+  Whether or not to delete positions with gaps. Default is set to TRUE.
   }
 }
 \details{

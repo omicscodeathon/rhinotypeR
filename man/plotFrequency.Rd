@@ -5,21 +5,15 @@
 Plots the frequency of assigned genotypes. This function uses the output of \code{assignTypes()} as input.
 }
 \usage{
-plotFrequency(target_data, ref_data, model = "Tamura3p")
+plotFrequency(assignedTypes)
 }
 \arguments{
-  \item{target_data}{
-  Path to the target fasta file.
-  }
-  \item{ref_data}{
-  Path to the reference fasta file.
-  }
-  \item{model}{
-  The evolutionary model used for genotype assignment. Default is "Tamura3p".
+  \item{assignedTypes}{
+  A dataframe from the function \code{assignTypes}.
   }
 }
 \details{
-This function visualizes the frequency of assigned genotypes based on the provided target and reference data.
+This function visualizes the frequency of assigned genotypes based of the newly generated data.
 }
 \value{
 A plot showing the frequency of assigned genotypes.

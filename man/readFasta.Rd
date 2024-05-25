@@ -9,7 +9,7 @@ readFasta(fastaFile)
 }
 \arguments{
   \item{fastaFile}{
-  Path to the fasta file. A FASTA file is a text-based method for encoding nucleotide or peptide sequences, utilizing single-letter codes to represent base pairs or amino acids. Each sequence in FASTA format commences with a line providing a brief description, succeeded by lines containing the sequence data.
+  Path to the fasta file. A FASTA file is a text-based method for encoding nucleotide or peptide sequences, utilizing single-letter codes to represent base pairs or amino acids. Each sequence in FASTA format commences with a header line, succeeded by lines containing the sequence data.
   }
 }
 \details{

@@ -2,7 +2,7 @@
 \alias{SNPeek}
 \title{Visualize single nucleotide polymorphisms}
 \description{
-Visualizes single nucleotide polymorphisms (SNPs) relative to a specified reference sequence. To specify the reference, move it to the bottom of the alignment. Substitutions are color-coded by nucleotide: A = green, T = red, C = blue, G = yellow.
+Visualizes single nucleotide polymorphisms (SNPs) relative to a specified reference sequence. To specify the reference, manually move it to the bottom of the alignment. Substitutions are color-coded by nucleotide: A = green, T = red, C = blue, G = yellow.
 }
 \usage{
 SNPeek(fastaFile, showLegend = FALSE)
@@ -19,7 +19,7 @@ SNPeek(fastaFile, showLegend = FALSE)
 This function visualizes SNPs in the provided sequence data, using a color-coding scheme for different nucleotides.
 }
 \value{
-A plot showing the SNPs relative to the reference sequence.
+A plot showing the SNPs relative to a user specified reference sequence.
 }
 \author{
 Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 

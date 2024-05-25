@@ -5,11 +5,11 @@
 Counts single nucleotide polymorphisms across input sequences and produces an output matrix.
 }
 \usage{
-countSNPs(inputSequencesPath)
+countSNPs(fastaData)
 }
 \arguments{
-  \item{inputSequencesPath}{
-  The path to the input sequences in fasta format.
+  \item{fastaData}{
+  The fasta data to be processed.
   }
 }
 \details{
