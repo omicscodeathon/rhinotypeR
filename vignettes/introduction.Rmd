@@ -18,7 +18,7 @@ You can install `rhinotypeR` from GitHub with:
 ```{r}
 # If needed
 # install.packages("devtools")
-devtools::install_github("yourusername/rhinotypeR")
+# devtools::install_github("yourusername/rhinotypeR")
 ```
 
 # Usage
@@ -69,6 +69,11 @@ genotypes <- assignTypes(sequences)
 ```{r}
 plotFrequency(genotypes)
 plotDistances(distances)
+```
+## Session Info
+
+```{r}
+sessionInfo()
 ```
 
 ## Conclusion

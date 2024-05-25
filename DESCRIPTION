@@ -2,8 +2,13 @@ Package: rhinotypeR
 Type: Package
 Title: Rhinovirus genotyping
 Version: 0.1.0
-Authors: Martha Luka, Ruth Nanjala, Winfred Gatua, Wafaa M. Rashed, Olaitan Awe
-Maintainer: Ruth Nanjala <ruth.nanjala@reuben.ox.ac.uk>
+Authors@R: c(
+    person("Martha", "Luka", role = c("aut")),
+    person("Ruth", "Nanjala", role = c("aut", "cre"), email = "ruth.nanjala@reuben.ox.ac.uk"),
+    person("Winfred", "Gatua", role = c("aut")),
+    person("Wafaa M.", "Rashed", role = c("aut")),
+    person("Olaitan", "Awe", role = c("aut"))
+    )
 Description: "rhinotypeR" is designed to automate the comparison of sequence data against prototype strains, 
             streamlining the genotype assignment process. By implementing predefined pairwise distance thresholds, 
             this package makes genotype assignment accessible to researchers and public health professionals. 
@@ -17,7 +22,8 @@ Encoding: UTF-8
 LazyData: false
 biocViews: Sequencing, Genetics, Phylogenetics
 Depends: 
-    R (>= 4.4.0)
+    R (>= 4.4.0),
+    Biostrings
 Suggests:
   knitr,
   rmarkdown

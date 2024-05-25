@@ -27,7 +27,7 @@ countSNPsHelper <- function(fastaData, gapDeletion = TRUE) {
   
   # Optionally remove sites with missing data
   if (gapDeletion) {
-    refs = deleteMissingDataSites(refs)
+    refs <- deleteMissingDataSites(refs)
   }
   
   # Convert all cleaned sequences to a matrix of character vectors
