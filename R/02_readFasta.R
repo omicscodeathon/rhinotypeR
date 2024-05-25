@@ -21,7 +21,7 @@ compareLengths <- function(seqs) {
 
 # Function 2
 # Function to read sequences from a FASTA file and adjust their lengths
-readFasta2 <- function(fastaFile) {
+readFasta <- function(fastaFile) {
   # Read all lines from the FASTA file
   #lines <- readLines(fastaFile)
   
