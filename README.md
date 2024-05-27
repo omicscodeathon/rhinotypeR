@@ -130,7 +130,55 @@ sequences before being imported into R for genotype assignment</td>
 <td>RV prototypes are downloaded into the local machine</td>
 </tr>
 <tr class="even">
-<td><code>readFasta</code>()<code>| Reads sequence alignment/fasta files into R for processing | fasta file | A fasta file imported into R |</code>SNPeek()<code>| Visualizes single nucleotide polymorphisms (SNPs) relative to a specified reference sequence. To specify the reference, move it to the bottom of the alignment. Substitutions are color-coded by nucleotide: A = green, T = red, C = blue, G = yellow | fasta file | A plot highlighting SNPs per sequence |</code>plotAA()<code>|Plots amino acid substitutions with a specified sequence as the reference. The input is an amino acid fasta file (translated DNA sequences). To specify the reference sequence, move it to the bottom of the alignment. Changes are coloured by the class of amino acid: Red = Positively charged, Blue = Negatively charged, Green = Polar, Yellow = Non-polar | Amino acid fasta file | A plot highlighting amino acid substitutions per sequence |</code>assignTypes()<code>| Rapidly assigns genotypes to input sequences. The input fasta file should include the prototype strains, which can be downloaded using getPrototypeSeqs() | fasta file | CSV file with three columns: sequence header, assigned type, and genetic distance   |</code>pairwiseDistances()<code>| Estimates pairwise distances across input sequences using a specified evolutionary model | fasta file | A dense distance matrix |</code>overallMeanDistance()<code>| Estimates the overall mean distance of input sequences  |  fasta file |  A single numeric value |</code>countSNPs<code>()</code></td>
+<td><code>readFasta</code>()</td>
+<td>Reads sequence alignment/fasta files into R for processing</td>
+<td>fasta file</td>
+<td>A fasta file imported into R</td>
+</tr>
+<tr class="odd">
+<td><code>SNPeek()</code></td>
+<td>Visualizes single nucleotide polymorphisms (SNPs) relative to a
+specified reference sequence. To specify the reference, move it to the
+bottom of the alignment. Substitutions are color-coded by nucleotide: A
+= green, T = red, C = blue, G = yellow</td>
+<td>fasta file</td>
+<td>A plot highlighting SNPs per sequence</td>
+</tr>
+<tr class="even">
+<td><code>plotAA()</code></td>
+<td>Plots amino acid substitutions with a specified sequence as the
+reference. The input is an amino acid fasta file (translated DNA
+sequences). To specify the reference sequence, move it to the bottom of
+the alignment. Changes are coloured by the class of amino acid: Red =
+Positively charged, Blue = Negatively charged, Green = Polar, Yellow =
+Non-polar</td>
+<td>Amino acid fasta file</td>
+<td>A plot highlighting amino acid substitutions per sequence</td>
+</tr>
+<tr class="odd">
+<td><code>assignTypes()</code></td>
+<td>Rapidly assigns genotypes to input sequences. The input fasta file
+should include the prototype strains, which can be downloaded using
+getPrototypeSeqs()</td>
+<td>fasta file</td>
+<td>CSV file with three columns: sequence header, assigned type, and
+genetic distance</td>
+</tr>
+<tr class="even">
+<td><code>pairwiseDistances()</code></td>
+<td>Estimates pairwise distances across input sequences using a
+specified evolutionary model</td>
+<td>fasta file</td>
+<td>A dense distance matrix</td>
+</tr>
+<tr class="odd">
+<td><code>overallMeanDistance()</code></td>
+<td>Estimates the overall mean distance of input sequences</td>
+<td>fasta file</td>
+<td>A single numeric value</td>
+</tr>
+<tr class="even">
+<td><code>countSNPs</code>()</td>
 <td>Counts single nucleotide polymorphisms across input sequences</td>
 <td>fasta file</td>
 <td>A dense matrix</td>
