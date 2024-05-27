@@ -25,7 +25,8 @@ A plot object showing the amino acid substitutions.
 Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
 }
 \seealso{
-\code{\link{readFasta}}
+\code{\link{SNPeek}},
+\code{\link{plotAA}}
 }
 \examples{
 # Load the dataset

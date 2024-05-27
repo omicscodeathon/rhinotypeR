@@ -5,7 +5,7 @@
 Estimates the overall mean distance of input sequences.
 }
 \usage{
-overallMeanDistance(fastaData, model, gapDeletion=TRUE)
+overallMeanDistance(fastaData, model="p-distance", gapDeletion=TRUE)
 }
 \arguments{
   \item{fastaFile}{
