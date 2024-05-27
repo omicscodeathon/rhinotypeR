@@ -5,11 +5,11 @@
 Plots amino acid substitutions with a specified sequence as the reference. The input is an amino acid fasta file (translated DNA sequences). To specify the reference sequence, move it to the bottom of the alignment. Changes are colored by the class of amino acid: Red = Positively charged, Blue = Negatively charged, Green = Polar, Yellow = Non-polar.
 }
 \usage{
-plotAA(x, showLegend = FALSE)
+plotAA(z, showLegend = FALSE)
 }
 \arguments{
-  \item{x}{
-  The input amino acid sequences in fasta format.
+  \item{z}{
+  The file path to the input amino acid sequences in fasta format.
   }
   \item{showLegend}{
   Logical indicating whether to show the legend. Default is FALSE.
@@ -29,11 +29,10 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
 }
 \examples{
 # Load the dataset
-test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
+test <- system.file("extdata", "test.translated.fasta", package = "rhinotypeR")
 
 # Usage
-fastaData <- readFasta(test)
-plotAA(fastaData)
+plotAA(test)
 }
 \keyword{genotype}
 \keyword{sequence analysis}

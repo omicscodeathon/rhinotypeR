@@ -324,15 +324,14 @@ Own data
 Example
 ```{r }
   # Load the dataset
-  test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
+  test <- system.file("extdata", "test.translated.fasta", package = "rhinotypeR")
   
   # usage
-  fastaData <- readFasta(fastaFile = test)
-  plotAA(fastaData, showLegend = T)
+  plotAA(test, showLegend = T)
 ```
 
 Own data
 ```{r }
-  #fastaD <- readFasta("path to fasta file")
+  #fastaData <- "path to fasta file"
   #plotAA(fastaData, showLegend = T)
 ```
