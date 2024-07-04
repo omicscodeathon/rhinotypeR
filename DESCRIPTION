@@ -19,6 +19,7 @@ Description: "rhinotypeR" is designed to automate the comparison of sequence dat
             facilitating in-depth genetic and evolutionary studies.
 License: MIT License
 Encoding: UTF-8
+Imports: Biostrings
 LazyData: false
 biocViews: Sequencing, Genetics, Phylogenetics
 Depends: 
