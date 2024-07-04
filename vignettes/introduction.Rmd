@@ -35,7 +35,7 @@ library(rhinotypeR)
 1. Download prototype sequences:
 
 ```{r}
-getPrototypeSeqs("path_to_destination_folder")
+# getPrototypeSeqs("path_to_destination_folder")
 # For example
 # getPrototypeSeqs("~/Desktop")
 ```
@@ -43,32 +43,32 @@ getPrototypeSeqs("path_to_destination_folder")
 2. Read sequences:
 
 ```{r}
-sequences <- readFasta("path/to/your/fasta/file")
+# sequences <- readFasta("path/to/your/fasta/file")
 ```
 
 3. Visualize SNPs:
 
 ```{r}
-SNPeek(sequences)
+# SNPeek(sequences)
 ```
 
 4. Calculate Pairwise Distances:
 
 ```{r}
-distances <- pairwiseDistances(sequences)
+# distances <- pairwiseDistances(sequences)
 ```
 
 5. Assign Genotypes::
 
 ```{r}
-genotypes <- assignTypes(sequences)
+# genotypes <- assignTypes(sequences)
 ```
 
 6. Plot Results:
 
 ```{r}
-plotFrequency(genotypes)
-plotDistances(distances)
+# plotFrequency(genotypes)
+# plotDistances(distances)
 ```
 ## Session Info
 
