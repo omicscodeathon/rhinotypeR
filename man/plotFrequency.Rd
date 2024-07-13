@@ -2,7 +2,8 @@
 \alias{plotFrequency}
 \title{Plots the frequency of assigned genotypes}
 \description{
-Plots the frequency of assigned genotypes. This function uses the output of \code{assignTypes()} as input.
+Plots the frequency of assigned genotypes. 
+This function uses the output of \code{assignTypes()} as input.
 }
 \usage{
 plotFrequency(assignedTypes)

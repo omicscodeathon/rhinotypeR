@@ -2,7 +2,8 @@
 \alias{plotDistances}
 \title{Visualizes pairwise genetic distances}
 \description{
-Visualizes pairwise genetic distances in a heatmap. This function uses the output of pairwiseDistances() as input.
+Visualizes pairwise genetic distances in a heatmap. 
+This function uses the output of pairwiseDistances() as input.
 }
 \usage{
 plotDistances(distancesMatrix)

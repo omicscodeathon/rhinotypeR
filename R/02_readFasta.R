@@ -5,14 +5,14 @@ compareLengths <- function(seqs) {
   max_length <- max(nchar(seqs))
   
   # Adjust each sequence to have the same length as the longest sequence
-  adjustedSeqs <- sapply(seqs, function(seq) {
+  adjustedSeqs <- vapply(seqs, function(seq) {
     seq_length <- nchar(seq)
     if (seq_length < max_length) {
       # Pad shorter sequences with hyphens to reach the max length
       seq <- paste0(seq, paste0(rep("-", max_length - seq_length), collapse = ""))
     }
     seq
-  }, USE.NAMES = TRUE)
+  }, character(1), USE.NAMES = TRUE)
   
   return(adjustedSeqs)
 }

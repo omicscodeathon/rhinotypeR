@@ -15,50 +15,39 @@ assignTypes <- function(fastaData, model = "p-distance", gapDeletion = TRUE, thr
   
   # Filter rows to remove the same names as in the list
   distances <- distances[!rownames(distances) %in% names_to_keep, ]
-  
   # Initialize vectors to store output data
   queryVec <- character(0)
   assignedTypeVec <- character(0)
   distanceVec <- numeric(0)
+  refSeqVec <- character(0)
   
   # Iterate over each row (query) in the distances matrix
-  for (i in 1:nrow(distances)) {
+  for (i in seq_len(nrow(distances))) {
     queryHeader <- rownames(distances)[i]
-    
     validCols <- which(distances[i, ] < threshold)
     
     if (length(validCols) == 0) {
       # If no valid columns found, mark as "unassigned"
-      queryVec <- c(queryVec, queryHeader)
       assignedTypeVec <- c(assignedTypeVec, "unassigned")
       distanceVec <- c(distanceVec, NA)
-    } else if (length(validCols) > 1) {
-      # If multiple valid columns, choose the one with the minimum distance
+      # Find the column with the minimum distance
+      minDistCol <- which.min(distances[i, ])
+      refSeqVec <- c(refSeqVec, colnames(distances)[minDistCol])
+    } else {
+      # Choose the one with the minimum distance
       minDistanceCol <- which.min(distances[i, validCols])
       col <- validCols[minDistanceCol]
-      
-      queryVec <- c(queryVec, queryHeader)
       assignedType <- colnames(distances)[col]
-      assignedTypeCleaned <- sub(".*_", "", assignedType)
-      assignedTypeCleaned <- gsub("RV", "", assignedTypeCleaned)
-      
-      assignedTypeVec <- c(assignedTypeVec, assignedTypeCleaned)
+      assignedTypeVec <- c(assignedTypeVec, sub(".*_", "", gsub("RV", "", assignedType)))
       distanceVec <- c(distanceVec, distances[i, col])
-    } else {
-      # For a single valid column
-      col <- validCols
-      
-      queryVec <- c(queryVec, queryHeader)
-      assignedType <- colnames(distances)[col]
-      assignedTypeCleaned <- sub(".*_", "", assignedType)
-      assignedTypeCleaned <- gsub("RV", "", assignedTypeCleaned)
-      
-      assignedTypeVec <- c(assignedTypeVec, assignedTypeCleaned)
-      distanceVec <- c(distanceVec, distances[i, col])
+      refSeqVec <- c(refSeqVec, assignedType)
     }
+    queryVec <- c(queryVec, queryHeader)
   }
   
-  outputDf <- data.frame(query = queryVec, assignedType = assignedTypeVec, distance = distanceVec, stringsAsFactors = FALSE)
+  outputDf <- data.frame(query = queryVec, assignedType = assignedTypeVec, 
+                         distance = distanceVec, reference = refSeqVec, stringsAsFactors = FALSE)
   
   return(outputDf)
 }
+

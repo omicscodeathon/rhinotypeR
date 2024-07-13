@@ -7,6 +7,6 @@ getPrototypeSeqs <- function(destinationFolder){
   file.copy(from = ref,
             to = file.path(destinationFolder,"RVRefs.fasta"), overwrite = TRUE)
   
-  print(paste0("The reference sequences have been downloaded to ", destinationFolder))
+  message("The reference sequences have been downloaded to ", destinationFolder)
   
 }

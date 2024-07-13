@@ -2,7 +2,8 @@
 \alias{countSNPs}
 \title{Counts single nucleotide polymorphisms}
 \description{
-Counts single nucleotide polymorphisms across input sequences and produces an output matrix.
+Counts single nucleotide polymorphisms across input sequences and 
+produces an output matrix.
 }
 \usage{
 countSNPs(fastaData)
@@ -13,7 +14,8 @@ countSNPs(fastaData)
   }
 }
 \details{
-This function counts the number of single nucleotide polymorphisms (SNPs) across the provided sequences.
+This function counts the number of single nucleotide polymorphisms 
+(SNPs) across the provided sequences.
 }
 \value{
 A matrix with the SNP counts for each sequence.

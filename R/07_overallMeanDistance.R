@@ -18,7 +18,7 @@ overallPDistance <- function(fastaData, gapDeletion=TRUE) {
   total_distance <- 0
   num_comparisons <- 0
   
-  for (i in 1:(num_sequences - 1)) {
+  for (i in seq_len(num_sequences - 1)) {
     for (j in (i + 1):num_sequences) {
       # Compute distance between sequence i and j
       seq_i_chars <- strsplit(sequences[[i]], "")[[1]]
@@ -49,14 +49,14 @@ overallJCDistance <- function(fastaData, gapDeletion=TRUE) {
     sequences <- deleteMissingDataSites(sequences)
   }
   
-  for (i in 1:(num_sequences - 1)) {
+  for (i in seq_len(num_sequences - 1)) {
     for (j in (i + 1):num_sequences) {
       # Compute distance between sequence i and j using p-distance
       seq_i_chars <- strsplit(sequences[[i]], "")[[1]]
       seq_j_chars <- strsplit(sequences[[j]], "")[[1]]
       p_distance <- sum(seq_i_chars != seq_j_chars) / length(seq_i_chars)
       
-      # Apply the Jukes-Cantor correction if p_distance < 3/4, else consider the distance as infinite
+      # Apply the JC correction if p_distance < 3/4, else consider the distance as infinite
       if (p_distance < 0.75) {
         jc_distance <- -3/4 * log(1 - 4/3 * p_distance)
         total_jc_distance <- total_jc_distance + jc_distance
@@ -92,7 +92,7 @@ overallK2PDistance <- function(fastaData, gapDeletion=TRUE) {
   }
   
   
-  for (i in 1:(num_sequences - 1)) {
+  for (i in seq_len(num_sequences - 1)) {
     for (j in (i + 1):num_sequences) {
       seq_i_chars <- strsplit(sequences[[i]], "")[[1]]
       seq_j_chars <- strsplit(sequences[[j]], "")[[1]]
@@ -100,7 +100,7 @@ overallK2PDistance <- function(fastaData, gapDeletion=TRUE) {
       # Determine transitions and transversions
       transitions <- 0
       transversions <- 0
-      for (k in 1:length(seq_i_chars)) {
+      for (k in seq_along(seq_i_chars)) {
         if (seq_i_chars[k] != seq_j_chars[k]) {
           # Purines: A, G; Pyrimidines: C, T
           if (seq_i_chars[k] %in% c("A", "G") && seq_j_chars[k] %in% c("A", "G") ||
@@ -130,7 +130,8 @@ overallK2PDistance <- function(fastaData, gapDeletion=TRUE) {
   if (num_comparisons > 0) {
     overall_mean_distance <- total_distance / num_comparisons
   } else {
-    overall_mean_distance <- NA # No valid comparisons or all were skipped due to invalid K2P model conditions
+    # No valid comparisons or all were skipped due to invalid K2P model conditions
+    overall_mean_distance <- NA 
   }
   
   return(overall_mean_distance)
@@ -152,7 +153,7 @@ overallT3PDistance <- function(fastaData, gapDeletion=TRUE) {
     sequences <- deleteMissingDataSites(sequences)
   }
   
-  for (i in 1:(num_sequences - 1)) {
+  for (i in seq_len(num_sequences - 1)) {
     for (j in (i + 1):num_sequences) {
       seq_i_chars <- strsplit(sequences[[i]], "")[[1]]
       seq_j_chars <- strsplit(sequences[[j]], "")[[1]]

@@ -2,7 +2,9 @@
 \alias{assignTypes}
 \title{Assigns genotypes to input sequences}
 \description{
-Rapidly assigns genotypes to input sequences. The input fasta file should include the prototype strains, which can be downloaded using getPrototypeSeqs().
+Rapidly assigns genotypes to input sequences. 
+The input fasta file should include the prototype strains, 
+which can be downloaded using getPrototypeSeqs().
 }
 \usage{
 assignTypes(fastaData, model = "p-distance", gapDeletion = TRUE, threshold = 0.105)
@@ -22,7 +24,8 @@ assignTypes(fastaData, model = "p-distance", gapDeletion = TRUE, threshold = 0.1
   }
 }
 \details{
-This function compares input sequences against prototype strains using a specified evolutionary model and assigns genotypes based on predefined distance thresholds.
+This function compares input sequences against prototype strains using a 
+specified evolutionary model and assigns genotypes based on predefined distance thresholds.
 }
 \value{
 A list with the assigned genotypes and their distances to the reference sequences.

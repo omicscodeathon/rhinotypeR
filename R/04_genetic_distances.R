@@ -34,10 +34,12 @@ countSNPsHelper <- function(fastaData, gapDeletion = TRUE) {
   seqMatrix <- do.call(rbind, lapply(refs, function(seq) strsplit(seq, "")[[1]]))
   
   # Initialize the SNP matrix
-  snpMatrix <- matrix(nrow = nrow(seqMatrix), ncol = nrow(seqMatrix), dimnames = list(refHeaders, refHeaders))
+  snpMatrix <- matrix(nrow = nrow(seqMatrix), 
+                      ncol = nrow(seqMatrix), 
+                      dimnames = list(refHeaders, refHeaders))
   
   # Loop over all pairs of sequences using matrix indices
-  for (i in 1:nrow(seqMatrix)) {
+  for (i in seq_len(nrow(seqMatrix))) {
     for (j in i:nrow(seqMatrix)) {
       seq1 <- seqMatrix[i, ]
       seq2 <- seqMatrix[j, ]
@@ -67,19 +69,21 @@ calcPDistance <- function(fastaData, gapDeletion = TRUE) {
   
   # Directly calculate reference sequence lengths
   refs <- fastaData$sequences
-
+  
   # Optionally remove sites with missing data
   if (gapDeletion) {
     refs <- deleteMissingDataSites(refs)
   }
   
-  refLengths <- sapply(refs, function(seq) length(unlist(strsplit(seq, ""))))
+  refLengths <- vapply(refs, function(seq) length(unlist(strsplit(seq, ""))), integer(1))
   
   # Prepare a matrix for p-distances with appropriate dimensions and names
-  pDistancesMatrix <- matrix(nrow = length(queryHeaders), ncol = length(refLengths), dimnames = list(queryHeaders, refHeaders))
+  pDistancesMatrix <- matrix(nrow = length(queryHeaders), 
+                             ncol = length(refLengths), 
+                             dimnames = list(queryHeaders, refHeaders))
   
   # Calculate p-distance for each query-reference pair
-  for (q in 1:nrow(snpCounts)) {
+  for (q in seq_len(nrow(snpCounts))) {
     for (i in seq_along(refLengths)) {
       if (!is.na(snpCounts[q, i])) {
         pDistancesMatrix[q, i] <- snpCounts[q, i] / refLengths[i]
@@ -92,6 +96,7 @@ calcPDistance <- function(fastaData, gapDeletion = TRUE) {
   return(pDistancesMatrix)
 }
 
+
 # -------------------------------------------------------------------------
 # Jukes Cantor
 # Function to calculate Jukes-Cantor genetic distance
@@ -100,14 +105,17 @@ calcJukesCantorDistance <- function(fastaData, gapDeletion = TRUE) {
   p_dist <- calcPDistance(fastaData, gapDeletion = gapDeletion)  
   
   # Initialize a matrix to store Jukes-Cantor distances
-  jc_dist <- matrix(nrow = nrow(p_dist), ncol = ncol(p_dist), dimnames = dimnames(p_dist))
+  jc_dist <- matrix(nrow = nrow(p_dist), 
+                    ncol = ncol(p_dist), 
+                    dimnames = dimnames(p_dist))
   
   # Apply the Jukes-Cantor formula to each element in the p-distance matrix
   jc_dist <- -3/4 * log(1 - 4/3 * p_dist)
   
   # Handling cases where p_dist >= 0.75, setting JC distance to Inf 
   # JC assumes that all nt substitutions are equally probable and independent, which might not always hold true in real data. 
-      #The handling of cases where p_dist >= 0.75 with Inf is to indicate that the Jukes-Cantor model might not be valid for these high levels of divergence due to the assumption of the model being violated. 
+      #The handling of cases where p_dist >= 0.75 with Inf is to indicate that the JC model might not be valid for these 
+        #high levels of divergence due to the assumption of the model being violated. 
   jc_dist[p_dist >= 0.75] <- Inf  
   
   # Return the Jukes-Cantor genetic distance matrix
@@ -160,11 +168,11 @@ calcKimura2pDistance <- function(fastaData, gapDeletion = TRUE) {
                       dimnames = list(queryHeaders, refHeaders))
   
   # Iterate over each query sequence
-  for (q in 1:length(queries)) {
+  for (q in seq_along(queries)) {
     queryChars <- strsplit(queries[[q]], split = "")[[1]]
     
     # Iterate over each reference sequence
-    for (r in 1:length(refs)) {
+    for (r in seq_along(refs)) {
       refChars <- strsplit(refs[[r]], split = "")[[1]]
       
       # Ensure lengths match to avoid errors in distance calculation
@@ -213,11 +221,11 @@ calcTamura3pDistance <- function(fastaData, gapDeletion = TRUE) {
                          dimnames = list(queryHeaders, refHeaders))
   
   # Iterate over each query sequence
-  for (q in 1:length(queries)) {
+  for (q in seq_along(queries)) {
     queryChars <- strsplit(queries[[q]], split = "")[[1]]
     
     # Iterate over each reference sequence
-    for (r in 1:length(refs)) {
+    for (r in seq_along(refs)) {
       refChars <- strsplit(refs[[r]], split = "")[[1]]
       
       # Ensure sequence lengths match for comparison

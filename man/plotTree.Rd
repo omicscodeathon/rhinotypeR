@@ -2,7 +2,8 @@
 \alias{plotTree}
 \title{Plots a simple phylogenetic tree}
 \description{
-Plots a simple phylogenetic tree using the genetic distances estimated by \code{pairwiseDistances()}.
+Plots a simple phylogenetic tree using the genetic distances estimated by 
+\code{pairwiseDistances()}.
 }
 \usage{
 plotTree(distance_matrix)

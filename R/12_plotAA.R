@@ -47,13 +47,11 @@ readAA <- function(fastaFile) {
 
 
 plotAA <- function(fastaFile, showLegend = FALSE) {
-  
-  # Read file
-  fastaData <- readAA(fastaFile = fastaFile)
+  fastaData <- readAA(fastaFile = fastaFile)  # Read file
   
   sequences <- fastaData$sequences
   seqNames <- fastaData$headers
-  proteinLength <- max(sapply(sequences, nchar))
+  proteinLength <- max(vapply(sequences, nchar, integer(1)))
   
   compareSequences <- function(seqA, seqB) {
     seqAChars <- strsplit(seqA, "")[[1]]
@@ -85,13 +83,13 @@ plotAA <- function(fastaFile, showLegend = FALSE) {
        xlab = paste0("Protein Position of ", seqNames[length(seqNames)], ", acting as reference"),
        ylab = "", 
        yaxt = 'n')
-  axis(2, at = 1:length(sequences), labels = seqNames, las = 2, cex.axis = 0.8)
+  axis(2, at = seq_along(sequences), labels = seqNames, las = 2, cex.axis = 0.8)
   
   # Plot small vertical bars for each difference using mapped colors
   for (i in seq_along(diffList)) {
     yPosStart <- rep(i, nrow(diffList[[i]]))
     yPosEnd <- yPosStart
-    for (j in 1:nrow(diffList[[i]])) {
+    for (j in seq_len(nrow(diffList[[i]]))) {
       segments(x0 = diffList[[i]]$position[j], y0 = yPosStart[j] - 0.25, 
                x1 = diffList[[i]]$position[j], y1 = yPosEnd[j] + 0.25, col = diffList[[i]]$color[j])
     }

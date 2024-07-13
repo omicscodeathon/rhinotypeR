@@ -19,7 +19,8 @@ overallMeanDistance(fastaData, model="p-distance", gapDeletion=TRUE)
   }
 }
 \details{
-This function estimates the overall mean genetic distance of input sequences using the specified evolutionary model.
+This function estimates the overall mean genetic distance of 
+input sequences using the specified evolutionary model.
 }
 \value{
 A numeric value representing the overall mean distance.
