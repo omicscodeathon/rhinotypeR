@@ -19,7 +19,7 @@ This file contains GenBank Accession numbers MT177659–MT177911, representing V
 ---
 
 ## <prototypes.fasta> and <prototypes.csv>
-These files contain prototype sequences downloaded from picornaviridae.com, combined with the sequences from Luka et al., and aligned using MAFFT.
+These files contain prototype sequences downloaded from https://picornaviridae.com, combined with the sequences from Luka et al., and aligned using MAFFT.
 
 ### Source
 - Prototype sequences from picornaviridae.com.
