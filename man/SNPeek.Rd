@@ -8,10 +8,10 @@ To specify the reference, manually move it to the bottom of the alignment.
 Substitutions are color-coded by nucleotide: A = green, T = red, C = blue, G = yellow.
 }
 \usage{
-SNPeek(fastaFile, showLegend = FALSE)
+SNPeek(fastaData, showLegend = FALSE)
 }
 \arguments{
-  \item{fastaFile}{
+  \item{fastaData}{
   The fasta file used here is the output from the function \code{readFasta}.
   }
   \item{showLegend}{

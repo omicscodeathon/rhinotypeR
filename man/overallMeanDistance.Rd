@@ -8,7 +8,7 @@ Estimates the overall mean distance of input sequences.
 overallMeanDistance(fastaData, model="p-distance", gapDeletion=TRUE)
 }
 \arguments{
-  \item{fastaFile}{
+  \item{fastaData}{
   The fasta file used here is the output from the function \code{readFasta}.
   }
   \item{model}{

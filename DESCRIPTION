@@ -17,17 +17,18 @@ Description: "rhinotypeR" is designed to automate the comparison of sequence dat
             Additionally, "rhinotypeR" supports comprehensive visualization and analysis of 
             single nucleotide polymorphisms (SNPs) and amino acid substitutions, 
             facilitating in-depth genetic and evolutionary studies.
-License: MIT License
+License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: Biostrings
 LazyData: false
 biocViews: Sequencing, Genetics, Phylogenetics
 Depends: 
-    R (>= 4.4.0),
-    Biostrings
+    R (>= 4.4.0)
 Suggests:
   knitr,
   rmarkdown
 VignetteBuilder: knitr
+Vignettes: 
+  `Introduction to rhinotypeR` = "vignettes/rhinotypeR.Rmd"
 URL: https://github.com/omicscodeathon/rhinotypeR
 BugReports: https://github.com/omicscodeathon/rhinotypeR/issues  

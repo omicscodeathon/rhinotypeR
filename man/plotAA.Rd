@@ -9,10 +9,10 @@ Changes are colored by the class of amino acid:
 Red = Positively charged, Blue = Negatively charged, Green = Polar, Yellow = Non-polar.
 }
 \usage{
-plotAA(z, showLegend = FALSE)
+plotAA(AAfastaFile, showLegend = FALSE)
 }
 \arguments{
-  \item{z}{
+  \item{AAfastaFile}{
   The file path to the input amino acid sequences in fasta format.
   }
   \item{showLegend}{

@@ -6,11 +6,14 @@ Counts single nucleotide polymorphisms across input sequences and
 produces an output matrix.
 }
 \usage{
-countSNPs(fastaData)
+countSNPs(fastaData, gapDeletion = TRUE)
 }
 \arguments{
   \item{fastaData}{
   The fasta data to be processed.
+  }
+  \item{gapDeletion}{
+  Whether or not to delete positions with gaps. Default is set to TRUE.
   }
 }
 \details{

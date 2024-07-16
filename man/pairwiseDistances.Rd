@@ -5,7 +5,7 @@
 Estimates pairwise distances across input sequences using a specified evolutionary model.
 }
 \usage{
-pairwiseDistances(fastaData, model = "p-distance, gapDeletion = TRUE")
+pairwiseDistances(fastaData, model = "p-distance", gapDeletion = TRUE)
 }
 \arguments{
 \item{fastaData}{

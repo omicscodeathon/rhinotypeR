@@ -1,4 +1,7 @@
 export(SNPeek, assignTypes, countSNPs, getPrototypeSeqs, overallMeanDistance, 
         pairwiseDistances, plotAA, plotDistances, plotFrequency, plotTree, readFasta)
-
-
+importFrom("grDevices", "adjustcolor", "heat.colors")
+importFrom("graphics", "axis", "barplot", "legend", "par", "segments")
+importFrom("stats", "aggregate", "as.dist", "hclust", "heatmap")
+importFrom("utils", "head", "read.csv")
+importFrom("Biostrings", "readDNAStringSet")

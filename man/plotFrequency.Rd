@@ -6,11 +6,14 @@ Plots the frequency of assigned genotypes.
 This function uses the output of \code{assignTypes()} as input.
 }
 \usage{
-plotFrequency(assignedTypes)
+plotFrequency(assignedTypesDF, showLegend = FALSE)
 }
 \arguments{
-  \item{assignedTypes}{
+  \item{assignedTypesDF}{
   A dataframe from the function \code{assignTypes}.
+  }
+  \item{showLegend}{
+  Logical indicating whether to show the legend. Default is FALSE.
   }
 }
 \details{

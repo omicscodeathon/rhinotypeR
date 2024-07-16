@@ -1,9 +1,9 @@
 source("R/02_readFasta.R")
 
 
-readAA <- function(fastaFile) {
+readAA <- function(AAfastaFile) {
   # Read all lines from the FASTA file
-  lines <- readLines(fastaFile)
+  lines <- readLines(AAfastaFile)
 
   # Initialize lists to store sequences and their headers
   seqList <- list()
@@ -46,8 +46,8 @@ readAA <- function(fastaFile) {
 
 
 
-plotAA <- function(fastaFile, showLegend = FALSE) {
-  fastaData <- readAA(fastaFile = fastaFile)  # Read file
+plotAA <- function(AAfastaFile, showLegend = FALSE) {
+  fastaData <- readAA(AAfastaFile = AAfastaFile)  # Read file
   
   sequences <- fastaData$sequences
   seqNames <- fastaData$headers

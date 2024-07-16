@@ -7,7 +7,7 @@ These sequences should be combined with and aligned alongside
 newly generated sequences before being imported into R for genotype assignment.
 }
 \usage{
-getPrototypeSeqs(destinationFolder = "./output")
+getPrototypeSeqs(destinationFolder)
 }
 \arguments{
   \item{destinationFolder}{
@@ -30,7 +30,7 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
 }
 \examples{
 # Run the function
-getPrototypeSeqs(destinationFolder = "./output")
+# getPrototypeSeqs(destinationFolder = "~/Desktop")
 }
 \keyword{genotype}
 \keyword{sequence analysis}

@@ -1,11 +1,11 @@
 source("R/05_pairwiseDistances.R")
 
-plotDistances <- function(distance_matrix){
+plotDistances <- function(distancesMatrix){
   # Convert the data to a matrix 
-  distance_matrix <- as.matrix(distance_matrix)
+  distancesMatrix <- as.matrix(distancesMatrix)
   
   # Heatmap
-  heatmap(distance_matrix, Rowv = NA, Colv = NA, col = heat.colors(256), 
+  heatmap(distancesMatrix, Rowv = NA, Colv = NA, col = heat.colors(256), 
           scale = "none", margins = c(7,10))
 }
 
