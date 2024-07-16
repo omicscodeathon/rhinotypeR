@@ -1,0 +1,38 @@
+Package: rhinotypeR
+Type: Package
+Title: Rhinovirus genotyping
+Version: 0.99.0
+Authors@R: c(
+    person("Martha", "Luka", role = c("aut")),
+    person("Ruth", "Nanjala", role = c("aut", "cre"), email = "ruthnanjala97@gmail.com"),
+    person("Winfred", "Gatua", role = c("aut")),
+    person("Wafaa M.", "Rashed", role = c("aut")),
+    person("Olaitan", "Awe", role = c("aut"))
+    )
+Description: "rhinotypeR" is designed to automate the comparison of sequence data against prototype strains, 
+            streamlining the genotype assignment process. By implementing predefined pairwise distance thresholds, 
+            this package makes genotype assignment accessible to researchers and public health professionals. 
+            This tool enhances our epidemiological toolkit by enabling more efficient surveillance and analysis of 
+            rhinoviruses (RVs) and other viral pathogens with complex genomic landscapes. 
+            Additionally, "rhinotypeR" supports comprehensive visualization and analysis of 
+            single nucleotide polymorphisms (SNPs) and amino acid substitutions, 
+            facilitating in-depth genetic and evolutionary studies.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Imports: Biostrings
+biocViews: Sequencing, Genetics, Phylogenetics
+Depends: R (>= 4.4.0)
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+Vignettes: `Introduction to rhinotypeR` = "vignettes/rhinotypeR.Rmd"
+URL: https://github.com/omicscodeathon/rhinotypeR
+BugReports: https://github.com/omicscodeathon/rhinotypeR/issues
+NeedsCompilation: no
+Packaged: 2024-07-16 14:46:55 UTC; user
+Author: Martha Luka [aut],
+  Ruth Nanjala [aut, cre],
+  Winfred Gatua [aut],
+  Wafaa M. Rashed [aut],
+  Olaitan Awe [aut]
+Maintainer: Ruth Nanjala <ruthnanjala97@gmail.com>
+Built: R 4.4.0; ; 2024-07-16 14:47:03 UTC; unix

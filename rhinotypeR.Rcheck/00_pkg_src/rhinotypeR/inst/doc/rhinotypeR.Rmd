@@ -1,0 +1,80 @@
+---
+title: "Introduction to rhinotypeR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to rhinotypeR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+This vignette provides an overview of how to use the `rhinotypeR` package for genotyping rhinoviruses.
+
+## Installation
+
+You can install `rhinotypeR` from GitHub with:
+
+```{r}
+# If needed
+# install.packages("devtools")
+# devtools::install_github("yourusername/rhinotypeR")
+```
+
+# Usage
+
+## Loading the package
+
+```{r}
+library(rhinotypeR)
+```
+
+
+## Example Workflow
+
+1. Download prototype sequences:
+
+```{r}
+# getPrototypeSeqs("path_to_destination_folder")
+# For example
+# getPrototypeSeqs("~/Desktop")
+```
+
+2. Read sequences:
+
+```{r}
+# sequences <- readFasta("path/to/your/fasta/file")
+```
+
+3. Visualize SNPs:
+
+```{r}
+# SNPeek(sequences)
+```
+
+4. Calculate Pairwise Distances:
+
+```{r}
+# distances <- pairwiseDistances(sequences)
+```
+
+5. Assign Genotypes::
+
+```{r}
+# genotypes <- assignTypes(sequences)
+```
+
+6. Plot Results:
+
+```{r}
+# plotFrequency(genotypes)
+# plotDistances(distances)
+```
+## Session Info
+
+```{r}
+sessionInfo()
+```
+
+## Conclusion
+The rhinotypeR package simplifies the process of genotyping rhinoviruses and analyzing their genetic data.

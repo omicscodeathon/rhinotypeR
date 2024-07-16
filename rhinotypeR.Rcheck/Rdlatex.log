@@ -1,0 +1,31 @@
+Hmm ... looks like a package
+Converting parsed Rd's to LaTeX .
+Creating pdf output from LaTeX ...
+Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
+  Running 'texi2dvi' on 'Rd2.tex' failed.
+Messages:
+You don't have a working TeX binary (tex) installed anywhere in
+your PATH, and texi2dvi cannot proceed without one.  If you want to use
+this script, you'll need to install TeX (if you don't have it) or change
+your PATH or TEX environment variable (if you do).  See the --help
+output for more details.
+
+For information about obtaining TeX, please see http://tug.org/texlive,
+or do a web search for TeX and your operating system or distro.
+Output:
+
+Error in texi2dvi(file = file, pdf = TRUE, clean = clean, quiet = quiet,  : 
+  Running 'texi2dvi' on 'Rd2.tex' failed.
+Messages:
+You don't have a working TeX binary (tex) installed anywhere in
+your PATH, and texi2dvi cannot proceed without one.  If you want to use
+this script, you'll need to install TeX (if you don't have it) or change
+your PATH or TEX environment variable (if you do).  See the --help
+output for more details.
+
+For information about obtaining TeX, please see http://tug.org/texlive,
+or do a web search for TeX and your operating system or distro.
+Output:
+
+Error in running tools::texi2pdf()
+You may want to clean up by 'rm -Rf /var/folders/vj/s7g76mj17cnbf_pcf0636dg80000gp/T//RtmpeUQ3ZE/Rd2pdff04cd639c6a'
