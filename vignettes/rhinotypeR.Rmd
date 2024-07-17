@@ -7,16 +7,22 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+
+```{r setup, include=FALSE}
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+
+```
+
+
 # Introduction
 
-The `rhinotypeR` package is designed to simplify the genotyping of rhinoviruses using the VP4/2 genomic region. It streamlines the process by enabling a user to download prototype sequences, calculate genetic pairwise distances, and compare the distances to prototype strains for genotype assignment.It also provides visualization options such as frequency plots and simple phylogenetic trees. 
+The `rhinotypeR` package is designed to simplify the genotyping of rhinoviruses using the VP4/2 genomic region. Having worked on rhinoviruses for a few years, I noticed that assigning genotypes after sequencing was particularly laborious, and needed several manual interventions. So I reached out to a few colleagues with the idea of a collaborative project to address this. This package addresses this challenge by streamlining the process by enabling a user to download prototype sequences, calculate genetic pairwise distances, and compare the distances to prototype strains for genotype assignment. It also provides visualization options such as frequency plots and simple phylogenetic trees. 
 
 ## Installation
 
 You can install `rhinotypeR` from BioConductor with:
 
 ```{r eval=FALSE}
-# If needed
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
@@ -26,9 +32,9 @@ BiocManager::install("Biostrings")
 You can install `rhinotypeR` from GitHub with:
 
 ```{r}
-# If needed
 install.packages("devtools")
-devtools::install_github("yourusername/rhinotypeR")
+
+devtools::install_github("omicscodeathon/rhinotypeR")
 ```
 
 
@@ -45,16 +51,18 @@ library(rhinotypeR)
 
 1. Download prototype sequences:
 
-```{r}
-# getPrototypeSeqs("path_to_destination_folder")
-# For example
-# getPrototypeSeqs("~/Desktop")
+The getPrototypeSeqs function downloads the prototype sequences required for genotyping.
+
+```{r eval=FALSE}
+getPrototypeSeqs("~/Desktop")
 ```
 
 2. Read sequences:
 
+The readFasta function reads FASTA files containing sequence data.
+
 ```{r}
-# sequences <- readFasta("path/to/your/fasta/file")
+sequences <- readFasta("../inst/extdata/test.fasta")
 ```
 
 3. Visualize SNPs:
@@ -81,11 +89,6 @@ library(rhinotypeR)
 # plotFrequency(genotypes)
 # plotDistances(distances)
 ```
-## Session Info
-
-```{r}
-sessionInfo()
-```
 
 ## Conclusion
-The rhinotypeR package simplifies the process of genotyping rhinoviruses and analyzing their genetic data.
+The rhinotypeR package simplifies the process of genotyping rhinoviruses and analyzing their genetic data. By automating various steps and providing visualization tools, it enhances the efficiency and accuracy of rhinovirus epidemiological studies.
