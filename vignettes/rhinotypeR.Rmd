@@ -9,17 +9,28 @@ vignette: >
 
 # Introduction
 
-This vignette provides an overview of how to use the `rhinotypeR` package for genotyping rhinoviruses.
+The `rhinotypeR` package is designed to simplify the genotyping of rhinoviruses using the VP4/2 genomic region. It streamlines the process by enabling a user to download prototype sequences, calculate genetic pairwise distances, and compare the distances to prototype strains for genotype assignment.It also provides visualization options such as frequency plots and simple phylogenetic trees. 
 
 ## Installation
+
+You can install `rhinotypeR` from BioConductor with:
+
+```{r eval=FALSE}
+# If needed
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("Biostrings")
+```
 
 You can install `rhinotypeR` from GitHub with:
 
 ```{r}
 # If needed
-# install.packages("devtools")
-# devtools::install_github("yourusername/rhinotypeR")
+install.packages("devtools")
+devtools::install_github("yourusername/rhinotypeR")
 ```
+
 
 # Usage
 
