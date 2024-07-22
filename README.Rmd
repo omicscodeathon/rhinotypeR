@@ -335,3 +335,24 @@ Own data
   #fastaData <- "path to fasta file"
   #plotAA(fastaData, showLegend = T)
 ```
+
+
+## Contributors
+- Martha Luka
+- Ruth Nanjala
+- Wafaa Rashed
+- Winfred Gatua
+- Olaitan Awe
+
+## Citation
+Martha M. Luka1, Ruth Nanjala2, Wafaa M. Rashed3,4,  Winfred Gatua5,6, Olaitan I. Awe7
+
+- Authors’ Affiliation
+
+- School of Biodiversity, One Health and Veterinary Medicine, University of Glasgow, Glasgow, G12 8QQ, UK.
+- Kennedy Institute of Rheumatology, Nuttfield Department of Orthopaedics, Rheumatology and Musculoskeletal Sciences, University of Oxford, UK.
+- Pharmacy Practice Department, Faculty of Pharmacy, Ahram Canadian University, Egypt.
+- Computational Systems Biology Laboratory, USP, Brazil
+- MRC Integrative Epidemiology Unit, University of Bristol, UK.       
+- Population Health Sciences, Bristol Medical School, UK.
+- African Society for Bioinformatics and Computational Biology, Cape Town, South Africa.
