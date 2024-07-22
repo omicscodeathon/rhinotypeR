@@ -435,11 +435,11 @@ Own data
 
 ## Contributors
 
-- Martha Luka
-- Ruth Nanjala
-- Wafaa Rashed
-- Winfred Gatua
-- Olaitan Awe
+1.  Martha Luka
+2.  Ruth Nanjala
+3.  Wafaa Rashed
+4.  Winfred Gatua
+5.  Olaitan Awe
 
 ## Citation
 
@@ -448,21 +448,15 @@ Olaitan I. Awe7
 
 - Authors’ Affiliation
 
-- School of Biodiversity, One Health and Veterinary Medicine, University
-  of Glasgow, Glasgow, G12 8QQ, UK.
-
-- Kennedy Institute of Rheumatology, Nuttfield Department of
-  Orthopaedics, Rheumatology and Musculoskeletal Sciences, University of
-  Oxford, UK.
-
-- Pharmacy Practice Department, Faculty of Pharmacy, Ahram Canadian
-  University, Egypt.
-
-- Computational Systems Biology Laboratory, USP, Brazil
-
-- MRC Integrative Epidemiology Unit, University of Bristol, UK.  
-
-- Population Health Sciences, Bristol Medical School, UK.
-
-- African Society for Bioinformatics and Computational Biology, Cape
-  Town, South Africa.
+1.  School of Biodiversity, One Health and Veterinary Medicine,
+    University of Glasgow, Glasgow, G12 8QQ, UK.
+2.  Kennedy Institute of Rheumatology, Nuttfield Department of
+    Orthopaedics, Rheumatology and Musculoskeletal Sciences, University
+    of Oxford, UK.
+3.  Pharmacy Practice Department, Faculty of Pharmacy, Ahram Canadian
+    University, Egypt.
+4.  Computational Systems Biology Laboratory, USP, Brazil
+5.  MRC Integrative Epidemiology Unit, University of Bristol, UK.  
+6.  Population Health Sciences, Bristol Medical School, UK.
+7.  African Society for Bioinformatics and Computational Biology, Cape
+    Town, South Africa.
