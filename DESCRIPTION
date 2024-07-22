@@ -32,3 +32,4 @@ Vignettes:
   `Introduction to rhinotypeR` = "vignettes/rhinotypeR.Rmd"
 URL: https://github.com/omicscodeathon/rhinotypeR
 BugReports: https://github.com/omicscodeathon/rhinotypeR/issues  
+RoxygenNote: 7.3.2
