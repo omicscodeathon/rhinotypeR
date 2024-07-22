@@ -446,7 +446,7 @@ Own data
 Martha M. Luka1, Ruth Nanjala2, Wafaa M. Rashed3,4, Winfred Gatua5,6,
 Olaitan I. Awe7
 
-- Authors’ Affiliation
+Authors’ Affiliation
 
 1.  School of Biodiversity, One Health and Veterinary Medicine,
     University of Glasgow, Glasgow, G12 8QQ, UK.
