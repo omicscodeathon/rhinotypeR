@@ -51,7 +51,7 @@ library(rhinotypeR)
 
 1. Download prototype sequences:
 
-The getPrototypeSeqs function downloads the prototype sequences required for genotyping.
+The `getPrototypeSeqs` function downloads the prototype sequences required for genotyping. These should the be combined with the newly generated sequences, aligned using a suitable software, and imported into R.
 
 ```{r eval=FALSE}
 getPrototypeSeqs("~/Desktop")
@@ -59,35 +59,56 @@ getPrototypeSeqs("~/Desktop")
 
 2. Read sequences:
 
-The readFasta function reads FASTA files containing sequence data.
+The `readFasta` function reads FASTA files containing sequence data.
 
 ```{r}
-sequences <- readFasta("../inst/extdata/test.fasta")
+sequences <- readFasta("../inst/extdata/input_aln.fasta")
 ```
 
 3. Visualize SNPs:
 
+The `SNPeek` function visualizes single nucleotide polymorphisms (SNPs) in the sequences, with a select sequence acting as the reference. To specify the reference sequences, move it to the bottom of the alignment before importing into R.
+
 ```{r}
-# SNPeek(sequences)
+SNPeek(sequences)
 ```
 
 4. Calculate Pairwise Distances:
 
+The `pairwiseDistances` function calculates genetic distances between sequences, using a specified evolutionary model.
+
 ```{r}
-# distances <- pairwiseDistances(sequences)
+distances <- pairwiseDistances(sequences, model = "p-distance", gapDeletion = TRUE)
 ```
 
-5. Assign Genotypes::
+5. Assign Genotypes:
+
+The assignTypes function assigns genotypes to the sequences by comparing genetic distances to prototype strains.
 
 ```{r}
-# genotypes <- assignTypes(sequences)
+genotypes <- assignTypes(sequences, model = "p-distance", gapDeletion = TRUE, threshold = 0.105)
 ```
 
 6. Plot Results:
 
+The `plotFrequency` function visualizes the frequency of assigned genotypes. This function uses the output of `assignTypes` as input.
+
 ```{r}
-# plotFrequency(genotypes)
-# plotDistances(distances)
+plotFrequency(genotypes)
+plotDistances(distances)
+```
+
+
+The `plotDistances` function visualizes pairwise genetic distances in a heatmap. This function uses the output of `pairwiseDistances` as input.
+
+```{r}
+plotDistances(distances)
+```
+
+The `plotTree` function plots a simple phylogenetic tree. This function uses the output of `pairwiseDistances` as input.
+
+```{r}
+plotTree(distances)
 ```
 
 ## Conclusion
