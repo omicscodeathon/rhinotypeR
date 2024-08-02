@@ -2,8 +2,8 @@
 % Please edit documentation in R/rhinotypeR.R
 \docType{package}
 \name{rhinotypeR}
-\alias{rhinotypeR}
 \alias{rhinotypeR-package}
+\alias{rhinotypeR}
 \title{rhinotypeR: A Package for the genotyping of rhinoviruses using the VP4/2 region}
 \description{
 The \pkg{rhinotypeR} package provides tools and functions that streamline the genotyping of rhinoviruses using the VP4/2 region.

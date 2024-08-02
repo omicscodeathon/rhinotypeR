@@ -41,7 +41,7 @@
 #'
 #' @docType package
 #' @name rhinotypeR
-#' @aliases rhinotypeR-package
+#' @aliases rhinotypeR
 #' @seealso \url{https://github.com/omicscodeathon/rhinotypeR}
 #' @keywords package
 "_PACKAGE"
