@@ -14,9 +14,9 @@ options(repos = c(CRAN = "https://cran.rstudio.com/"))
 ```
 
 
-# Introduction
+## Background
 
-The `rhinotypeR` package is designed to simplify the genotyping of rhinoviruses using the VP4/2 genomic region. Having worked on rhinoviruses for a few years, I noticed that assigning genotypes after sequencing was particularly laborious, and needed several manual interventions. So I reached out to a few colleagues with the idea of a collaborative project to address this. This package addresses this challenge by streamlining the process by enabling a user to download prototype sequences, calculate genetic pairwise distances, and compare the distances to prototype strains for genotype assignment. It also provides visualization options such as frequency plots and simple phylogenetic trees. 
+The `rhinotypeR` package is designed to simplify the genotyping of rhinoviruses using the VP4/2 genomic region. Having worked on rhinoviruses for a few years, I noticed that assigning genotypes after sequencing was particularly laborious, and needed several manual interventions. We, therefore, developed this package to address this challenge by streamlining the process by enabling a user to download prototype sequences, calculate genetic pairwise distances, and compare the distances to prototype strains for genotype assignment. It also provides visualization options such as frequency plots and simple phylogenetic trees. 
 
 ## Installation
 
@@ -26,19 +26,19 @@ You can install `rhinotypeR` from BioConductor with:
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install("Biostrings")
+BiocManager::install("rhinotypeR")
 ```
 
 You can install `rhinotypeR` from GitHub with:
 
-```{r}
-install.packages("devtools")
+```{r, message=FALSE, warning=FALSE, results='hide'}
+install.packages("devtools", quietly = TRUE)
 
 devtools::install_github("omicscodeathon/rhinotypeR")
 ```
 
 
-# Usage
+## Usage
 
 ## Loading the package
 
@@ -51,7 +51,7 @@ library(rhinotypeR)
 
 1. Download prototype sequences:
 
-The `getPrototypeSeqs` function downloads the prototype sequences required for genotyping. These should the be combined with the newly generated sequences, aligned using a suitable software, and imported into R.
+The `getPrototypeSeqs` function downloads the prototype sequences required for genotyping. These should the be combined with the newly generated sequences, aligned using a suitable software, and imported into R. For example, to download to the Desktop directory, one can run:
 
 ```{r eval=FALSE}
 getPrototypeSeqs("~/Desktop")
@@ -59,7 +59,7 @@ getPrototypeSeqs("~/Desktop")
 
 2. Read sequences:
 
-The `readFasta` function reads FASTA files containing sequence data.
+The `readFasta` function reads FASTA files containing sequence data. This extracts the sequence data and headers information and should be stored into an object for downstream analysis.
 
 ```{r}
 sequences <- readFasta("../inst/extdata/input_aln.fasta")
@@ -67,7 +67,16 @@ sequences <- readFasta("../inst/extdata/input_aln.fasta")
 
 3. Visualize SNPs:
 
-The `SNPeek` function visualizes single nucleotide polymorphisms (SNPs) in the sequences, with a select sequence acting as the reference. To specify the reference sequences, move it to the bottom of the alignment before importing into R.
+The `SNPeek` function visualizes single nucleotide polymorphisms (SNPs) in the sequences, with a select sequence acting as the reference. To specify the reference sequences, move it to the bottom of the alignment before importing into R. Substitutions are color-coded by the nucleotide i.e., 
+
+  A = <span style="color: green;">green</span> 
+  
+  T = <span style="color: red;">red</span>
+  
+  C = <span style="color: blue;">blue</span>
+  
+  G = <span style="color: yellow;">yellow</span>
+  
 
 ```{r}
 SNPeek(sequences)
@@ -81,12 +90,22 @@ The `pairwiseDistances` function calculates genetic distances between sequences,
 distances <- pairwiseDistances(sequences, model = "p-distance", gapDeletion = TRUE)
 ```
 
+The distance matrix looks like:
+
+```{r, echo=FALSE}
+distances[1:5, 1:7]
+```
+
+
 5. Assign Genotypes:
 
 The assignTypes function assigns genotypes to the sequences by comparing genetic distances to prototype strains.
 
 ```{r}
 genotypes <- assignTypes(sequences, model = "p-distance", gapDeletion = TRUE, threshold = 0.105)
+
+head(genotypes)
+
 ```
 
 6. Plot Results:
@@ -95,7 +114,6 @@ The `plotFrequency` function visualizes the frequency of assigned genotypes. Thi
 
 ```{r}
 plotFrequency(genotypes)
-plotDistances(distances)
 ```
 
 
@@ -108,7 +126,10 @@ plotDistances(distances)
 The `plotTree` function plots a simple phylogenetic tree. This function uses the output of `pairwiseDistances` as input.
 
 ```{r}
-plotTree(distances)
+# sub-sample 
+sampled_distances <- distances[1:30,1:30]
+
+plotTree(sampled_distances)
 ```
 
 ## Conclusion
