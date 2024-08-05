@@ -62,7 +62,7 @@ getPrototypeSeqs("~/Desktop")
 The `readFasta` function reads FASTA files containing sequence data. This extracts the sequence data and headers information and should be stored into an object for downstream analysis.
 
 ```{r}
-sequences <- readFasta("../inst/extdata/input_aln.fasta")
+sequences <- readFasta(system.file("extdata", "input_aln.fasta", package="rhinotypeR"))
 ```
 
 3. Visualize SNPs:
