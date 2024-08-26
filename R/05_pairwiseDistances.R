@@ -1,4 +1,3 @@
-source("R/04_genetic_distances.R")
 
 pairwiseDistances <- function(fastaData, model = "p-distance", gapDeletion = TRUE) {
 

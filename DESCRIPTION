@@ -4,8 +4,9 @@ Title: Rhinovirus genotyping
 Version: 0.99.1
 Date: 2024-08-06
 Authors@R: c(
-    person("Martha", "Luka", role = c("aut")),
-    person("Ruth", "Nanjala", role = c("aut", "cre"), email = "ruthnanjala97@gmail.com"),
+    person("Martha", "Luka", role = c("aut", "cre"), email = "marthaluka20@gmail.com",
+           comment = c(ORCID = "0000-0001-6217-4426")),
+    person("Ruth", "Nanjala", role = c("aut")),
     person("Winfred", "Gatua", role = c("aut")),
     person("Wafaa M.", "Rashed", role = c("aut")),
     person("Olaitan", "Awe", role = c("aut"))

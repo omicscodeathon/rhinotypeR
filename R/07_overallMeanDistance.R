@@ -1,8 +1,5 @@
 
 # Function to calculate overall mean distance of a multiple sequence alignment
-
-source("R/04_genetic_distances.R")
-
  # 1. p-distance
 
 overallPDistance <- function(fastaData, gapDeletion=TRUE) {

@@ -1,4 +1,3 @@
-source("R/05_pairwiseDistances.R")
 
 plotDistances <- function(distancesMatrix){
   # Convert the data to a matrix 

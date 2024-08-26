@@ -1,5 +1,4 @@
-source("R/04_genetic_distances.R")
-source("R/05_pairwiseDistances.R")
+
 
 assignTypes <- function(fastaData, model = "p-distance", gapDeletion = TRUE, threshold = 0.105) {
   

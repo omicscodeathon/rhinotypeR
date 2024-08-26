@@ -1,4 +1,3 @@
-source("R/02_readFasta.R")
 
 
 readAA <- function(AAfastaFile) {

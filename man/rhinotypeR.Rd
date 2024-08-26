@@ -54,11 +54,11 @@ vignette("rhinotypeR", package = "rhinotypeR")
 \url{https://github.com/omicscodeathon/rhinotypeR}
 }
 \author{
-\strong{Maintainer}: Ruth Nanjala \email{ruthnanjala97@gmail.com}
+\strong{Maintainer}: Martha Luka \email{marthaluka20@gmail.com}
 
 Authors:
 \itemize{
-  \item Martha Luka
+  \item Ruth Nanjala
   \item Winfred Gatua
   \item Wafaa M. Rashed
   \item Olaitan Awe

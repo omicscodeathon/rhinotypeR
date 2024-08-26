@@ -1,4 +1,3 @@
-source("R/02_readFasta.R")
 
 
 # Optionally delete sites with at least one missing data for all sequences 

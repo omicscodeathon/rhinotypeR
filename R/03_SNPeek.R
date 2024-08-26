@@ -1,4 +1,3 @@
-source("R/02_readFasta.R")
 
 SNPeek <- function(fastaData, showLegend = FALSE) {
   sequences <- fastaData$sequences
