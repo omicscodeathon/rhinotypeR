@@ -1,210 +1,145 @@
 
 # Function to calculate overall mean distance of a multiple sequence alignment
- # 1. p-distance
 
-overallPDistance <- function(fastaData, gapDeletion=TRUE) {
-   # extract seq data from the fastaData (a product of readFasta)
-  sequences <- fastaData$sequences
-  
+# Consolidated Helper function to reduce code repetition
+calculateOverallDistancesHelper <- function(sequences, gapDeletion, distanceFunc) {
   # Optionally remove sites with missing data
   if (gapDeletion) {
     sequences <- deleteMissingDataSites(sequences)
   }
   
-  num_sequences <- length(sequences)
-  total_distance <- 0
-  num_comparisons <- 0
+  # Calculate pairwise distances using the provided distance function
+  pairwise_distances <- combn(sequences, 2, function(x) {
+    seq_i_chars <- strsplit(x[1], "")[[1]]
+    seq_j_chars <- strsplit(x[2], "")[[1]]
+    
+    distanceFunc(seq_i_chars, seq_j_chars)
+  }, simplify = TRUE)
   
-  for (i in seq_len(num_sequences - 1)) {
-    for (j in (i + 1):num_sequences) {
-      # Compute distance between sequence i and j
-      seq_i_chars <- strsplit(sequences[[i]], "")[[1]]
-      seq_j_chars <- strsplit(sequences[[j]], "")[[1]]
-      distance <- sum(seq_i_chars != seq_j_chars) / length(seq_i_chars)
-      total_distance <- total_distance + distance
-      num_comparisons <- num_comparisons + 1
-    }
+  # Calculate the overall mean distance
+  overall_mean_distance <- mean(pairwise_distances, na.rm = TRUE)
+  
+  return(overall_mean_distance)
+}
+
+
+
+ # 1. p-distance
+
+overallPDistance <- function(fastaData, gapDeletion = TRUE) {
+  sequences <- fastaData$sequences
+  
+  distanceFunc <- function(seq_i_chars, seq_j_chars) {
+    sum(seq_i_chars != seq_j_chars) / length(seq_i_chars)
   }
   
-  # Calculate overall mean distance
-  overallPDistance <- total_distance / num_comparisons
-  
-  return(overallPDistance)
+  calculateOverallDistancesHelper(sequences, gapDeletion, distanceFunc)
 }
+
+
 
 # -------------------------------------------------------------------------
 
 # 2. Jukes-Cantor model
-overallJCDistance <- function(fastaData, gapDeletion=TRUE) {
+overallJCDistance <- function(fastaData, gapDeletion = TRUE) {
   sequences <- fastaData$sequences
-  num_sequences <- length(sequences)
-  total_jc_distance <- 0
-  num_comparisons <- 0
   
-  # Optionally remove sites with missing data
-  if (gapDeletion) {
-    sequences <- deleteMissingDataSites(sequences)
-  }
-  
-  for (i in seq_len(num_sequences - 1)) {
-    for (j in (i + 1):num_sequences) {
-      # Compute distance between sequence i and j using p-distance
-      seq_i_chars <- strsplit(sequences[[i]], "")[[1]]
-      seq_j_chars <- strsplit(sequences[[j]], "")[[1]]
-      p_distance <- sum(seq_i_chars != seq_j_chars) / length(seq_i_chars)
-      
-      # Apply the JC correction if p_distance < 3/4, else consider the distance as infinite
-      if (p_distance < 0.75) {
-        jc_distance <- -3/4 * log(1 - 4/3 * p_distance)
-        total_jc_distance <- total_jc_distance + jc_distance
-        num_comparisons <- num_comparisons + 1
-      }
+  distanceFunc <- function(seq_i_chars, seq_j_chars) {
+    p_distance <- sum(seq_i_chars != seq_j_chars) / length(seq_i_chars)
+    if (p_distance < 0.75) {
+      -3/4 * log(1 - 4/3 * p_distance)
+    } else {
+      NA
     }
   }
   
-  # Calculate overall mean Jukes-Cantor distance
-  if (num_comparisons > 0) {
-    overall_mean_jc_distance <- total_jc_distance / num_comparisons
-  } else {
-    overall_mean_jc_distance <- NA  # Return NA if no valid comparisons were made
-  }
-  
-  return(overall_mean_jc_distance)
+  calculateOverallDistancesHelper(sequences, gapDeletion, distanceFunc)
 }
+
+
 
 # -------------------------------------------------------------------------
 
-
 # Kimura 2 parameter
-overallK2PDistance <- function(fastaData, gapDeletion=TRUE) {
+
+overallK2PDistance <- function(fastaData, gapDeletion = TRUE) {
   sequences <- fastaData$sequences
   
-  num_sequences <- length(sequences)
-  total_distance <- 0
-  num_comparisons <- 0
-
-  # Optionally remove sites with missing data
-  if (gapDeletion) {
-    sequences <- deleteMissingDataSites(sequences)
-  }
-  
-  
-  for (i in seq_len(num_sequences - 1)) {
-    for (j in (i + 1):num_sequences) {
-      seq_i_chars <- strsplit(sequences[[i]], "")[[1]]
-      seq_j_chars <- strsplit(sequences[[j]], "")[[1]]
-      
-      # Determine transitions and transversions
-      transitions <- 0
-      transversions <- 0
-      for (k in seq_along(seq_i_chars)) {
-        if (seq_i_chars[k] != seq_j_chars[k]) {
-          # Purines: A, G; Pyrimidines: C, T
-          if (seq_i_chars[k] %in% c("A", "G") && seq_j_chars[k] %in% c("A", "G") ||
-              seq_i_chars[k] %in% c("C", "T") && seq_j_chars[k] %in% c("C", "T")) {
-            transitions <- transitions + 1
-          } else {
-            transversions <- transversions + 1
-          }
-        }
-      }
-      
-      P <- transitions / length(seq_i_chars)
-      Q <- transversions / length(seq_i_chars)
-      
-      # Apply Kimura 2-parameter model if valid
-      if ((1 - 2*P - Q) > 0 && (1 - 2*Q) > 0) {
-        k2p_distance <- 0.5 * log(1 / (1 - 2*P - Q)) + 0.25 * log(1 / (1 - 2*Q))
-        total_distance <- total_distance + k2p_distance
-      } else {
-        # cases where K2P model is not valid
-      }
-      
-      num_comparisons <- num_comparisons + 1
+  # Define the distance function for the Kimura 2-parameter model
+  distanceFunc <- function(seq_i_chars, seq_j_chars) {
+    transitions <- sum((seq_i_chars == "A" & seq_j_chars == "G") |
+                         (seq_i_chars == "G" & seq_j_chars == "A") |
+                         (seq_i_chars == "C" & seq_j_chars == "T") |
+                         (seq_i_chars == "T" & seq_j_chars == "C"))
+    
+    transversions <- sum((seq_i_chars == "A" & seq_j_chars %in% c("C", "T")) |
+                           (seq_i_chars == "G" & seq_j_chars %in% c("C", "T")) |
+                           (seq_i_chars == "C" & seq_j_chars %in% c("A", "G")) |
+                           (seq_i_chars == "T" & seq_j_chars %in% c("A", "G")))
+    
+    P <- transitions / length(seq_i_chars)
+    Q <- transversions / length(seq_i_chars)
+    
+    # Apply the Kimura 2-parameter formula, ensuring the logarithm arguments are valid
+    if ((1 - 2 * P - Q) > 0 && (1 - 2 * Q) > 0) {
+      0.5 * log(1 / (1 - 2 * P - Q)) + 0.25 * log(1 / (1 - 2 * Q))
+    } else {
+      NA
     }
   }
   
-  if (num_comparisons > 0) {
-    overall_mean_distance <- total_distance / num_comparisons
-  } else {
-    # No valid comparisons or all were skipped due to invalid K2P model conditions
-    overall_mean_distance <- NA 
-  }
+  # Use the helper function to calculate the overall mean distance
+  overall_mean_distance <- calculateOverallDistancesHelper(sequences, gapDeletion, distanceFunc)
   
   return(overall_mean_distance)
 }
+
 
 # -------------------------------------------------------------------------
 
 # Tamura 3 parameter
 
-overallT3PDistance <- function(fastaData, gapDeletion=TRUE) {
+overallT3PDistance <- function(fastaData, gapDeletion = TRUE) {
   sequences <- fastaData$sequences
   
-  num_sequences <- length(sequences)
-  total_distance <- 0
-  num_comparisons <- 0
-  
-  # Optionally remove sites with missing data
-  if (gapDeletion) {
-    sequences <- deleteMissingDataSites(sequences)
-  }
-  
-  for (i in seq_len(num_sequences - 1)) {
-    for (j in (i + 1):num_sequences) {
-      seq_i_chars <- strsplit(sequences[[i]], "")[[1]]
-      seq_j_chars <- strsplit(sequences[[j]], "")[[1]]
-      
-      # Use existing function to calculate P and Q
-      transitionTransversionProportions <- calcTransitionTransversions(seq_i_chars, seq_j_chars)
-      P <- transitionTransversionProportions$P
-      Q <- transitionTransversionProportions$Q
-      
-      gc_content <- sum(seq_i_chars %in% c("G", "C")) / length(seq_i_chars)
-      
-      # Apply Tamura 3-parameter model if valid
-      if ((1 - 2*P - Q) > 0 && (1 - 2*Q) > 0) {
-        G <- 1 / (1 + (1 - 2*Q) * (gc_content / (1 - gc_content)))
-        t3p_distance <- (0.5 * log(1 / (1 - 2*P - Q))) + (G * 0.5 * log(1 / (1 - 2*Q)))
-        total_distance <- total_distance + t3p_distance
-      } else {
-        # Optionally, handle cases where T3P model is not valid
-        # For this example, we'll skip these cases in the average calculation
-      }
-      
-      num_comparisons <- num_comparisons + 1
+  distanceFunc <- function(seq_i_chars, seq_j_chars) {
+    tt_results <- calcTransitionTransversions(seq_i_chars, seq_j_chars)
+    P <- tt_results$P
+    Q <- tt_results$Q
+    
+    gc_content <- sum(seq_i_chars %in% c("G", "C")) / length(seq_i_chars)
+    C <- gc_content + gc_content - 2 * gc_content * gc_content
+    
+    if ((1 - P / C - Q) > 0 && (1 - 2 * Q) > 0) {
+      G <- 1 / (1 + (1 - 2 * Q) * (gc_content / (1 - gc_content)))
+      -C * log(1 - P / C - Q) - 0.5 * (1 - C) * log(1 - 2 * Q)
+    } else {
+      NA
     }
   }
   
-  if (num_comparisons > 0) {
-    overall_mean_distance <- total_distance / num_comparisons
-  } else {
-    overall_mean_distance <- NA # skipped due to invalid T3P model conditions
-  }
-  
-  return(overall_mean_distance)
+  calculateOverallDistancesHelper(sequences, gapDeletion, distanceFunc)
 }
+
 
 # -------------------------------------------------------------------------
 # Function to bring all evo models together
-overallMeanDistance<- function(fastaData, model='p-distance', gapDeletion=TRUE) {
+overallMeanDistance <- function(fastaData, model = 'p-distance', gapDeletion = TRUE) {
   
-  # preprocess fasta data
+  # Preprocess fasta data
   fastaData <- preProcessFastaStringSet(fastaData)
   
-  # Determine which model to use based on user input
-  if (model == "p-distance") {
-    result <- overallPDistance(fastaData, gapDeletion = gapDeletion)
-  } else if (model == "JC") {
-    result <- overallJCDistance(fastaData, gapDeletion = gapDeletion)
-  } else if (model == "Kimura2p") {
-    result <- overallK2PDistance(fastaData, gapDeletion = gapDeletion)
-  } else if (model == "Tamura3p") {
-    result <- overallT3PDistance(fastaData, gapDeletion = gapDeletion)
-  } else {
-    stop("Unknown model specified. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p' ")
-  }
+  # Map model names to their corresponding functions
+  functionMap <- list(
+    "p-distance" = overallPDistance,
+    "JC" = overallJCDistance,
+    "Kimura2p" = overallK2PDistance,
+    "Tamura3p" = overallT3PDistance
+  )
   
-  # Return the result of the chosen model
+  # Apply the appropriate function based on the model
+  result <- applyModelFunction(fastaData, model, gapDeletion, functionMap)
+  
   return(result)
 }
+

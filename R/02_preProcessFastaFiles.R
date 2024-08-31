@@ -28,11 +28,8 @@ preProcessFastaStringSet <- function(readDNAStringSetObject) {
   
   # Convert the alignment to character sequences and extract headers
   seqList <- as.character(readDNAStringSetObject) 
-  headerList <- names(readDNAStringSetObject)
-  
-  # Combine headers and sequences into a named character vector
-  names(seqList) <- headerList
-  
+  headerList <- names(seqList)
+
   # Adjust all sequences to the length of the longest sequence
   seqList <- compareLengths(seqList)
   

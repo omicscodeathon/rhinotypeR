@@ -2,7 +2,7 @@
 #'
 #' The \pkg{rhinotypeR} package provides tools and functions that streamline the genotyping of rhinoviruses using the VP4/2 region.
 #'
-#' This package includes functions to read sequence data, calculate pairwise distances and visualization, specifically tailored for rhinovirus data. It also provides additional utilities for working with sequence data in FASTA format such as simple phylogenetic trees.
+#' This package includes functions to calculate pairwise distances and visualization, specifically tailored for rhinovirus data. It also provides additional utilities for working with sequence data in FASTA format such as simple phylogenetic trees.
 #'
 #' @section Main functions:
 #' \itemize{
