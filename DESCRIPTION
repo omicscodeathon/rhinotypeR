@@ -1,7 +1,7 @@
 Package: rhinotypeR
 Type: Package
 Title: Rhinovirus genotyping
-Version: 0.99.1
+Version: 0.99.2
 Date: 2024-08-06
 Authors@R: c(
     person("Martha", "Luka", role = c("aut", "cre"), email = "marthaluka20@gmail.com",
@@ -21,7 +21,8 @@ Description: "rhinotypeR" is designed to automate the comparison of sequence dat
             facilitating in-depth genetic and evolutionary studies.
 License: MIT + file LICENSE
 Encoding: UTF-8
-Imports: Biostrings
+Imports: 
+    Biostrings
 LazyData: false
 biocViews: Sequencing, Genetics, Phylogenetics
 Depends: 
@@ -29,11 +30,13 @@ Depends:
 Suggests:
     knitr,
     rmarkdown,
+    BiocManager,
+    BiocStyle,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Vignettes: 
   `Introduction to rhinotypeR` = "vignettes/rhinotypeR.Rmd"
 URL: https://github.com/omicscodeathon/rhinotypeR
 BugReports: https://github.com/omicscodeathon/rhinotypeR/issues  
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Config/testthat/edition: 3
