@@ -18,16 +18,17 @@ compareLengths <- function(seqs) {
 }
 
 
+# Read the DNA sequences from a FASTA file (Biostrings package)
+# readDNAStringSetObject <- Biostrings::readDNAStringSet(fastaFile)
+
 
 # Function 2
 # Function to read sequences from a FASTA file and adjust their lengths
-readFasta <- function(fastaFile) {
-  # Read the DNA sequences from a FASTA file
-  alignment <- Biostrings::readDNAStringSet(fastaFile)
+preProcessFastaStringSet <- function(readDNAStringSetObject) {
   
   # Convert the alignment to character sequences and extract headers
-  seqList <- as.character(alignment) 
-  headerList <- names(alignment)
+  seqList <- as.character(readDNAStringSetObject) 
+  headerList <- names(readDNAStringSetObject)
   
   # Combine headers and sequences into a named character vector
   names(seqList) <- headerList

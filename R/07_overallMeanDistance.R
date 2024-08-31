@@ -189,6 +189,9 @@ overallT3PDistance <- function(fastaData, gapDeletion=TRUE) {
 # Function to bring all evo models together
 overallMeanDistance<- function(fastaData, model='p-distance', gapDeletion=TRUE) {
   
+  # preprocess fasta data
+  fastaData <- preProcessFastaStringSet(fastaData)
+  
   # Determine which model to use based on user input
   if (model == "p-distance") {
     result <- overallPDistance(fastaData, gapDeletion = gapDeletion)

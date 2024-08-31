@@ -1,6 +1,13 @@
+
+```{r setup, include=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("BiocStyle")
+```
+
 ---
 title: "Introduction to rhinotypeR"
-output: rmarkdown::html_vignette
+output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Introduction to rhinotypeR}
   %\VignetteEngine{knitr::rmarkdown}
@@ -40,10 +47,10 @@ getPrototypeSeqs("~/Desktop")
 
 2. Read sequences:
 
-The `readFasta` function reads FASTA files containing sequence data. This extracts the sequence data and headers information and should be stored into an object for downstream analysis.
+Use the Biostrings package to read FASTA files containing sequence data. This extracts the sequence data and headers information and should be stored into an object for downstream analysis.
 
 ```{r}
-sequences <- readFasta(system.file("extdata", "input_aln.fasta", package="rhinotypeR"))
+sequences <- Biostrings::readDNAStringSet(system.file("extdata", "input_aln.fasta", package="rhinotypeR"))
 ```
 
 3. Visualize SNPs:

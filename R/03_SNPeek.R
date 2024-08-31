@@ -1,5 +1,9 @@
 
 SNPeek <- function(fastaData, showLegend = FALSE) {
+  
+  # preprocess fasta data
+  fastaData <- preProcessFastaStringSet(fastaData)
+  
   sequences <- fastaData$sequences
   seqNames <- fastaData$headers
   genomeLength <- max(vapply(sequences, nchar, integer(1)))

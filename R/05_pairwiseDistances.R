@@ -1,5 +1,8 @@
 
 pairwiseDistances <- function(fastaData, model = "p-distance", gapDeletion = TRUE) {
+  
+  # preprocess fasta data
+  fastaData <- preProcessFastaStringSet(fastaData)
 
   # Determine which model to use based on user input
   if (model == "p-distance") {

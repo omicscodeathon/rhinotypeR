@@ -7,7 +7,6 @@
 #' @section Main functions:
 #' \itemize{
 #'   \item \code{\link{getPrototypeSeqs}}: Download prototype sequences into local machine.
-#'   \item \code{\link{readFasta}}: Read sequences from a FASTA file.
 #'   \item \code{\link{pairwiseDistances}}: Calculates pairwise distances using a specified evolutionary model.
 #'   \item \code{\link{assignTypes}}: Assigns sequences to their respective rhinovirus genotypes.
 #'   \item \code{\link{plotTree}}: Plots a simple phylogenetic tree.
@@ -21,7 +20,7 @@
 #' getPrototypeSeqs("path/to/destination")
 #'
 #' \# Read sequences from a FASTA file
-#' sequences <- readFasta("../inst/extdata/input_aln.fasta")
+#' sequences <- Biostrings::readDNAStringSet("../inst/extdata/input_aln.fasta")
 #'
 #' \# Perform sequence analysis
 #' distance_matrix <- pairwiseDistances(sequences)

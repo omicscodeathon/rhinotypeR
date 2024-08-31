@@ -2,18 +2,28 @@
 
 assignTypes <- function(fastaData, model = "p-distance", gapDeletion = TRUE, threshold = 0.105) {
   
+  # preprocess fasta data
+  fastaData <- preProcessFastaStringSet(fastaData)
+  
   ref <- system.file("extdata", "prototypes.csv", package = "rhinotypeR")
   prototypes <- read.csv(ref)
   names_to_keep <- prototypes$Accession
   
+  # Check if input fastaData contains the prototype sequences
+  if (!all(names_to_keep %in% names(fastaData))) {
+    stop("To classify rhinovirus sequences, please ensure your input sequences contain the prototypes.
+         These can be downloaded using `getPrototypeSeqs`.")
+  }
+  
   # run pairwiseDistances to calculate distances
-  distances <- pairwiseDistances(fastaData, model = model, gapDeletion=gapDeletion)
+  distances <- pairwiseDistances(fastaData, model = model, gapDeletion = gapDeletion)
   
   # Filter columns based on the prototypes
   distances <- distances[, colnames(distances) %in% names_to_keep]
   
   # Filter rows to remove the same names as in the list
   distances <- distances[!rownames(distances) %in% names_to_keep, ]
+  
   # Initialize vectors to store output data
   queryVec <- character(0)
   assignedTypeVec <- character(0)
@@ -49,4 +59,3 @@ assignTypes <- function(fastaData, model = "p-distance", gapDeletion = TRUE, thr
   
   return(outputDf)
 }
-
