@@ -12,7 +12,7 @@ SNPeek(fastaData, showLegend = FALSE)
 }
 \arguments{
   \item{fastaData}{
-  The fasta file used here is the output from the function \code{readFasta}.
+  The fasta file used here is the output from the function `Biostrings::readDNAStringSet`.
   }
   \item{showLegend}{
   Logical indicating whether to show the legend. Default is FALSE.
@@ -29,13 +29,13 @@ A plot showing the SNPs relative to a user specified reference sequence.
 Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
 }
 \seealso{
-\code{\link{readFasta}}
+\code{\link{plotAA}}
 }
 \examples{
 # Load the dataset
 test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
 
-fastaData <- readFasta(fastaFile = test)
+fastaData <- Biostrings::readDNAStringSet(test)
 SNPeek(fastaData, showLegend = FALSE)
 }
 \keyword{SNP}

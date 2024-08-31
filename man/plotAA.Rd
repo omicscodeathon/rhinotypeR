@@ -29,15 +29,15 @@ A plot object showing the amino acid substitutions.
 Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
 }
 \seealso{
-\code{\link{SNPeek}},
-\code{\link{plotAA}}
+\code{\link{SNPeek}}
 }
 \examples{
 # Load the dataset
 test <- system.file("extdata", "test.translated.fasta", package = "rhinotypeR")
 
 # Usage
-plotAA(test)
+testData <- Biostrings::readAAStringSet(test)
+plotAA(testData)
 }
 \keyword{genotype}
 \keyword{sequence analysis}

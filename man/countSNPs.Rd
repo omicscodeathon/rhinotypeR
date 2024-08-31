@@ -27,14 +27,14 @@ A matrix with the SNP counts for each sequence.
 Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe 
 }
 \seealso{
-\code{\link{readFasta}}
+\code{\link{pairwiseDistances}}
 }
 \examples{
 # Load the dataset
 test <- system.file("extdata", "test.fasta", package = "rhinotypeR")
 
 # Run the function
-fastaData <- readFasta(test)
+fastaData <- Biostrings::readDNAStringSet(test)
 countSNPs(fastaData)
 }
 \keyword{genotype}

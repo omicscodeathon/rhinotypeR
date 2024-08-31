@@ -33,7 +33,7 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
 test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
 
 # Run 
-queryFastaData <- readFasta(test)
+queryFastaData <- Biostrings::readDNAStringSet(test)
 df <- assignTypes(queryFastaData, "p-distance")
 
 plotFrequency(df)

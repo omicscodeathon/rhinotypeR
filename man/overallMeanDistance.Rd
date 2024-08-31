@@ -9,7 +9,7 @@ overallMeanDistance(fastaData, model="p-distance", gapDeletion=TRUE)
 }
 \arguments{
   \item{fastaData}{
-  The fasta file used here is the output from the function \code{readFasta}.
+  The fasta file used here is the output from the Biostrings function `Biostrings::readDNAStringSet`.
   }
   \item{model}{
   The evolutionary model used to calculate distances. Default is set to "p-distance".
@@ -36,7 +36,7 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
 test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
 
 # Usage
-fastaData <- readFasta(test)
+fastaData <- Biostrings::readDNAStringSet(test)
 overallMeanDistance(fastaData, model="p-distance")
 }
 \keyword{genotype}
