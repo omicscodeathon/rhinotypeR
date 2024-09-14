@@ -37,14 +37,14 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
 Ensure the input fasta file includes the necessary prototype strains.
 }
 \seealso{
-\code{\link{getPrototypeSeqs}}, \code{\link{readFasta}}
+\code{\link{getPrototypeSeqs}}, \code{\link{pairwiseDistances}}
 }
 \examples{
 # Load the dataset
 test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
 
 # Run command
-fastaD <- readFasta(test)
+fastaD <- Biostrings::readDNAStringSet(test)
 assignTypes(fastaD, model = "p-distance", gapDeletion = TRUE, threshold = 0.105)
 }
 \keyword{genotype}

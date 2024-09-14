@@ -1,4 +1,3 @@
-source("R/05_pairwiseDistances.R")
 
 plotTree <- function(distance_matrix) {
   

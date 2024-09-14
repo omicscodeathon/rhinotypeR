@@ -29,8 +29,16 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
 \code{\link{assignTypes}}
 }
 \examples{
-# Run the function
-# getPrototypeSeqs(destinationFolder = "~/Desktop")
+if (interactive()) {
+    # Specify a destination directory
+    dest_dir <- tempdir()  # Create a temporary directory for the example
+
+    # download prototypes
+    getPrototypeSeqs(destinationFolder = dest_dir)
+    
+    # List downloaded files
+    list.files(dest_dir)
+    }
 }
 \keyword{genotype}
 \keyword{sequence analysis}

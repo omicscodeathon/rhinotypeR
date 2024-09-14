@@ -30,7 +30,7 @@ Martha Luka, Ruth Nanjala, Wafaa Rashed, Winfred Gatua, Olaitan Awe
 test <- system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
 
 # Example usage
-fastaD <- readFasta(test)
+fastaD <- Biostrings::readDNAStringSet(test)
 pdistances <- pairwiseDistances(fastaD, "p-distance")
 plotTree(pdistances)
 }

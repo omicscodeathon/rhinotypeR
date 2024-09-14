@@ -1,7 +1,5 @@
-# get input data from assignTypes.R
+# input data from assignTypes.R
 
-source("R/06_assignTypes.R")
-source("R/02_readFasta.R")
 
 plotFrequency <- function(assignedTypesDF, showLegend=FALSE){
   # Add 'species' column based on the first letter of 'assigned_type'

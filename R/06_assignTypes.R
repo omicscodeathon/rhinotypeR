@@ -1,53 +1,50 @@
-source("R/04_genetic_distances.R")
-source("R/05_pairwiseDistances.R")
-
 assignTypes <- function(fastaData, model = "p-distance", gapDeletion = TRUE, threshold = 0.105) {
   
+  # Preprocess fasta data
+  fastaData <- preProcessFastaStringSet(fastaData)
+  
+  # Load prototype sequences
   ref <- system.file("extdata", "prototypes.csv", package = "rhinotypeR")
   prototypes <- read.csv(ref)
   names_to_keep <- prototypes$Accession
   
-  # run pairwiseDistances to calculate distances
-  distances <- pairwiseDistances(fastaData, model = model, gapDeletion=gapDeletion)
-  
-  # Filter columns based on the prototypes
-  distances <- distances[, colnames(distances) %in% names_to_keep]
-  
-  # Filter rows to remove the same names as in the list
-  distances <- distances[!rownames(distances) %in% names_to_keep, ]
-  # Initialize vectors to store output data
-  queryVec <- character(0)
-  assignedTypeVec <- character(0)
-  distanceVec <- numeric(0)
-  refSeqVec <- character(0)
-  
-  # Iterate over each row (query) in the distances matrix
-  for (i in seq_len(nrow(distances))) {
-    queryHeader <- rownames(distances)[i]
-    validCols <- which(distances[i, ] < threshold)
-    
-    if (length(validCols) == 0) {
-      # If no valid columns found, mark as "unassigned"
-      assignedTypeVec <- c(assignedTypeVec, "unassigned")
-      distanceVec <- c(distanceVec, NA)
-      # Find the column with the minimum distance
-      minDistCol <- which.min(distances[i, ])
-      refSeqVec <- c(refSeqVec, colnames(distances)[minDistCol])
-    } else {
-      # Choose the one with the minimum distance
-      minDistanceCol <- which.min(distances[i, validCols])
-      col <- validCols[minDistanceCol]
-      assignedType <- colnames(distances)[col]
-      assignedTypeVec <- c(assignedTypeVec, sub(".*_", "", gsub("RV", "", assignedType)))
-      distanceVec <- c(distanceVec, distances[i, col])
-      refSeqVec <- c(refSeqVec, assignedType)
-    }
-    queryVec <- c(queryVec, queryHeader)
+  # Check if input fastaData contains the prototype sequences
+  if (!all(names_to_keep %in% fastaData$headers)) {
+    stop("To classify rhinovirus sequences, please ensure your input sequences contain the prototypes. 
+         These can be downloaded using `getPrototypeSeqs`.")
   }
   
-  outputDf <- data.frame(query = queryVec, assignedType = assignedTypeVec, 
-                         distance = distanceVec, reference = refSeqVec, stringsAsFactors = FALSE)
+  # Run pairwiseDistances to calculate distances
+  distances <- pairwiseDistances(fastaData, model = model, gapDeletion = gapDeletion)
+  
+  # Filter columns and rows based on the prototypes
+  distances <- distances[, colnames(distances) %in% names_to_keep, drop = FALSE]
+  distances <- distances[!rownames(distances) %in% names_to_keep, , drop = FALSE]
+  
+  # Function to assign a type based on distance for a single query
+  assign_type <- function(row) {
+    validCols <- which(row < threshold)
+    
+    if (length(validCols) == 0) {
+      minDistCol <- which.min(row)
+      return(c("unassigned", NA, colnames(distances)[minDistCol]))
+    } else {
+      minDistanceCol <- which.min(row[validCols])
+      col <- validCols[minDistanceCol]
+      assignedType <- colnames(distances)[col]
+      return(c(sub(".*_", "", gsub("RV", "", assignedType)), row[col], assignedType))
+    }
+  }
+  
+  # Apply the assign_type function over each row
+  result <- t(apply(distances, 1, assign_type))
+  
+  # Convert result to a data frame
+  outputDf <- data.frame(query = rownames(distances), 
+                         assignedType = result[, 1], 
+                         distance = as.numeric(result[, 2]), 
+                         reference = result[, 3], 
+                         stringsAsFactors = FALSE)
   
   return(outputDf)
 }
-

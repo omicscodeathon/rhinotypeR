@@ -1,7 +1,9 @@
 
-source("R/04_genetic_distances.R")
 
 countSNPs <- function(fastaData, gapDeletion = TRUE){
+  # preprocess fasta data
+  fastaData <- preProcessFastaStringSet(fastaData)
+  
   # run countSNP function
   snps <- countSNPsHelper(fastaData, gapDeletion = gapDeletion)
   # output
