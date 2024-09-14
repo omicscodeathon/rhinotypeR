@@ -126,7 +126,7 @@ Authors’ Affiliation
 1. School of Biodiversity, One Health and Veterinary Medicine, University of Glasgow, Glasgow, G12 8QQ, UK.
 2. Kennedy Institute of Rheumatology, Nuttfield Department of Orthopaedics, Rheumatology and Musculoskeletal Sciences, University of Oxford, UK.
 3. Pharmacy Practice Department, Faculty of Pharmacy, Ahram Canadian University, Egypt.
-4. Computational Systems Biology Laboratory, USP, Brazil
+4. Computational Systems Biology Laboratory, USP, Brazil.
 5. MRC Integrative Epidemiology Unit, University of Bristol, UK.       
 6. Population Health Sciences, Bristol Medical School, UK.
 7. African Society for Bioinformatics and Computational Biology, Cape Town, South Africa.

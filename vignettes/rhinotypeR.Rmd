@@ -1,5 +1,5 @@
 
-```{r setup, include=FALSE}
+```{r setup, eval=FALSE}
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install("BiocStyle")
