@@ -7,12 +7,7 @@ plotFrequency <- function(assignedTypesDF, showLegend=FALSE){
   
   
   types_counts <- aggregate(query ~ assignedType, data = assignedTypesDF, FUN = length)
-  types_counts$label <- paste0(types_counts$assignedType, ", ", types_counts$query)
   types_counts$species <- substr(types_counts$assignedType, 1, 1)
-  types_counts <- transform(types_counts,
-                            end_y = (query),
-                            start_y = c(0, head(cumsum(query), n=-1)))
-  
   types_counts$species[types_counts$species == "u"] <- "Other"
   
   # Simple bar chart
