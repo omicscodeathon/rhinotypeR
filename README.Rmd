@@ -6,7 +6,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
+  fig.path = "inst/figures/README-",
   out.width = "100%"
 )
 ```
@@ -50,10 +50,10 @@ The input datasets (target, reference and prototype) are fasta files.
 Here’s an example of a FASTA file: 
 
 
-![](man/figures/example_fasta_file.png)
+![](inst/figures/example_fasta_file.png)
 
 ## Workflow
-![](man/figures/workflow.png)
+![](inst/figures/workflow.png)
 
 
 RhinotypeR workflow. The user downloads prototype strains using `getPrototypeSeqs()` function, combines these with their newly generated VP4/2 sequences, aligns and manually curates the alignment. 

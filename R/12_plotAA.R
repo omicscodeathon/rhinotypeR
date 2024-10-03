@@ -8,7 +8,7 @@ plotAA <- function(AAfastaFile, showLegend = FALSE) {
   proteinLength <- max(vapply(sequences, nchar, integer(1)))
   
   # Define a color map for amino acids
-  colorMap <- c(
+  colorMapAA <- c(
     R = "red", H = "red", K = "red",      # Positively charged amino acid 
     D = "blue", E = "blue",               # Negatively charged amino acid 
     S = "green", T = "green", N = "green", Q = "green", # Polar amino acid 
@@ -17,7 +17,7 @@ plotAA <- function(AAfastaFile, showLegend = FALSE) {
   )
   
   # Use helper function to compare sequences and assign colors
-  diffList <- compareAndColorSequences(sequences, colorMap, colorFallback = "gray")
+  diffList <- compareAndColorSequences(sequences, colorMapAA, colorFallback = "gray")
   
   # Adjust left margin to ensure y-axis labels are not truncated
   oldPar <- par(mar = c(5, 8, 4, 2) + 0.1, xpd = TRUE)

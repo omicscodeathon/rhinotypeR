@@ -8,10 +8,10 @@ SNPeek <- function(fastaData, showLegend = FALSE) {
   genomeLength <- max(vapply(sequences, nchar, integer(1)))
   
   # Define a color map for nucleotides
-  colorMap <- c(A = "green", T = "red", C = "blue", G = "yellow")
+  colorMapNT <- c(A = "green", T = "red", C = "blue", G = "yellow")
   
   # Use helper function to compare sequences and assign colors
-  diffList <- compareAndColorSequences(sequences, colorMap, colorFallback = "black")
+  diffList <- compareAndColorSequences(sequences, colorMapNT, colorFallback = "black")
   
   # Adjust left margin to ensure y-axis labels are not truncated
   oldPar <- par(mar = c(5, 8, 4, 2) + 0.1)

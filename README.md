@@ -43,11 +43,11 @@ GenBank and reference prototype strains from www.picornaviridae.com The
 input datasets (target, reference and prototype) are fasta files. Here’s
 an example of a FASTA file:
 
-![](man/figures/example_fasta_file.png)
+![](inst/figures/example_fasta_file.png)
 
 ## Workflow
 
-![](man/figures/workflow.png)
+![](inst/figures/workflow.png)
 
 RhinotypeR workflow. The user downloads prototype strains using
 `getPrototypeSeqs()` function, combines these with their newly generated
@@ -84,6 +84,11 @@ with:
 ##### Load Library
 
     library("rhinotypeR")
+    #> 
+    #> Attaching package: 'rhinotypeR'
+    #> The following objects are masked _by_ '.GlobalEnv':
+    #> 
+    #>     assignTypes, overallMeanDistance, pairwiseDistances, plotAA, SNPeek
 
 ## Functions
 

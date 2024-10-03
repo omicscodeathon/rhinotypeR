@@ -1,5 +1,4 @@
-
-plotTree <- function(distance_matrix) {
+plotTree <- function(distance_matrix, ...) {
   
   # Convert the data to a matrix 
   distance_matrix <- as.matrix(distance_matrix)
@@ -10,7 +9,6 @@ plotTree <- function(distance_matrix) {
   # Perform hierarchical clustering using complete linkage
   hc <- hclust(distance_object, method = "complete")
   
-  # Plot the dendrogram
-  plot(hc, hang = -1, cex = 0.6, main = "A simple tree", xlab = "", #ann = par("ann"),
-       ylab = "Genetic distance")
+  # Plot the dendrogram with additional arguments passed through `...`
+  plot(hc, ...)
 }

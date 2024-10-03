@@ -3,9 +3,9 @@ assignTypes <- function(fastaData, model = "p-distance", gapDeletion = TRUE, thr
   # Preprocess fasta data
   fastaData <- preProcessFastaStringSet(fastaData)
   
-  # Load prototype sequences
-  ref <- system.file("extdata", "prototypes.csv", package = "rhinotypeR")
-  prototypes <- read.csv(ref)
+  # Load prototype sequences from .rda file
+  ref <- system.file("extdata", "prototypes.rda", package = "rhinotypeR")
+  load(ref)
   names_to_keep <- prototypes$Accession
   
   # Check if input fastaData contains the prototype sequences
