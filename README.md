@@ -201,7 +201,7 @@ estimated by pairwiseDistances()</td>
 </tbody>
 </table>
 
-## Contributors/ Citation
+## Contributors/Citation
 
 Martha M. Luka1,#, Ruth Nanjala2, Wafaa M. Rashed3,4, Winfred Gatua5,6,
 Olaitan I. Awe7 \# <m.luka.1@research.gla.ac.uk>
@@ -212,17 +212,12 @@ To report an issue please use the issues page (https://github.com/omicscodeathon
 ## Contribute to Project
 You can offer to help with the further development of this project by making pull requests on this repo. To do so, fork this repository and make the proposed changes. Once completed and tested, submit a pull request to this repo.
 
-Authors’ Affiliation
+## Authors’ Affiliation
 
-1.  School of Biodiversity, One Health and Veterinary Medicine,
-    University of Glasgow, Glasgow, G12 8QQ, UK.
-2.  Kennedy Institute of Rheumatology, Nuttfield Department of
-    Orthopaedics, Rheumatology and Musculoskeletal Sciences, University
-    of Oxford, UK.
-3.  Pharmacy Practice Department, Faculty of Pharmacy, Ahram Canadian
-    University, Egypt.
+1.  School of Biodiversity, One Health and Veterinary Medicine, University of Glasgow, Glasgow, G12 8QQ, UK.
+2.  Kennedy Institute of Rheumatology, Nuttfield Department of Orthopaedics, Rheumatology and Musculoskeletal Sciences, University of Oxford, UK.
+3.  Pharmacy Practice Department, Faculty of Pharmacy, Ahram Canadian University, Egypt.
 4.  Computational Systems Biology Laboratory, USP, Brazil.
 5.  MRC Integrative Epidemiology Unit, University of Bristol, UK.  
 6.  Population Health Sciences, Bristol Medical School, UK.
-7.  African Society for Bioinformatics and Computational Biology, Cape
-    Town, South Africa.
+7.  African Society for Bioinformatics and Computational Biology, Cape Town, South Africa.
