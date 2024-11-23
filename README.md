@@ -205,7 +205,7 @@ estimated by pairwiseDistances()</td>
 ## Reporting Issues
 To report an issue please use the issues page (https://github.com/omicscodeathon/rhinotyper/issues). Please check existing issues before submitting a new one.
 
-## Contribute to Project
+## Contribute to the Project
 You can offer to help with the further development of this project by making pull requests on this repo. To do so, fork this repository and make the proposed changes. Once completed and tested, submit a pull request to this repo.
 
 ## Contributors/Citation
