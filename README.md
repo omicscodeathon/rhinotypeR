@@ -4,13 +4,13 @@
 <!-- badges: end -->
 
 
-               /**       /**                       /**                                   /*** *** 
+               /**       /**                       /**                                   /*** ***
               | **      |**/                      | **                                  | **__  **
       /****** | *******  /** /*******   /******  /******   /**   /**  /******   /****** | **  \ **
      /**__  **| **__  **| **| **__  ** /**__  **|_  **_/  | **  | ** /**__  ** /**__  **| *******/
     | **  \__/| **  \ **| **| **  \ **| **  \ **  | **    | **  | **| **  \ **| ********| **__  **
     | **      | **  | **| **| **  | **| **  | **  | ** /**| **  | **| **  | **| **_____/| **  \ **
-    | **      | **  | **| **| **  | **|  ******/  |  *****/|  *******/| ********|  *******/| **  | 
+    | **      | **  | **| **| **  | **|  ******/  |  *****/|  *******/| ********|  *******/| **  |
     |__/      |__/  |__/|__/|__/  |__/ \______/    \___/   \____  **| **____/  \_______/|__/  |__/
                                                            /**  | **| **                          
                                                           |  ******/| **                          
@@ -84,10 +84,10 @@ with:
 ##### Load Library
 
     library("rhinotypeR")
-    #> 
+    #>
     #> Attaching package: 'rhinotypeR'
     #> The following objects are masked _by_ '.GlobalEnv':
-    #> 
+    #>
     #>     assignTypes, overallMeanDistance, pairwiseDistances, plotAA, SNPeek
 
 ## Functions
@@ -205,6 +205,12 @@ estimated by pairwiseDistances()</td>
 
 Martha M. Luka1,#, Ruth Nanjala2, Wafaa M. Rashed3,4, Winfred Gatua5,6,
 Olaitan I. Awe7 \# <m.luka.1@research.gla.ac.uk>
+
+## Reporting Issues
+To report an issue please use the issues page (https://github.com/omicscodeathon/rhinotyper/issues). Please check existing issues before submitting a new one.
+
+## Contribute to Project
+You can offer to help with the further development of this project by making pull requests on this repo. To do so, fork this repository and make the proposed changes. Once completed and tested, submit a pull request to this repo.
 
 Authors’ Affiliation
 
