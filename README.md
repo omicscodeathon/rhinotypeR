@@ -125,17 +125,59 @@ sequences
 <td><code>getPrototypeSeqs()</code></td>
 <td>Downloads rhinovirus prototype strains into a local directory. These
 sequences should be combined with and aligned alongside newly generated
-sequences before being imported into R for genotype assignment</td>
+sequences, and aligned with a tool of choice before being imported into R 
+for genotype assignment</td>
 <td>Destination path</td>
 <td>RV prototypes are downloaded into the local machine</td>
 </tr>
+
+<tr class="even">
+<td><code>alignToRefs()</code></td>
+<td>Combines imported sequences with rhinovirus prototypes and performs a  
+multiple sequence alignment using ClustalW, ClustalOmega, or MUSCLE.</td>
+<td>DNAStringSet object of new sequences</td>
+<td>DNAStringSet object of aligned sequences containing prototypes</td>
+</tr>
+
+
+
+<tr class="odd">
+<td><code>assignTypes()</code></td>
+<td>Rapidly assigns genotypes to input sequences. The input fasta file
+should include the prototype strains, which can be downloaded using
+getPrototypeSeqs()</td>
+<td>DNAStringSet object</td>
+<td>CSV file with three columns: sequence header, assigned type, and
+genetic distance</td>
+</tr>
+<tr class="even">
+<td><code>countSNPs()</code></td>
+<td>Counts single nucleotide polymorphisms across input sequences</td>
+<td>DNAStringSet object</td>
+<td>A dense matrix</td>
+</tr>
+<tr class="odd">
+<td><code>pairwiseDistances()</code></td>
+<td>Estimates pairwise distances across input sequences using a
+specified evolutionary model</td>
+<td>DNAStringSet object</td>
+<td>A dense distance matrix</td>
+</tr>
+<tr class="even">
+<td><code>overallMeanDistance()</code></td>
+<td>Estimates the overall mean distance of input sequences</td>
+<td>DNAStringSet object</td>
+<td>A single numeric value</td>
+</tr>
+
+
 <tr class="even">
 <td><code>SNPeek()</code></td>
 <td>Visualizes single nucleotide polymorphisms (SNPs) relative to a
 specified reference sequence. To specify the reference, move it to the
 bottom of the alignment. Substitutions are color-coded by nucleotide: A
 = green, T = red, C = blue, G = yellow</td>
-<td>fasta file</td>
+<td>DNAStringSet object</td>
 <td>A plot highlighting SNPs per sequence</td>
 </tr>
 <tr class="odd">
@@ -148,34 +190,6 @@ Positively charged, Blue = Negatively charged, Green = Polar, Yellow =
 Non-polar</td>
 <td>Amino acid fasta file</td>
 <td>A plot highlighting amino acid substitutions per sequence</td>
-</tr>
-<tr class="even">
-<td><code>assignTypes()</code></td>
-<td>Rapidly assigns genotypes to input sequences. The input fasta file
-should include the prototype strains, which can be downloaded using
-getPrototypeSeqs()</td>
-<td>fasta file</td>
-<td>CSV file with three columns: sequence header, assigned type, and
-genetic distance</td>
-</tr>
-<tr class="odd">
-<td><code>pairwiseDistances()</code></td>
-<td>Estimates pairwise distances across input sequences using a
-specified evolutionary model</td>
-<td>fasta file</td>
-<td>A dense distance matrix</td>
-</tr>
-<tr class="even">
-<td><code>overallMeanDistance()</code></td>
-<td>Estimates the overall mean distance of input sequences</td>
-<td>fasta file</td>
-<td>A single numeric value</td>
-</tr>
-<tr class="odd">
-<td><code>countSNPs()</code></td>
-<td>Counts single nucleotide polymorphisms across input sequences</td>
-<td>fasta file</td>
-<td>A dense matrix</td>
 </tr>
 <tr class="even">
 <td><code>plotFrequency()</code></td>

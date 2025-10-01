@@ -1,135 +1,231 @@
-
-```{r setup, include=FALSE}
-options(repos = c(CRAN = "https://cran.rstudio.com/"))
-
-```
-
 ---
 title: "Introduction to rhinotypeR"
+author:
+  - name: "Martha Luka"
+    email: "marthaluka20@gmail.com"
+  - name: "Ruth Nanjala"
+  - name: "Wafaa Rashed"
+  - name: "Winfred Gatua"
+  - name: "Olaitan Awe"
 output: BiocStyle::html_document
 vignette: >
   %\VignetteIndexEntry{Introduction to rhinotypeR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  
 ---
 
-## Background
+```{r setup, include=FALSE}
+options(repos = c(CRAN = "https://cran.rstudio.com/"))
+```
 
-The `rhinotypeR` package is designed to simplify the genotyping of rhinoviruses using the VP4/2 genomic region. Having worked on rhinoviruses for a few years, I noticed that assigning genotypes after sequencing was particularly laborious, and needed several manual interventions. We, therefore, developed this package to address this challenge by streamlining the process by enabling a user to download prototype sequences, calculate genetic pairwise distances, and compare the distances to prototype strains for genotype assignment. It also provides visualization options such as frequency plots and simple phylogenetic trees. 
+## 1. Background
 
+The `rhinotypeR` package is designed to automate the genotyping of rhinoviruses using the VP4/2 genomic region. Having worked on rhinoviruses for a few years, I noticed that assigning genotypes after sequencing was particularly laborious, and needed several manual interventions. We, therefore, developed this package to address this challenge by streamlining the process.
 
-## Usage
+It provides:
 
-### Installing the package
+- Distance computation (`pairwiseDistances()`, `overallMeanDistance()`)
+- Genotype assignment (`assignTypes()`)
+- Visualization (`plotFrequency()`, `plotDistances()`, `plotTree()`, `SNPeek()`, `plotAA()`)
+- Data helpers (`alignToRefs()` for optional alignment in R; `deleteMissingDataSites()` for global gap deletion)
+- Prototype references (`getPrototypeSeqs()` if you prefer to align externally)
 
-You can install rhinotypeR from BioConductor using
+This vignette walks through two practical workflows:
 
-```{r eval=FALSE}
+**A. Align externally** (Your tool of choice) with `getPrototypeSeqs()` → merge with new data, align with tool of choice → import → `assignTypes()`.
+
+**B. Align in R** (with packaged prototypes) using `alignToRefs()` → `assignTypes()`.
+
+**Tip:** Genotype assignment relies on distances to prototype strains and requires that those prototypes are present in the alignment you pass to `assignTypes()`. The `alignToRefs()` helper makes this easy by appending packaged prototypes and aligning jointly.
+
+## 2. Installing the package
+
+You can install rhinotypeR from Bioconductor using:
+
+```{r, eval=FALSE}
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
 BiocManager::install("rhinotypeR")
 ```
 
-
-### Loading the package
+## 3. Load rhinotypeR
 
 ```{r}
+# Load package
 library(rhinotypeR)
+
+# Load example data
+data(rhinovirusVP4, package = "rhinotypeR")
 ```
 
+## 4. Input expectations
 
-### Example Workflow
+- **Format:** FASTA (DNA for VP4/2; AA only for `plotAA()`)
+- **Region:** VP4/2; sequences should be homologous
+- **Length/QC:** We recommend ≥350 bp (typical ~420 bp) and careful trimming to the target region
+- **Alignment:** Required before genotype assignment. Do it either in R (`alignToRefs()`) or outside R and then import (e.g., with `Biostrings::readDNAStringSet()`)
 
-1. Download prototype sequences:
+### 4.1. Option A: Align externally
 
-The `getPrototypeSeqs` function downloads the prototype sequences required for genotyping. These should the be combined with the newly generated sequences, aligned using a suitable software, and imported into R. For example, to download to the Desktop directory, one can run:
+Prefer your own alignment tool? Use `getPrototypeSeqs()` to export the packaged prototypes to your local device. These should then be combined with the newly generated sequences, aligned using suitable software, curated and imported into R. There are a multitude of existing alignment software including [MAFFT](https://mafft.cbrc.jp/alignment/server/) and [MUSCLE](https://www.ebi.ac.uk/jdispatcher/).
+
+For example, to download to the Desktop directory:
+
+```{r, eval=FALSE}
+getPrototypeSeqs("~/Desktop")
+
+# You will get "~/Desktop/RVRefs.fasta"
+# 2) Combine RVRefs.fasta with your new sequences and align in your tool (e.g., MAFFT).
+# 3) Manually curate (trim to VP4/2 span, resolve poor columns), then save as FASTA.
+```
+
+Use the Biostrings package to read the curated alignment FASTA file into R:
+
+```{r}
+aln_curated <- Biostrings::readDNAStringSet(
+  system.file("extdata", "input_aln.fasta", package = "rhinotypeR")
+)
+```
+
+### 4.2. Option B: Align in R
+
+Use this when you want a fully scripted path in R. `alignToRefs()` appends packaged references and runs `msa::msa()` using ClustalW/ClustalOmega/MUSCLE. It can optionally crop the final alignment to the non-gap span of a chosen prototype (`trimToRef = TRUE`, default; anchor with `refName`).
 
 ```{r eval=FALSE}
-getPrototypeSeqs("~/Desktop")
+# Use package dataset: rhinovirusVP4
+# Align user sequences + prototypes in R (choose method)
+aln <- alignToRefs(
+  seqData   = rhinovirusVP4,
+  method    = "ClustalW",           # or "ClustalOmega", "Muscle"
+  trimToRef = TRUE,                 # crop to reference non-gap span
+  refName   = "JN855971.1_A107"     # default anchor; change if desired
+)
+
+aln
+
 ```
 
-2. Read sequences:
+**Why trimming and gap handling matter:**
 
-Use the Biostrings package to read FASTA files containing sequence data. This extracts the sequence data and headers information and should be stored into an object for downstream analysis.
+- `trimToRef = TRUE` crops the alignment to the exact span covered by a chosen prototype — helpful when user reads spill over the target region
+- `deleteGapsGlobally()` performs global deletion (drop any column with a gap in any sequence). This is different from pairwise deletion used within distance calculations. Use with care — this modifies the alignment
+
+## 5. Assign types
 
 ```{r}
-sequences <- Biostrings::readDNAStringSet(system.file("extdata", "input_aln.fasta", package="rhinotypeR"))
+# Input A
+res <- assignTypes(aln_curated, model = "IUPAC", deleteGapsGlobally = FALSE, threshold = 0.105)
+head(res)
 ```
 
-3. Visualize SNPs:
-
-The `SNPeek` function visualizes single nucleotide polymorphisms (SNPs) in the sequences, with a select sequence acting as the reference. To specify the reference sequences, move it to the bottom of the alignment before importing into R. Substitutions are color-coded by the nucleotide i.e., 
-
-  A = <span style="color: green;">green</span> 
-  
-  T = <span style="color: red;">red</span>
-  
-  C = <span style="color: blue;">blue</span>
-  
-  G = <span style="color: yellow;">yellow</span>
-  
-
-```{r}
-SNPeek(sequences)
+```{r eval=FALSE}
+# OR similarly for input B
+res <- assignTypes(aln, model = "IUPAC", deleteGapsGlobally = FALSE, threshold = 0.105)
+head(res)
 ```
 
-4. Calculate Pairwise Distances:
+**Assigning types: rules and outputs**
 
-The `pairwiseDistances` function calculates genetic distances between sequences, using a specified evolutionary model.
+`assignTypes()` compares each query to prototypes and returns:
+
+- `query` (sequence ID)
+- `assignedType` (or "unassigned")
+- `distance` (to nearest prototype — always reported, even if unassigned)
+- `reference` (prototype accession/name used)
+
+**Thresholds:** We default to `threshold = 0.105` (~10.5%) in line with common practice for VP4/2 (A/C) and close to B; adjust per your analysis or species.
+
+## 6. Plot results
 
 ```{r}
-distances <- pairwiseDistances(sequences, model = "p-distance", gapDeletion = TRUE)
+plotFrequency(res)
+```
+
+## 7. Distances and summaries
+
+```{r}
+# Distances among all sequences
+d <- pairwiseDistances(
+  fastaData = rhinovirusVP4,
+  model = "IUPAC",
+  deleteGapsGlobally = FALSE   # set TRUE to apply global deletion inside the function
+)
 ```
 
 The distance matrix looks like:
 
 ```{r, echo=FALSE}
-distances[1:5, 1:7]
+d[1:5, 1:7]
 ```
 
-
-5. Assign Genotypes:
-
-The assignTypes function assigns genotypes to the sequences by comparing genetic distances to prototype strains.
+To visualize the pairwise distances using a heatmap or a phylogenetic tree:
 
 ```{r}
-genotypes <- assignTypes(sequences, model = "p-distance", gapDeletion = TRUE, threshold = 0.105)
+# Mean distance (overall diversity)
+overallMeanDistance(rhinovirusVP4, model = "IUPAC")
 
-head(genotypes)
+# Visual summaries
+## Heatmap
+plotDistances(d)  
 
+## Simple tree (from distances)
+sampled_distances <- d[1:30, 1:30]
+plotTree(sampled_distances, hang = -1, cex = 0.6, 
+         main = "A simple tree", xlab = "", ylab = "Genetic distance")
 ```
 
-6. Plot Results:
+## 8. SNP and amino acid views
 
-The `plotFrequency` function visualizes the frequency of assigned genotypes. This function uses the output of `assignTypes` as input.
+The `SNPeek()` function visualizes single nucleotide polymorphisms (SNPs) in the sequences, with a selected sequence acting as the reference. To specify the reference sequence, move it to the bottom of the alignment before importing into R. Substitutions are color-coded by nucleotide:
+
+- A = <span style="color: green;">green</span> 
+- T = <span style="color: red;">red</span>
+- C = <span style="color: blue;">blue</span>
+- G = <span style="color: yellow;">yellow</span>
+  
+`SNPeek()` (nucleotide) and `plotAA()` (protein) support zooming and highlighting. To show all sequence names, increase the plotting device height (RStudio plot pane or `png(height=...)`).
 
 ```{r}
-plotFrequency(genotypes)
+# SNP view (nucleotide)
+SNPeek(rhinovirusVP4)
+
+# AA view (requires an AAStringSet)
+
+## Option 1 -- read an aligned amino acid sequence
+aa_seq <- Biostrings::readAAStringSet(system.file("extdata", "test_translated.fasta", package = "rhinotypeR"))
+plotAA(aa_seq)
 ```
 
-
-The `plotDistances` function visualizes pairwise genetic distances in a heatmap. This function uses the output of `pairwiseDistances` as input.
-
-```{r}
-plotDistances(distances)
+```{r, eval=FALSE}
+## Option 2 -- translating DNA
+# Remove gaps before translate()
+aln_no_gaps <- Biostrings::DNAStringSet(
+  gsub("-", "", as.character(rhinovirusVP4))
+)
+#translate
+aa <- Biostrings::translate(aln_no_gaps)
+aa_aln <- msa::msa(aa)  # align as plotAA expects equal width
+aa_aln <- as(aa_aln, "AAStringSet") # transform to AAStringSet
+plotAA(aa_aln)
 ```
 
-The `plotTree` function plots a simple phylogenetic tree. This function uses the output of `pairwiseDistances` as input.
+**Tip:** `show_only_highlighted = TRUE` focuses on chosen rows while keeping mismatch context relative to the reference.
 
-```{r}
-# sub-sample 
-sampled_distances <- distances[1:30,1:30]
+## 9. Quality and troubleshooting
 
-plotTree(sampled_distances, hang = -1, cex = 0.6, main = "A simple tree", xlab = "", ylab = "Genetic distance")
-```
+* **Prototypes missing?** `assignTypes()` will error if prototypes are not present in your alignment. Use Option A (`alignToRefs()`) or Option B (`getPrototypeSeqs()` + external align).
+* **Misaligned region?** Use `trimToRef = TRUE` and select an appropriate `refName` that spans your intended VP4/2 region.
+* **Gaps distort distances?** Consider `deleteMissingDataSites()` (global deletion), or use a pairwise deletion model where appropriate in distance routines.
+* **SNP/AA plots truncated?** Increase device height or use the `highlight_*` options and `show_only_highlighted = TRUE`.
 
-## Conclusion
-The rhinotypeR package simplifies the process of genotyping rhinoviruses and analyzing their genetic data. By automating various steps and providing visualization tools, it enhances the efficiency and accuracy of rhinovirus epidemiological studies.
+## 10. Conclusion
 
+The `rhinotypeR` package simplifies the process of genotyping rhinoviruses and analyzing their genetic data. By automating various steps and providing visualization tools, it enhances the efficiency and accuracy of rhinovirus epidemiological studies.
 
-## Session Info
+## Session info
+
 ```{r}
 sessionInfo()
 ```
-

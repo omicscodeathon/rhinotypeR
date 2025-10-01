@@ -1,0 +1,31 @@
+citHeader("To cite rhinotypeR in publications, please use:")
+
+meta <- utils::packageDescription("rhinotypeR")
+
+# Software citation
+bibentry(
+  bibtype = "Manual",
+  title   = "rhinotypeR: Rhinovirus genotyping",
+  author  = c(
+    person("Martha", "Luka"),
+    person("Ruth", "Nanjala"),
+    person("Wafaa", "Rashed"),
+    person("Winfred", "Gatua"),
+    person("Olaitan", "Awe")
+  ),
+  year    = if (!is.null(meta$Date)) substr(meta$Date, 1, 4) else format(Sys.Date(), "%Y"),
+  note    = sprintf("R package version %s", meta$Version),
+  url     = "https://bioconductor.org/packages/rhinotypeR"
+)
+
+# methods paper, add a second entry:
+# bibentry(
+#   bibtype = "Article",
+#   title   = "rhinotypeR: VP4/2-based genotyping of human rhinoviruses",
+#   author  = c(person("..."), ...),
+#   journal = "Journal Name",
+#   year    = "2025",
+#   volume  = "...",
+#   pages   = "...",
+#   doi     = "10.xxxx/xxxxx"
+# )

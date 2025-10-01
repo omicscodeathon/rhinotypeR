@@ -1,30 +1,81 @@
-test_that("overallMeanDistance function works correctly", {
+
+# Global skips for this test file
+skip_if_not_installed("MSA2dist")
+
+# Small deterministic 15-nt alignment (no gaps)
+simple_dna <- Biostrings::DNAStringSet(c(
+  Seq1 = "ATGCATGCATGCATG",
+  Seq2 = "ATGGATGCATGCATG",  # 1 mismatch vs Seq1
+  Seq3 = "ATGCTTGCATGCATG",  # a couple of mismatches vs Seq1
+  Seq4 = "ATGCATGCATGCATG"   # identical to Seq1
+))
+
+# Same length (15) but with gaps in some sequences
+# (global deletion should remove that column)
+simple_dna_gaps <- Biostrings::DNAStringSet(c(
+  Seq1 = "ATGCA-TGCATGCAT",  
+  Seq2 = "ATGCAATGCA-GCAT",
+  Seq3 = "ATGCAATGCATGCAT",
+  Seq4 = "AT-CAATGCATGCAT"
+))
+
+test_that("overallMeanDistance returns a single finite numeric in [0,1]", {
+  m <- overallMeanDistance(simple_dna, model = "IUPAC", deleteGapsGlobally = FALSE)
+  expect_type(m, "double")
+  expect_length(m, 1L)
+  expect_true(is.finite(m))
+  expect_gte(m, 0)
+  expect_lte(m, 1)
+})
+
+test_that("overallMeanDistance agrees with mean(lower triangle) of pairwiseDistances", {
+  m_fun <- overallMeanDistance(simple_dna, model = "IUPAC", deleteGapsGlobally = FALSE)
   
-  # read a fasta file object for testing
-  data_path <- system.file("extdata", "test.fasta", package = "rhinotypeR")
-  dna_seqs <- Biostrings::readDNAMultipleAlignment(data_path)
+  D <- pairwiseDistances(simple_dna, model = "IUPAC", deleteGapsGlobally = FALSE)
+  Dm <- as.matrix(D)
+  m_manual <- mean(Dm[lower.tri(Dm)])
   
-  # Test with the default model ("p-distance")
-  p_distance_result <- overallMeanDistance(dna_seqs, model = "p-distance")
-  expect_true(is.numeric(p_distance_result))
-  expect_equal(round(p_distance_result, 2), 0.22) # values agreed by other software (MegaX and ape R package)
+  expect_equal(m_fun, m_manual, tolerance = 1e-12)
+})
+
+test_that("deleteGapsGlobally does not increase mean distance", {
+  m_keep <- overallMeanDistance(simple_dna_gaps, model = "IUPAC", deleteGapsGlobally = FALSE)
+  m_drop <- overallMeanDistance(simple_dna_gaps, model = "IUPAC", deleteGapsGlobally = TRUE)
   
-  # Test with the Jukes-Cantor model ("JC")
-  jc_distance_result <- overallMeanDistance(dna_seqs, model = "JC")
-  expect_true(is.numeric(jc_distance_result))
-  expect_equal(round(jc_distance_result, 2), 0.26) # values agreed by other software (MegaX and ape R package)
+  # Removing a gap column across all sequences should not increase mean distance
+  expect_lte(m_drop, m_keep)
+})
+
+test_that("overallMeanDistance runs with common models", {
+  expect_silent(overallMeanDistance(simple_dna, model = "IUPAC"))
+  expect_silent(overallMeanDistance(simple_dna, model = "raw"))
+  expect_silent(overallMeanDistance(simple_dna, model = "JC69"))
+})
+
+test_that("Two-sequence case equals their pairwise distance (raw model)", {
+  x <- Biostrings::DNAStringSet(c(
+    S1 = "ATGCATGCATGCATG",
+    S2 = "ATGCATGCATGCATT"  
+  ))
   
-  # Test with the Kimura 2-parameter model ("Kimura2p")
-  k2p_distance_result <- overallMeanDistance(dna_seqs, model = "Kimura2p")
-  expect_true(is.numeric(k2p_distance_result))
-  expect_false(is.na(k2p_distance_result)) # Ensure that a valid result is returned
+  m <- overallMeanDistance(x, model = "raw", deleteGapsGlobally = FALSE)
   
-  # Test with the Tamura 3-parameter model ("Tamura3p")
-  t3p_distance_result <- overallMeanDistance(dna_seqs, model = "Tamura3p")
-  expect_true(is.numeric(t3p_distance_result))
-  expect_false(is.na(t3p_distance_result)) # Ensure that a valid result is returned
+  D <- pairwiseDistances(x, model = "raw", deleteGapsGlobally = FALSE)
+  expected <- as.matrix(D)["S1", "S2"]
   
-  # Test with an invalid model
-  expect_error(overallMeanDistance(dna_seqs, model = "invalid"), 
-               "Unknown model specified. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p' ")
+  expect_equal(m, expected, tolerance = 1e-12)
+})
+
+test_that("Identical sequences yield mean distance 0", {
+  x <- Biostrings::DNAStringSet(c(
+    A = "ACGTACGTACGTACG",
+    B = "ACGTACGTACGTACG",
+    C = "ACGTACGTACGTACG"
+  ))
+  m <- overallMeanDistance(x, model = "IUPAC")
+  expect_equal(m, 0)
+})
+
+test_that("Non-DNAStringSet input errors (type safety)", {
+  expect_error(overallMeanDistance(list(A = "ACGT")), regexp = "")
 })
