@@ -1,33 +1,123 @@
-test_that("pairwiseDistances function works correctly", {
+
+# Global skips for this test file
+skip_if_not_installed("MSA2dist")
+
+# Shared test fixtures
+simple_dna <- Biostrings::DNAStringSet(c(
+  Seq1 = "ATGCATGC",
+  Seq2 = "ATGGATGC",
+  Seq3 = "ATGCTTGC",
+  Seq4 = "ATGCATGC"
+))
+
+dna_with_gaps <- Biostrings::DNAStringSet(c(
+  Seq1 = "ATGC-TGC",
+  Seq2 = "ATGGATGC",
+  Seq3 = "ATGC-TGC"
+))
+
+identical_seqs <- Biostrings::DNAStringSet(c(
+  Seq1 = "ATGC",
+  Seq2 = "ATGC",
+  Seq3 = "ATGC"
+))
+
+all_different <- Biostrings::DNAStringSet(c(
+  Seq1 = "AAAA",
+  Seq2 = "TTTT",
+  Seq3 = "CCCC"
+))
+
+# Tests
+test_that("pairwiseDistances returns correct matrix structure", {
+  result <- pairwiseDistances(simple_dna)
   
-  # read a fasta file object for testing
-  data_path <- system.file("extdata", "test.fasta", package = "rhinotypeR")
-  dna_seqs <- Biostrings::readDNAMultipleAlignment(data_path)
+  expect_type(result, "double")
+  expect_true(is.matrix(result))
+  expect_equal(nrow(result), 4)
+  expect_equal(ncol(result), 4)
+  expect_equal(rownames(result), names(simple_dna))
+  expect_equal(colnames(result), names(simple_dna))
+})
+
+test_that("pairwiseDistances diagonal is zero", {
+  result <- pairwiseDistances(simple_dna)
   
-  # Determine the number of sequences
-  num_sequences <- dim(dna_seqs)[1]
+  # Diagonal should be all zeros (sequence compared to itself)
+  expect_equal(diag(result), rep(0, 4))
+})
+
+test_that("pairwiseDistances matrix is symmetric", {
+  result <- pairwiseDistances(simple_dna)
   
-  # Test with the default model ("p-distance")
-  p_distance_result <- pairwiseDistances(dna_seqs, model = "p-distance")
-  expect_true(is.matrix(p_distance_result))
-  expect_equal(dim(p_distance_result), c(num_sequences, num_sequences))
+  # Distance matrix should be symmetric
+  expect_equal(result, t(result))
+})
+
+test_that("pairwiseDistances handles identical sequences", {
+  result <- pairwiseDistances(identical_seqs)
   
-  # Test with the Jukes-Cantor model ("JC")
-  jc_distance_result <- pairwiseDistances(dna_seqs, model = "JC")
-  expect_true(is.matrix(jc_distance_result))
-  expect_equal(dim(jc_distance_result), c(num_sequences, num_sequences))
+  # All pairs should have 0 distance
+  expect_true(all(result == 0))
+})
+
+test_that("pairwiseDistances handles completely different sequences", {
+  result <- pairwiseDistances(all_different)
   
-  # Test with the Kimura 2-parameter model ("Kimura2p")
-  k2p_distance_result <- pairwiseDistances(dna_seqs, model = "Kimura2p")
-  expect_true(is.matrix(k2p_distance_result))
-  expect_equal(dim(k2p_distance_result), c(num_sequences, num_sequences))
+  # All off-diagonal elements should be > 0
+  off_diag <- result[upper.tri(result)]
+  expect_true(all(off_diag > 0))
+  expect_true(all(off_diag <= 1))  # Distances should be proportions (0-1)
+})
+
+test_that("pairwiseDistances values are in valid range", {
+  result <- pairwiseDistances(simple_dna)
   
-  # Test with the Tamura 3-parameter model ("Tamura3p")
-  t3p_distance_result <- pairwiseDistances(dna_seqs, model = "Tamura3p")
-  expect_true(is.matrix(t3p_distance_result))
-  expect_equal(dim(t3p_distance_result), c(num_sequences, num_sequences))
+  # All distances should be between 0 and 1
+  expect_true(all(result >= 0))
+  expect_true(all(result <= 1))
+})
+
+test_that("pairwiseDistances model parameter works", {
+  # Should accept different models
+  expect_silent(pairwiseDistances(simple_dna, model = "IUPAC"))
+  expect_silent(pairwiseDistances(simple_dna, model = "raw"))
+  expect_silent(pairwiseDistances(simple_dna, model = "JC69"))
+})
+
+test_that("pairwiseDistances deleteGapsGlobally works", {
+  result_with_gaps <- pairwiseDistances(dna_with_gaps, deleteGapsGlobally = FALSE)
+  result_no_gaps <- pairwiseDistances(dna_with_gaps, deleteGapsGlobally = TRUE)
   
-  # Test with an invalid model
-  expect_error(pairwiseDistances(dna_seqs, model = "invalid"), 
-               "Unknown model specified. Choose from 'p-distance', 'JC', 'Kimura2p', or 'Tamura3p' ")
+  expect_type(result_with_gaps, "double")
+  expect_type(result_no_gaps, "double")
+  
+  # Both should be valid distance matrices
+  expect_true(is.matrix(result_with_gaps))
+  expect_true(is.matrix(result_no_gaps))
+})
+
+test_that("pairwiseDistances errors on unaligned sequences", {
+  unaligned <- Biostrings::DNAStringSet(c(
+    Seq1 = "ATGC",
+    Seq2 = "ATGCAA"
+  ))
+  
+  expect_error(pairwiseDistances(unaligned))
+})
+
+test_that("pairwiseDistances errors with invalid input", {
+  expect_error(pairwiseDistances("not a DNAStringSet"))
+  expect_error(pairwiseDistances(NULL))
+})
+
+test_that("pairwiseDistances handles ambiguous bases", {
+  ambiguous <- Biostrings::DNAStringSet(c(
+    Seq1 = "ATGC",
+    Seq2 = "NTGC"
+  ))
+  
+  # IUPAC model should handle ambiguity
+  expect_silent(result <- pairwiseDistances(ambiguous, model = "IUPAC"))
+  expect_type(result, "double")
 })

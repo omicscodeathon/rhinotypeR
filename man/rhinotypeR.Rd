@@ -4,53 +4,171 @@
 \name{rhinotypeR}
 \alias{rhinotypeR}
 \alias{rhinotypeR-package}
-\title{rhinotypeR: A Package for the genotyping of rhinoviruses using the VP4/2 region}
+\title{rhinotypeR: VP4/2-based genotyping and visualization for human rhinoviruses}
 \description{
-The \pkg{rhinotypeR} package provides tools and functions that streamline the genotyping of rhinoviruses using the VP4/2 region.
+The \pkg{rhinotypeR} package provides a toolkit for automating rhinovirus
+genotyping using the VP4/2 genomic region—streamlining alignment, genotype
+assignment, and visualization.
 }
-\details{
-This package includes functions to calculate pairwise distances and visualization, specifically tailored for rhinovirus data. It also provides additional utilities for working with sequence data in FASTA format such as simple phylogenetic trees.
+\section{Main Functions}{
+
+\subsection{Core Analysis Functions:}{
+\itemize{
+  \item \code{\link{assignTypes}}: Assign sequences to rhinovirus genotypes
+        based on distances to prototype strains. Returns query ID, assigned type,
+        distance to nearest prototype, and reference used.
+  \item \code{\link{pairwiseDistances}}: Calculates pairwise genetic distances
+        between all sequences using specified evolutionary models (e.g., IUPAC).
+  \item \code{\link{overallMeanDistance}}: Computes the overall mean genetic
+        distance across all sequences as a measure of diversity.
+}}
+
+\subsection{Alignment and Data Preparation:}{
+\itemize{
+  \item \code{\link{alignToRefs}}: Aligns user sequences with packaged prototype
+        references using ClustalW, ClustalOmega, or MUSCLE. Optionally crops
+        the alignment to a reference span.
+  \item \code{\link{getPrototypeSeqs}}: Exports packaged prototype sequences
+        to a local directory for external alignment workflows.
+  \item \code{deleteMissingDataSites}: Performs global gap deletion
+        (removes any column containing gaps in any sequence).  % internal helper, not linked
+}}
+
+\subsection{Visualization Functions:}{
+\itemize{
+  \item \code{\link{plotDistances}}: Creates a heatmap of pairwise genetic distances.
+  \item \code{\link{plotTree}}: Generates a simple phylogenetic tree from a distance matrix.
+  \item \code{\link{SNPeek}}: Visualizes single nucleotide polymorphisms (SNPs)
+        with color-coded nucleotides (A=green, T=red, C=blue, G=yellow).
+  \item \code{\link{plotAA}}: Displays amino acid differences with zooming and highlighting.
+  % If present:
+  % \item \code{\link{plotFrequency}}: Visualizes the frequency distribution of assigned genotypes.
+}}
 }
-\section{Main functions}{
+
+\section{Input expectations}{
 
 \itemize{
-  \item \code{\link{getPrototypeSeqs}}: Download prototype sequences into local machine.
-  \item \code{\link{pairwiseDistances}}: Calculates pairwise distances using a specified evolutionary model.
-  \item \code{\link{assignTypes}}: Assigns sequences to their respective rhinovirus genotypes.
-  \item \code{\link{plotTree}}: Plots a simple phylogenetic tree.
+  \item \emph{Format:} FASTA; DNA for VP4/2 (AA only for \code{\link{plotAA}}).
+  \item \emph{Region:} VP4/2; sequences must be homologous.
+  \item \emph{Length/QC:} Recommended \eqn{\ge} 350 bp (typical \~420 bp) and trimmed to the VP4/2 span.
+  \item \emph{Alignment:} Required before calling \code{\link{assignTypes}}. Do this in R with
+        \code{\link{alignToRefs}} or externally (then import with \code{Biostrings::readDNAStringSet}).
 }
 }
 
-\section{Getting started}{
+\section{Workflows}{
 
-To get started with \pkg{rhinotypeR}, download the prototype sequences and combine these with your newly generated VP4/2 sequences and align using a suitable tool. Then import the curated alignment into R:
+\subsection{Workflow A: External Alignment}{
+\enumerate{
+  \item Export prototypes: \code{getPrototypeSeqs("~/Desktop")}
+  \item Combine prototypes with your sequences
+  \item Align externally (e.g., MAFFT: \url{https://mafft.cbrc.jp/alignment/server/})
+  \item Import alignment: \code{Biostrings::readDNAStringSet("alignment.fasta")}
+  \item Assign genotypes: \code{assignTypes(alignment)}
+}}
+
+\subsection{Workflow B: Align in R}{
 \preformatted{
+# Align sequences with packaged prototypes
+aln <- alignToRefs(
+  seqData   = rhinovirusVP4,
+  method    = "ClustalW",
+  trimToRef = TRUE,
+  refName   = "JN855971.1_A107"
+)
 
-\# Download prototype sequences
-getPrototypeSeqs("path/to/destination")
+# Assign genotypes
+res <- assignTypes(
+  aln,
+  model = "IUPAC",
+  deleteGapsGlobally = FALSE,
+  threshold = 0.105
+)
 
-\# Read sequences from a FASTA file
-sequences <- Biostrings::readDNAStringSet("../inst/extdata/input_aln.fasta")
-
-\# Perform sequence analysis
-distance_matrix <- pairwiseDistances(sequences)
-
-\# Assign to genotypes
-assigned_types <- assignTypes(distance_matrix)
-
-\# Simple phylogenetic tree
-plotTree(distance_matrix)
+# Visualize results
+plotFrequency(res)
+}
+}
 }
 
-For more detailed examples and usage, refer to the package vignettes:
+\section{Key Parameters}{
+
+\itemize{
+  \item \strong{threshold:} Default 0.105 (~10.5\%) for VP4/2 region, following
+        common practice for RV-A/C and close to RV-B.
+  \item \strong{trimToRef:} When TRUE, crops alignment to non-gap span of chosen
+        prototype (helpful when reads extend beyond target region).
+  \item \strong{deleteGapsGlobally:} Global deletion vs. pairwise deletion (distance models).
+  \item \strong{model:} Evolutionary model for distance calculation (e.g., "IUPAC").
+}
+}
+
+\section{Bundled datasets}{
+
+\itemize{
+  \item \code{rhinovirusPrototypesVP4}: VP4/2 prototype references as a
+        \code{Biostrings::DNAStringSet} (mirrors \file{inst/extdata/prototypes.fasta}).
+        Reported by McIntyre et al. (2013), \emph{Journal of General Virology}, 94(8), 1791–1806.
+        \doi{10.1099/vir.0.053686-0}
+  \item \code{rhinovirusVP4}: A rhinovirus VP4/2 alignment as a
+        \code{Biostrings::DNAStringSet} for examples/tests; derived from
+        Luka et al. (2020), \emph{Open Forum Infectious Diseases}, 7(10), ofaa385.
+        \doi{10.1093/ofid/ofaa385}
+}
+}
+
+\section{Notes on assignment thresholds}{
+
+The default genotype cutoff in \code{\link{assignTypes}} is \code{threshold = 0.105}
+(~10.5\%), consistent with commonly used VP4/2 criteria for RV-A/C and close to RV-B.
+}
+
+\section{Getting Started}{
+
 \preformatted{
-vignette(package = "rhinotypeR")
-vignette("rhinotypeR", package = "rhinotypeR")
+library(rhinotypeR)
+data(rhinovirusVP4, package = "rhinotypeR")
+
+aln <- alignToRefs(
+  seqData   = rhinovirusVP4,
+  method    = "ClustalW",
+  trimToRef = TRUE
+)
+res <- assignTypes(aln, model = "IUPAC")
+head(res)
+
+d <- pairwiseDistances(rhinovirusVP4, model = "IUPAC")
+plotDistances(d)
+
+sampled <- d[1:30, 1:30]
+plotTree(sampled, main = "Rhinovirus VP4/2 Tree")
+
+SNPeek(rhinovirusVP4)
+aa <- Biostrings::translate(rhinovirusVP4)
+plotAA(aa)
+}
+}
+
+\section{Troubleshooting}{
+
+\itemize{
+  \item \strong{Prototypes missing error:} Ensure prototypes are present. Use
+        \code{alignToRefs()} or \code{getPrototypeSeqs()}.
+  \item \strong{Misaligned regions:} Use \code{trimToRef = TRUE} and choose an
+        appropriate \code{refName}.
+  \item \strong{Gap issues:} Consider global deletion with \code{deleteMissingDataSites()}
+        or pairwise deletion via distance models.
+  \item \strong{Truncated plots:} Increase device height or use
+        \code{show_only_highlighted = TRUE}.
 }
 }
 
 \seealso{
-\url{https://github.com/omicscodeathon/rhinotypeR}
+\code{\link{alignToRefs}}, \code{\link{assignTypes}}, \code{\link{pairwiseDistances}},
+\code{\link{overallMeanDistance}}, \code{\link{plotDistances}},
+\code{\link{plotTree}}, \code{\link{SNPeek}}, \code{\link{plotAA}},
+\code{\link{getPrototypeSeqs}}
 }
 \author{
 \strong{Maintainer}: Martha Luka \email{marthaluka20@gmail.com} (\href{https://orcid.org/0000-0001-6217-4426}{ORCID})
