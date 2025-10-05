@@ -19,7 +19,7 @@ vignette: >
 options(repos = c(CRAN = "https://cran.rstudio.com/"))
 ```
 
-## 1. Background
+## Background
 
 The `rhinotypeR` package is designed to automate the genotyping of rhinoviruses using the VP4/2 genomic region. Having worked on rhinoviruses for a few years, I noticed that assigning genotypes after sequencing was particularly laborious, and needed several manual interventions. We, therefore, developed this package to address this challenge by streamlining the process.
 
@@ -39,7 +39,7 @@ This vignette walks through two practical workflows:
 
 **Tip:** Genotype assignment relies on distances to prototype strains and requires that those prototypes are present in the alignment you pass to `assignTypes()`. The `alignToRefs()` helper makes this easy by appending packaged prototypes and aligning jointly.
 
-## 2. Installing the package
+## Installing the package
 
 You can install rhinotypeR from Bioconductor using:
 
@@ -50,7 +50,7 @@ if (!require("BiocManager", quietly = TRUE))
 BiocManager::install("rhinotypeR")
 ```
 
-## 3. Load rhinotypeR
+## Load rhinotypeR
 
 ```{r}
 # Load package
@@ -60,14 +60,14 @@ library(rhinotypeR)
 data(rhinovirusVP4, package = "rhinotypeR")
 ```
 
-## 4. Input expectations
+## Input expectations
 
 - **Format:** FASTA (DNA for VP4/2; AA only for `plotAA()`)
 - **Region:** VP4/2; sequences should be homologous
 - **Length/QC:** We recommend ≥350 bp (typical ~420 bp) and careful trimming to the target region
 - **Alignment:** Required before genotype assignment. Do it either in R (`alignToRefs()`) or outside R and then import (e.g., with `Biostrings::readDNAStringSet()`)
 
-### 4.1. Option A: Align externally
+### Option A: Align externally
 
 Prefer your own alignment tool? Use `getPrototypeSeqs()` to export the packaged prototypes to your local device. These should then be combined with the newly generated sequences, aligned using suitable software, curated and imported into R. There are a multitude of existing alignment software including [MAFFT](https://mafft.cbrc.jp/alignment/server/) and [MUSCLE](https://www.ebi.ac.uk/jdispatcher/).
 
@@ -89,7 +89,7 @@ aln_curated <- Biostrings::readDNAStringSet(
 )
 ```
 
-### 4.2. Option B: Align in R
+### Option B: Align in R
 
 Use this when you want a fully scripted path in R. `alignToRefs()` appends packaged references and runs `msa::msa()` using ClustalW/ClustalOmega/MUSCLE. It can optionally crop the final alignment to the non-gap span of a chosen prototype (`trimToRef = TRUE`, default; anchor with `refName`).
 
@@ -112,7 +112,7 @@ aln
 - `trimToRef = TRUE` crops the alignment to the exact span covered by a chosen prototype — helpful when user reads spill over the target region
 - `deleteGapsGlobally()` performs global deletion (drop any column with a gap in any sequence). This is different from pairwise deletion used within distance calculations. Use with care — this modifies the alignment
 
-## 5. Assign types
+## Assign types
 
 ```{r}
 # Input A
@@ -137,13 +137,13 @@ head(res)
 
 **Thresholds:** We default to `threshold = 0.105` (~10.5%) in line with common practice for VP4/2 (A/C) and close to B; adjust per your analysis or species.
 
-## 6. Plot results
+## Plot results
 
 ```{r}
 plotFrequency(res)
 ```
 
-## 7. Distances and summaries
+## Distances and summaries
 
 ```{r}
 # Distances among all sequences
@@ -176,7 +176,7 @@ plotTree(sampled_distances, hang = -1, cex = 0.6,
          main = "A simple tree", xlab = "", ylab = "Genetic distance")
 ```
 
-## 8. SNP and amino acid views
+## SNP and amino acid views
 
 The `SNPeek()` function visualizes single nucleotide polymorphisms (SNPs) in the sequences, with a selected sequence acting as the reference. To specify the reference sequence, move it to the bottom of the alignment before importing into R. Substitutions are color-coded by nucleotide:
 
@@ -213,14 +213,14 @@ plotAA(aa_aln)
 
 **Tip:** `show_only_highlighted = TRUE` focuses on chosen rows while keeping mismatch context relative to the reference.
 
-## 9. Quality and troubleshooting
+## Quality and troubleshooting
 
 * **Prototypes missing?** `assignTypes()` will error if prototypes are not present in your alignment. Use Option A (`alignToRefs()`) or Option B (`getPrototypeSeqs()` + external align).
 * **Misaligned region?** Use `trimToRef = TRUE` and select an appropriate `refName` that spans your intended VP4/2 region.
 * **Gaps distort distances?** Consider `deleteMissingDataSites()` (global deletion), or use a pairwise deletion model where appropriate in distance routines.
 * **SNP/AA plots truncated?** Increase device height or use the `highlight_*` options and `show_only_highlighted = TRUE`.
 
-## 10. Conclusion
+## Conclusion
 
 The `rhinotypeR` package simplifies the process of genotyping rhinoviruses and analyzing their genetic data. By automating various steps and providing visualization tools, it enhances the efficiency and accuracy of rhinovirus epidemiological studies.
 
