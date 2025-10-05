@@ -49,7 +49,9 @@ Compares query rhinovirus sequences to prototype reference strains using
 pairwise genetic distances and assigns a genotype when the nearest distance
 is below a user-specified threshold. If the nearest distance exceeds the
 threshold, the sequence is returned as `"unassigned"` **but the actual nearest
-distance and prototype reference are still reported**.
+distance and prototype reference are still reported**. This enables users to
+inspect borderline cases and optionally apply relaxed thresholds (e.g., up to
+0.11) to account for evolving viral diversity or intra-type variation.
 }
 \details{
 - Prototype accessions are distributed with the package and loaded from
@@ -58,7 +60,8 @@ distance and prototype reference are still reported**.
   it stops with guidance to use [alignToRefs()] or [getPrototypeSeqs()].
 - Distances are computed via [pairwiseDistances()] on the provided alignment.
 - Above-threshold queries are labeled `"unassigned"` while still reporting
-  the nearest prototype and its distance.
+  the nearest prototype and its distance to support interpretation and
+  threshold adjustment.
 }
 \examples{
 if (interactive()) {
@@ -71,7 +74,8 @@ if (interactive()) {
   # Note: The input must include the prototype sequences.
   # If your alignment does not already contain prototypes,
   # use alignToRefs() before calling assignTypes() OR
-  # use getPrototypeSeqs() to download the prototype sequences, combine with your new sequences and align before importing to R
+  # use getPrototypeSeqs() to download the prototype sequences, 
+      # combine with your new sequences and align before importing to R
   try({
     res <- assignTypes(fastaD, model = "IUPAC", deleteGapsGlobally = FALSE, threshold = 0.105)
     head(res)

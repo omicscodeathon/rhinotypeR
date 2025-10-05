@@ -52,8 +52,6 @@ assignment, and visualization.
   \item \emph{Format:} FASTA; DNA for VP4/2 (AA only for \code{\link{plotAA}}).
   \item \emph{Region:} VP4/2; sequences must be homologous.
   \item \emph{Length/QC:} Recommended \eqn{\ge} 350 bp (typical \~420 bp) and trimmed to the VP4/2 span.
-  \item \emph{Alignment:} Required before calling \code{\link{assignTypes}}. Do this in R with
-        \code{\link{alignToRefs}} or externally (then import with \code{Biostrings::readDNAStringSet}).
 }
 }
 
@@ -63,7 +61,7 @@ assignment, and visualization.
 \enumerate{
   \item Export prototypes: \code{getPrototypeSeqs("~/Desktop")}
   \item Combine prototypes with your sequences
-  \item Align externally (e.g., MAFFT: \url{https://mafft.cbrc.jp/alignment/server/})
+  \item Align externally (e.g., MAFFT \url{https://mafft.cbrc.jp/alignment/server/})
   \item Import alignment: \code{Biostrings::readDNAStringSet("alignment.fasta")}
   \item Assign genotypes: \code{assignTypes(alignment)}
 }}
@@ -96,7 +94,7 @@ plotFrequency(res)
 
 \itemize{
   \item \strong{threshold:} Default 0.105 (~10.5\%) for VP4/2 region, following
-        common practice for RV-A/C and close to RV-B.
+        proposals in McIntyre et al. (2013).
   \item \strong{trimToRef:} When TRUE, crops alignment to non-gap span of chosen
         prototype (helpful when reads extend beyond target region).
   \item \strong{deleteGapsGlobally:} Global deletion vs. pairwise deletion (distance models).
@@ -116,12 +114,6 @@ plotFrequency(res)
         Luka et al. (2020), \emph{Open Forum Infectious Diseases}, 7(10), ofaa385.
         \doi{10.1093/ofid/ofaa385}
 }
-}
-
-\section{Notes on assignment thresholds}{
-
-The default genotype cutoff in \code{\link{assignTypes}} is \code{threshold = 0.105}
-(~10.5\%), consistent with commonly used VP4/2 criteria for RV-A/C and close to RV-B.
 }
 
 \section{Getting Started}{
