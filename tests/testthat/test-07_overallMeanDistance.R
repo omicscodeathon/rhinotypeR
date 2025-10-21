@@ -47,9 +47,9 @@ test_that("deleteGapsGlobally does not increase mean distance", {
 })
 
 test_that("overallMeanDistance runs with common models", {
-  expect_silent(overallMeanDistance(simple_dna, model = "IUPAC"))
-  expect_silent(overallMeanDistance(simple_dna, model = "raw"))
-  expect_silent(overallMeanDistance(simple_dna, model = "JC69"))
+  expect_no_error(overallMeanDistance(simple_dna, model = "IUPAC"))
+  expect_no_error(overallMeanDistance(simple_dna, model = "raw"))
+  expect_no_error(overallMeanDistance(simple_dna, model = "JC69"))
 })
 
 test_that("Two-sequence case equals their pairwise distance (raw model)", {

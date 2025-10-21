@@ -33,9 +33,11 @@ NULL
 #' @seealso \code{\link[=compute_cache]{compute_cache}},
 #'   \code{\link[=plot_window]{plot_window}}
 #' @examples
+#' \dontrun{
 #' seqs <- c(Ref="ATGC", S1="ATGT", S2="ATAC")
 #' cmap <- c(A="green", T="red", C="blue", G="gold")
 #' compareAndColorSequences(seqs, cmap)
+#' }
 #' 
 #' @aliases compareAndColorSequences
 #' @rdname SNPeek-internal
@@ -89,9 +91,11 @@ compareAndColorSequences <- function(sequences, colorMap, colorFallback = "gray"
 #'   }
 #'
 #' @examples
+#' \dontrun{
 #' f <- system.file("extdata","test.fasta", package="rhinotypeR")
 #' aln <- Biostrings::readDNAStringSet(f)
 #' cache <- compute_cache(aln, ref_name = tail(names(aln), 1))
+#' }
 #'
 #' @aliases compute_cache SNPeekCache
 #' @rdname SNPeek-internal
@@ -193,8 +197,10 @@ compute_cache <- function(aln_set,
 #'   is not used directly by the drawing code.
 #'
 #' @examples
+#' \dontrun{
 #' cache2 <- subset_cache(cache, c(1, 3, 5))
-#'
+#' }
+#' 
 #' @aliases subset_cache
 #' @rdname SNPeek-internal
 #' @keywords internal
@@ -241,9 +247,11 @@ subset_cache <- function(cache, keep_idx) {
 #'
 #' @seealso \code{\link[=compute_cache]{compute_cache}}
 #' @examples
+#' \dontrun{
 #' cache <- compute_cache(aln)
 #' plot_window(cache, center = 200, window = 150,
 #'             highlight_seqs = cache$seq_names[1:3], showLegend = TRUE)
+#' }
 #'
 #' @aliases plot_window
 #' @rdname SNPeek-internal

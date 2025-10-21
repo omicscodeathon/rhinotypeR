@@ -51,7 +51,7 @@ assignment, and visualization.
 \itemize{
   \item \emph{Format:} FASTA; DNA for VP4/2 (AA only for \code{\link{plotAA}}).
   \item \emph{Region:} VP4/2; sequences must be homologous.
-  \item \emph{Length/QC:} Recommended \eqn{\ge} 350 bp (typical \~420 bp) and trimmed to the VP4/2 span.
+  \item \emph{Length/QC:} Recommended \eqn{\ge} 350 bp (typical 420 bp) and trimmed to the VP4/2 span.
 }
 }
 
@@ -93,7 +93,7 @@ plotFrequency(res)
 \section{Key Parameters}{
 
 \itemize{
-  \item \strong{threshold:} Default 0.105 (~10.5\%) for VP4/2 region, following
+  \item \strong{threshold:} Default 0.105 (approximately 10.5\%) for VP4/2 region, following
         proposals in McIntyre et al. (2013).
   \item \strong{trimToRef:} When TRUE, crops alignment to non-gap span of chosen
         prototype (helpful when reads extend beyond target region).

@@ -1,6 +1,9 @@
 
 # Silence plotting devices in tests:
-testthat::local_null_device()
+old_dev <- grDevices::dev.cur()
+grDevices::pdf(NULL)
+on.exit(grDevices::dev.off(), add = TRUE)
+
 testthat::local_edition(3)
 
 # Shared test fixtures
@@ -31,7 +34,7 @@ aln_with_gaps <- Biostrings::DNAStringSet(c(
 
 # Tests
 test_that("SNPeek works with basic aligned sequences", {
-  expect_silent(result <- SNPeek(simple_aln))
+  expect_no_error(result <- SNPeek(simple_aln))
   expect_s3_class(result, "SNPeekCache")
   expect_equal(result$genome_len, 8)
 })
@@ -54,12 +57,12 @@ test_that("SNPeek errors with invalid input type", {
 })
 
 test_that("SNPeek xlim and window parameters work", {
-  expect_silent(SNPeek(long_aln, xlim = c(3, 8)))
-  expect_silent(SNPeek(long_aln, center = 6, window = 4))
+  expect_no_error(SNPeek(long_aln, xlim = c(3, 8)))
+  expect_no_error(SNPeek(long_aln, center = 6, window = 4))
 })
 
 test_that("SNPeek highlighting works", {
-  expect_silent(SNPeek(short_aln, highlight_seqs = c("Seq1", "Seq2")))
+  expect_no_error(SNPeek(short_aln, highlight_seqs = c("Seq1", "Seq2")))
   expect_warning(SNPeek(short_aln, highlight_seqs = "NonExistent"), "not found")
 })
 
@@ -77,13 +80,13 @@ test_that("SNPeek custom color maps work", {
 })
 
 test_that("SNPeek handles sequences with gaps", {
-  expect_silent(result <- SNPeek(aln_with_gaps))
+  expect_no_error(result <- SNPeek(aln_with_gaps))
   expect_s3_class(result, "SNPeekCache")
 })
 
 test_that("SNPeek legend parameter works", {
-  expect_silent(SNPeek(short_aln, showLegend = TRUE))
-  expect_silent(SNPeek(short_aln, showLegend = FALSE))
+  expect_no_error(SNPeek(short_aln, showLegend = TRUE))
+  expect_no_error(SNPeek(short_aln, showLegend = FALSE))
 })
 
 test_that("SNPeek cache structure is correct", {
@@ -100,7 +103,7 @@ test_that("SNPeek works with package example data", {
   skip_if_not_installed("rhinotypeR")
   data(rhinovirusVP4, package = "rhinotypeR")
   
-  expect_silent(result <- SNPeek(rhinovirusVP4))
+  expect_no_error(result <- SNPeek(rhinovirusVP4))
   expect_s3_class(result, "SNPeekCache")
   expect_true(result$genome_len > 0)
 })

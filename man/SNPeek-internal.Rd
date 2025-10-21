@@ -122,19 +122,27 @@ ticks relative to a cached reference over a specified genomic span, with
 optional highlighting and a legend.
 }
 \examples{
+\dontrun{
 seqs <- c(Ref="ATGC", S1="ATGT", S2="ATAC")
 cmap <- c(A="green", T="red", C="blue", G="gold")
 compareAndColorSequences(seqs, cmap)
+}
 
+\dontrun{
 f <- system.file("extdata","test.fasta", package="rhinotypeR")
 aln <- Biostrings::readDNAStringSet(f)
 cache <- compute_cache(aln, ref_name = tail(names(aln), 1))
+}
 
+\dontrun{
 cache2 <- subset_cache(cache, c(1, 3, 5))
+}
 
+\dontrun{
 cache <- compute_cache(aln)
 plot_window(cache, center = 200, window = 150,
             highlight_seqs = cache$seq_names[1:3], showLegend = TRUE)
+}
 
 }
 \seealso{

@@ -1,10 +1,25 @@
 # rhinotypeR News
 
+-----------
+
+## 1.3.1 (devel) — 2025-10-21
+### Fixed
+- Example and test errors related to internal helpers (compareAndColorSequences(), 
+  compute_cache()) now handled safely using \dontrun{} and updated documentation.
+- Removed outdated License stub issue and corrected DESCRIPTION metadata formatting.
+- Corrected internal tests referencing deprecated testthat::local_null_device().
+
+### Improved
+- CountSNPs() re-implementation: directly computes pairwise SNP counts without 
+  relying on model-based rounding (e.g., from MSA2dist). No rounding artifacts
+
+-----------
+
 ## 1.3.0 (devel) — 2025-10-01
 ### Added
 - New function: `alignToRefs()`, which aligns user sequences to the packaged
-  rhinovirus prototype references using `msa::msa()` (ClustalW, ClustalOmega, or MUSCLE), with an
-  option to trim alignments to the non-gap span of a chosen reference.
+  rhinovirus prototype references using `msa::msa()` (ClustalW, ClustalOmega, or MUSCLE), 
+  with an option to trim alignments to the non-gap span of a chosen reference.
 
 ### Improved
 - **SNPeek()** and **plotAA()**: now support zooming to specific genomic regions
@@ -23,7 +38,7 @@
     while still allowing advanced users to capture outputs.
 - Code style and formatting improved (e.g.,consistent internal helpers).
 
----
+-----------
 
 ## 0.1.0 — Initial release
 - First public release of **rhinotypeR**.

@@ -11,22 +11,24 @@ countSNPs(fastaData, deleteGapsGlobally = FALSE)
 Sequences must have identical width.}
 
 \item{deleteGapsGlobally}{Logical. If `TRUE`, sites containing gaps (`-` or `.`)
-are removed across all sequences before SNP counting. Default: `FALSE`.}
+or ambiguous bases (`"N"`, `"?"`) are removed across all sequences 
+before SNP counting. Default: `FALSE`.}
 }
 \value{
-A numeric matrix of SNP counts with sequence names as dimnames.
+A square integer matrix of SNP counts with sequence names as 
+   row and column dimnames.
 }
 \description{
-Computes pairwise single nucleotide polymorphism (SNP) counts between all
-sequences in an aligned [Biostrings::DNAStringSet-class] object.
-Proportions are computed with [MSA2dist::dnastring2dist()] using the `"IUPAC"`
-model (accounts for ambiguous bases), then converted to integer SNP counts.
+Computes the absolute number of single-nucleotide differences (SNPs)
+between all pairs of sequences in an aligned
+[Biostrings::DNAStringSet-class] object. Optionally removes any
+alignment columns that contain gaps or ambiguous bases before counting.
 }
 \examples{
 if (interactive()) {
   aln <- Biostrings::DNAStringSet(c(Seq1="ATGC", Seq2="ATGT", Seq3="ATGA"))
   countSNPs(aln)
-  countSNPs(aln, deleteGapsGlobally = TRUE)
+  countSNPs(aln, deleteGapsGlobally = FALSE)
 }
 
 }

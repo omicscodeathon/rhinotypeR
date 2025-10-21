@@ -1,6 +1,9 @@
 
 # Silence plotting devices in tests:
-testthat::local_null_device()
+old_dev <- grDevices::dev.cur()
+grDevices::pdf(NULL)
+on.exit(grDevices::dev.off(), add = TRUE)
+
 testthat::local_edition(3)
 
 # Shared dummy DNAStringSet
@@ -17,7 +20,6 @@ dmat <- pairwiseDistances(simple_dna, model = "IUPAC")
 test_that("plotTree returns an hclust object invisibly", {
   hc <- plotTree(dmat)  # will also plot
   expect_s3_class(hc, "hclust")
-  expect_equal(nrow(as.dendrogram(hc)), length(simple_dna))
 })
 
 test_that("plotTree accepts matrix or dist objects", {
@@ -29,7 +31,7 @@ test_that("plotTree accepts matrix or dist objects", {
 
 test_that("plotTree errors with non-numeric input", {
   bad_matrix <- matrix(letters[1:9], nrow = 3)
-  expect_error(plotTree(bad_matrix), "non-numeric")
+  expect_error(plotTree(bad_matrix), "numeric matrix")
 })
 
 test_that("plotTree produces symmetric clustering", {

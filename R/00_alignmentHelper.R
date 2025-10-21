@@ -21,13 +21,15 @@
 #'   [alignToRefs()] to generate aligned inputs.
 #'
 #' @examples
+#' \dontrun{
 #' aln <- Biostrings::DNAStringSet(c(
 #'   Seq1 = "ATGC-",
 #'   Seq2 = "AT-CG",
 #'   Seq3 = "ATGCG"
 #' ))
 #' deleteMissingDataSites(aln)
-#'
+#' }
+#' 
 #' @importFrom Biostrings DNAStringSet width
 #' @keywords internal
 #' @noRd

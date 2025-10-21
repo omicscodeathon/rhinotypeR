@@ -43,7 +43,7 @@ test_that("alignToRefs: trimToRef reduces or equals width vs full alignment", {
 test_that("alignToRefs: invalid method is rejected", {
   expect_error(
     alignToRefs(seqs, method = "BogusMethod"),
-    regexp = "arg should be one of"
+    regexp = "should be one of"
   )
 })
 

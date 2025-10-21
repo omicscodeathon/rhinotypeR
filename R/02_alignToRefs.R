@@ -31,7 +31,7 @@
 #' the alignment is cropped to the range covered by non-gap positions in
 #' \code{refName}; internal gaps within that span are preserved. For global
 #' removal of gap-containing columns across all sequences, see
-#' \code{\link{deleteMissingDataSites}}.
+#' \code{deleteMissingDataSites()}.
 #'
 #' If you prefer to align/curate outside R, use
 #' \code{\link{getPrototypeSeqs}} to copy the prototype references to disk and
@@ -52,7 +52,7 @@
 #'   reference’s non-gap span.
 #'
 #' @seealso \code{\link{getPrototypeSeqs}}, \code{\link{pairwiseDistances}},
-#'   \code{\link{assignTypes}}, \code{\link{deleteMissingDataSites}}
+#'   \code{\link{assignTypes}}
 #'
 #' @examples
 #' seqs_path <- system.file("extdata", "test.fasta", package = "rhinotypeR")

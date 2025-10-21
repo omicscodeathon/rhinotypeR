@@ -1,17 +1,19 @@
 #' Count pairwise SNPs between aligned DNA sequences
 #'
 #' @description
-#' Computes pairwise single nucleotide polymorphism (SNP) counts between all
-#' sequences in an aligned [Biostrings::DNAStringSet-class] object.
-#' Proportions are computed with [MSA2dist::dnastring2dist()] using the `"IUPAC"`
-#' model (accounts for ambiguous bases), then converted to integer SNP counts.
+#' Computes the absolute number of single-nucleotide differences (SNPs)
+#' between all pairs of sequences in an aligned
+#' [Biostrings::DNAStringSet-class] object. Optionally removes any
+#' alignment columns that contain gaps or ambiguous bases before counting.
 #'
 #' @param fastaData A [Biostrings::DNAStringSet-class] of aligned DNA sequences.
 #'   Sequences must have identical width.
 #' @param deleteGapsGlobally Logical. If `TRUE`, sites containing gaps (`-` or `.`)
-#'   are removed across all sequences before SNP counting. Default: `FALSE`.
+#'   or ambiguous bases (`"N"`, `"?"`) are removed across all sequences 
+#'   before SNP counting. Default: `FALSE`.
 #'
-#' @return A numeric matrix of SNP counts with sequence names as dimnames.
+#' @return A square integer matrix of SNP counts with sequence names as 
+#'    row and column dimnames.
 #'
 #' @seealso [pairwiseDistances()] for distances; [SNPeek()], [plotAA()] for viz.
 #'
@@ -19,28 +21,44 @@
 #' if (interactive()) {
 #'   aln <- Biostrings::DNAStringSet(c(Seq1="ATGC", Seq2="ATGT", Seq3="ATGA"))
 #'   countSNPs(aln)
-#'   countSNPs(aln, deleteGapsGlobally = TRUE)
+#'   countSNPs(aln, deleteGapsGlobally = FALSE)
 #' }
 #'
-#' @importFrom MSA2dist dnastring2dist
+#' @importFrom Biostrings width
 #' @export
 countSNPs <- function(fastaData, deleteGapsGlobally = FALSE) {
   if (!inherits(fastaData, "DNAStringSet"))
-    stop("fastaData must be a Biostrings::DNAStringSet")
-  w <- Biostrings::width(fastaData)
-  if (length(unique(w)) != 1L)
-    stop("Sequences must be aligned (identical widths).")
+    stop("Input must be a Biostrings::DNAStringSet")
   
+  # Ensure sequences are aligned
+  seq_widths <- Biostrings::width(fastaData)
+  if (length(unique(seq_widths)) != 1L)
+    stop("Sequences must be aligned (identical lengths)")
+  
+  # Convert each DNA sequence into a character vector of bases
+  seq_matrix <- do.call(
+    rbind,
+    lapply(as.character(fastaData), function(x) strsplit(x, "")[[1]])
+  )
+  
+  # Optionally remove columns containing gaps or ambiguous bases
   if (deleteGapsGlobally) {
-    fastaData <- deleteMissingDataSites(fastaData)
+    keep_cols <- apply(seq_matrix, 2, function(col)
+      !any(col %in% c("-", "N", "?")))
+    seq_matrix <- seq_matrix[, keep_cols, drop = FALSE]
   }
   
-  res <- MSA2dist::dnastring2dist(fastaData, model = "IUPAC")  # proportions
-  D <- as.matrix(res$distSTRING)  # mismatch proportions
-  N <- as.matrix(res$sitesUsed)   # sites used per pair
+  n <- nrow(seq_matrix)
+  snp_matrix <- matrix(0L, n, n, dimnames = list(names(fastaData), names(fastaData)))
   
-  # Round to nearest integer with +0.5 trick (safe for non-negative values)
-  SNP <- matrix(as.integer(D * N + 0.5),
-                nrow = nrow(D), dimnames = dimnames(D))
-  SNP
+  # Pairwise SNP counting
+  for (i in seq_len(n)) {
+    for (j in seq_len(i)) {
+      mism <- sum(seq_matrix[i, ] != seq_matrix[j, ], na.rm = TRUE)
+      snp_matrix[i, j] <- snp_matrix[j, i] <- mism
+    }
+  }
+  
+  snp_matrix
 }
+

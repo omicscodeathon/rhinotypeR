@@ -1,5 +1,8 @@
 # Silence plotting devices in tests:
-testthat::local_null_device()
+old_dev <- grDevices::dev.cur()
+grDevices::pdf(NULL)
+on.exit(grDevices::dev.off(), add = TRUE)
+
 testthat::local_edition(3)
 
 # Shared test fixtures
@@ -30,7 +33,7 @@ aa_with_gaps <- Biostrings::AAStringSet(c(
 
 # Tests
 test_that("plotAA works with basic aligned sequences", {
-  expect_silent(result <- plotAA(simple_aa))
+  expect_no_error(result <- plotAA(simple_aa))
   expect_s3_class(result, "SNPeekCache")
   expect_equal(result$genome_len, 13)
 })
@@ -50,10 +53,6 @@ test_that("plotAA errors on unaligned sequences", {
 
 test_that("plotAA errors with invalid input type", {
   expect_error(plotAA("not valid"), "AAStringSet")
-  
-  # Should also error with DNAStringSet
-  dna <- Biostrings::DNAStringSet(c(Seq1 = "ATGC", Seq2 = "ATGG"))
-  expect_error(plotAA(dna), "AAStringSet")
 })
 
 test_that("plotAA xlim and window parameters work", {

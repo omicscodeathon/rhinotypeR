@@ -8,11 +8,11 @@
 #' Users have two equivalent workflows:
 #' \enumerate{
 #'   \item \strong{In-R workflow (no download):} use
-#'         \code{\link{alignToRefs()}} to align your sequences against the
+#'         \code{\link{alignToRefs}} to align your sequences against the
 #'         packaged reference prototypes directly in R, then run
 #'         \code{\link{assignTypes}} on the resulting alignment.
 #'   \item \strong{External-tools workflow (with download):} use
-#'         \code{getPrototypeSeqs()} to save \file{RVRefs.fasta} locally,
+#'         \code{getPrototypeSeqs} to save \file{RVRefs.fasta} locally,
 #'         \emph{combine it with your new sequences}, and perform alignment
 #'         using your preferred external tool. You can then bring the aligned
 #'         FASTA back into R for genotype assignment.

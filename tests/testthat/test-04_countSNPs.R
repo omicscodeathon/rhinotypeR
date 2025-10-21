@@ -44,7 +44,7 @@ test_that("countSNPs diagonal is zero", {
   result <- countSNPs(simple_dna)
   
   # Diagonal should be all zeros (sequence compared to itself)
-  expect_equal(diag(result), rep(0L, 4))
+  expect_equal(unname(diag(result)), rep(0L, 4))
 })
 
 test_that("countSNPs matrix is symmetric", {
@@ -113,7 +113,7 @@ test_that("countSNPs handles ambiguous bases", {
   ))
   
   # Should not error (IUPAC model handles ambiguity)
-  expect_silent(result <- countSNPs(ambiguous))
+  expect_no_error(result <- countSNPs(ambiguous))
   expect_type(result, "integer")
 })
 

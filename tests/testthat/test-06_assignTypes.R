@@ -80,9 +80,9 @@ test_that("assignTypes reports distance even when unassigned", {
 test_that("assignTypes model parameter works", {
   skip_if_not(file.exists(test_aln_file), "Test alignment file not found")
   
-  expect_silent(assignTypes(test_aln, model = "IUPAC"))
-  expect_silent(assignTypes(test_aln, model = "raw"))
-  expect_silent(assignTypes(test_aln, model = "JC69"))
+  expect_no_error(assignTypes(test_aln, model = "IUPAC"))
+  expect_no_error(assignTypes(test_aln, model = "raw"))
+  expect_no_error(assignTypes(test_aln, model = "JC69"))
 })
 
 test_that("assignTypes returns one row per query sequence", {

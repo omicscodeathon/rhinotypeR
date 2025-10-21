@@ -32,7 +32,7 @@ alignment does not already include prototypes, you have two options:
 are removed across all sequences before distance calculation. Default: `FALSE`.}
 
 \item{threshold}{Numeric. Distance threshold for genotype assignment.
-Defaults to `0.105` (≈10.5%), consistent with species A/C thresholds in
+Defaults to `0.105` (approximately 10.5%), consistent with species A/C thresholds in
 McIntyre et al. (2013). Use `0.095` for species B if desired.}
 }
 \value{
