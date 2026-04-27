@@ -1,24 +1,21 @@
 citHeader("To cite rhinotypeR in publications, please use:")
 
-pkg_year <- if (!is.null(meta$Date)) {
-  substr(meta$Date, 1, 4)
-} else {
-  format(Sys.Date(), "%Y")
-}
-
-
-# Software citation
 bibentry(
-  bibtype = "Manual",
-  title   = "rhinotypeR: Rhinovirus genotyping",
-  author  = c(
-    person("Martha",  "Luka"),
-    person("Ruth",    "Nanjala"),
-    person("Wafaa",   "Rashed"),
+  bibtype = "Article",
+  title = "rhinotypeR enables reproducible rhinovirus genotype assignment from VP4/2 sequences",
+  author = c(
+    person("Martha M.", "Luka"),
+    person("Ruth", "Nanjala"),
+    person("Wafaa M.", "Rashed"),
     person("Winfred", "Gatua"),
-    person("Olaitan", "Awe")
+    person("Olaitan I.", "Awe")
   ),
-  year    = pkg_year,
-  note    = sprintf("R package version %s", meta$Version),
-  url     = "https://bioconductor.org/packages/rhinotypeR"
+  journal = "Scientific Reports",
+  year = "2026",
+  volume = "16",
+  pages = "6149",
+  doi = "10.1038/s41598-026-37050-8",
+  url = "https://www.nature.com/articles/s41598-026-37050-8",
+  textVersion =
+    "Luka, M.M., Nanjala, R., Rashed, W.M. et al. rhinotypeR enables reproducible rhinovirus genotype assignment from VP4/2 sequences. Scientific Reports 16, 6149 (2026). https://doi.org/10.1038/s41598-026-37050-8"
 )
