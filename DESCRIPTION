@@ -1,8 +1,8 @@
 Package: rhinotypeR
 Type: Package
 Title: Rhinovirus genotyping
-Version: 1.5.0
-Date: 2025-10-21
+Version: 1.5.1
+Date: 2026-04-28
 Authors@R: c(
     person("Martha", "Luka", role = c("aut", "cre"), email = "marthaluka20@gmail.com",
            comment = c(ORCID = "0000-0001-6217-4426")),
