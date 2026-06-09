@@ -123,10 +123,10 @@ plotAA(aa, ref_name = "Ref", xlim = c(3, 8),
 [SNPeek()] for the nucleotide version; [compute_cache()],
   [plot_window()] for internals.
 
-Other visualization: 
-\code{\link{SNPeek}()},
-\code{\link{plotDistances}()},
-\code{\link{plotFrequency}()},
-\code{\link{plotTree}()}
+Other visualization:
+\code{\link[=SNPeek]{SNPeek()}},
+\code{\link[=plotDistances]{plotDistances()}},
+\code{\link[=plotFrequency]{plotFrequency()}},
+\code{\link[=plotTree]{plotTree()}}
 }
 \concept{visualization}

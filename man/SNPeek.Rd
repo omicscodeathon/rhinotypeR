@@ -101,10 +101,10 @@ SNPeek(aln, xlim = c(100, 200),
 \seealso{
 `plotAA()` for the amino-acid analogue.
 
-Other visualization: 
-\code{\link{plotAA}()},
-\code{\link{plotDistances}()},
-\code{\link{plotFrequency}()},
-\code{\link{plotTree}()}
+Other visualization:
+\code{\link[=plotAA]{plotAA()}},
+\code{\link[=plotDistances]{plotDistances()}},
+\code{\link[=plotFrequency]{plotFrequency()}},
+\code{\link[=plotTree]{plotTree()}}
 }
 \concept{visualization}

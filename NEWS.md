@@ -2,6 +2,14 @@
 
 -----------
 
+## 1.7.1 (devel) — 2026-06-09
+### Fixed
+- Updated imports of DNAMultipleAlignment and related functionality following
+changes in Bioconductor 3.24, where multiple-alignment classes and methods
+were moved from Biostrings to MultipleAlignment.
+
+-----------
+
 ## 1.3.1 (devel) — 2025-10-21
 ### Fixed
 - Example and test errors related to internal helpers (compareAndColorSequences(), 

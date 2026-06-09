@@ -58,10 +58,10 @@ if (!inherits(assigned, "try-error")) {
 \seealso{
 \code{\link{assignTypes}}
 
-Other visualization: 
-\code{\link{SNPeek}()},
-\code{\link{plotAA}()},
-\code{\link{plotDistances}()},
-\code{\link{plotTree}()}
+Other visualization:
+\code{\link[=SNPeek]{SNPeek()}},
+\code{\link[=plotAA]{plotAA()}},
+\code{\link[=plotDistances]{plotDistances()}},
+\code{\link[=plotTree]{plotTree()}}
 }
 \concept{visualization}

@@ -167,6 +167,7 @@ plotAA(aa)
 
 Authors:
 \itemize{
+  \item Martha Luka \email{marthaluka20@gmail.com} (\href{https://orcid.org/0000-0001-6217-4426}{ORCID})
   \item Ruth Nanjala
   \item Winfred Gatua
   \item Wafaa M. Rashed

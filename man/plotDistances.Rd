@@ -41,10 +41,10 @@ dist_mat <- pairwiseDistances(fastaD)
 \seealso{
 \code{\link{pairwiseDistances}}, \code{\link{plotTree}}
 
-Other visualization: 
-\code{\link{SNPeek}()},
-\code{\link{plotAA}()},
-\code{\link{plotFrequency}()},
-\code{\link{plotTree}()}
+Other visualization:
+\code{\link[=SNPeek]{SNPeek()}},
+\code{\link[=plotAA]{plotAA()}},
+\code{\link[=plotFrequency]{plotFrequency()}},
+\code{\link[=plotTree]{plotTree()}}
 }
 \concept{visualization}

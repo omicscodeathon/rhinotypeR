@@ -39,10 +39,10 @@ plotTree(dist_mat, lwd = 2)
 \seealso{
 \code{\link{pairwiseDistances}}, \code{\link{plotDistances}}
 
-Other visualization: 
-\code{\link{SNPeek}()},
-\code{\link{plotAA}()},
-\code{\link{plotDistances}()},
-\code{\link{plotFrequency}()}
+Other visualization:
+\code{\link[=SNPeek]{SNPeek()}},
+\code{\link[=plotAA]{plotAA()}},
+\code{\link[=plotDistances]{plotDistances()}},
+\code{\link[=plotFrequency]{plotFrequency()}}
 }
 \concept{visualization}
