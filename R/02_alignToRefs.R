@@ -70,7 +70,7 @@
 #' @importFrom Biostrings readDNAStringSet DNAStringSet subseq
 #' @importFrom msa msa
 #' @importFrom methods as
-#' @importClassesFrom MultipleAlignment DNAMultipleAlignment
+#' @importClassesFrom MultipleAlignment MultipleAlignment DNAMultipleAlignment 
 #' @export
 alignToRefs <- function(seqData,
                         method = c("ClustalW", "ClustalOmega", "Muscle"),
@@ -88,7 +88,7 @@ alignToRefs <- function(seqData,
   allseqs <- c(seqData, refseqs)
   
   # Align with msa
-  aln <- msa::msa(allseqs, method = method, ...)
+  aln <- msa::msa(allseqs, method = method, type = "dna", ...)
   
   # Convert MultipleAlignment DNAMultipleAlignment -> Biostrings DNAStringSet
   aln_bio <- as(aln, "DNAMultipleAlignment")

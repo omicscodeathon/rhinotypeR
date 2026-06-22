@@ -2,6 +2,15 @@
 
 -----------
 
+## 1.7.2 (devel) — 2026-06-16
+
+### Fixed
+- Updated handling of MultipleAlignment classes for compatibility with
+  Bioconductor 3.24.
+- Fixed alignment-related test failures under R CMD check.
+
+-----------
+
 ## 1.7.1 (devel) — 2026-06-09
 ### Fixed
 - Updated imports of DNAMultipleAlignment and related functionality following
