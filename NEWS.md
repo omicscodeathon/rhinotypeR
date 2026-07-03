@@ -1,5 +1,15 @@
 # rhinotypeR News
 
+
+-----------
+
+## 1.7.3 (devel) — 2026-07-03
+
+### Fixed
+- Updated handling of MultipleAlignment classes for compatibility with
+  Bioconductor 3.24 (Added MultipleAlignment to Depends to ensure compatibility with msa
+  alignment objects).
+
 -----------
 
 ## 1.7.2 (devel) — 2026-06-16

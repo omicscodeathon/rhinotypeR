@@ -93,7 +93,7 @@ alignToRefs <- function(seqData,
   # Convert MultipleAlignment DNAMultipleAlignment -> Biostrings DNAStringSet
   aln_bio <- as(aln, "DNAMultipleAlignment")
   aln_set <- Biostrings::DNAStringSet(aln_bio)
-  
+
   # Optionally trim to reference non-gap span (default anchor kept unless user overrides)
   if (isTRUE(trimToRef)) {
     if (!refName %in% names(aln_set)) {

@@ -1,8 +1,8 @@
 Package: rhinotypeR
 Type: Package
 Title: Rhinovirus genotyping
-Version: 1.7.2
-Date: 2026-06-16
+Version: 1.7.3
+Date: 2026-07-03
 Authors@R: c(
     person("Martha", "Luka", role = c("aut", "cre"), email = "marthaluka20@gmail.com",
            comment = c(ORCID = "0000-0001-6217-4426")),
@@ -23,14 +23,14 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: 
     Biostrings,
-    MultipleAlignment,
     methods,
     MSA2dist,
     msa
 LazyData: false
 biocViews: Sequencing, Genetics, Phylogenetics, Visualization, MultipleSequenceAlignment, MultipleComparison
 Depends: 
-    R (>= 4.6.0)
+    R (>= 4.6.0),
+    MultipleAlignment
 Suggests:
     knitr,
     rmarkdown,

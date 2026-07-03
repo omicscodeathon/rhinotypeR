@@ -2,6 +2,7 @@
 # Global skips for this test file
 skip_if_not_installed("msa")
 skip_if_not_installed("Biostrings") 
+skip_if_not_installed("MultipleAlignment")
 
 # Shared fixture: test fasta path + skip if missing
 test_fa <- system.file("extdata", "test.fasta", package = "rhinotypeR")
